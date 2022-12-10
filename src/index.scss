@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "~antd/dist/antd.css";
+@import "react-quill/dist/quill.snow.css";
+
+@layer base {
+  body {
+    @apply mx-auto text-base font-normal;
+    line-height: 1.5;
+  }
+  input {
+    @apply outline-none;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-[1440px] px-8 py-2;
+  }
+}
