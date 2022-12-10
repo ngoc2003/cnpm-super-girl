@@ -14,9 +14,15 @@ const HomePageUser = () => {
         </h4>
       </div>
       <div className="w-20 border-b-2 border-b-secondary"></div>
-      <Button className={"rounded-[90px] mt-5 border-2 text-white bg-transparent"}>
+      <Button
+        className={"rounded-[90px] mt-5 border-2 text-white bg-transparent"}
+      >
         FIND OUT HOW
       </Button>
+      <div className="text-[85px] text-center text-white font-brittany">
+        Welcome to TLU
+      </div>
+      <div className="text-[100px] tracking-wide text-center text-white">LIBRARY</div>
     </div>
   );
 };

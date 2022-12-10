@@ -3,7 +3,6 @@
 @tailwind utilities;
 @import "~antd/dist/antd.css";
 @import "react-quill/dist/quill.snow.css";
-
 @layer base {
   body {
     @apply mx-auto text-base font-normal;
@@ -16,6 +15,6 @@
 
 @layer components {
   .container {
-    @apply max-w-[1440px] px-8 py-2;
+    @apply px-8 py-2;
   }
 }
