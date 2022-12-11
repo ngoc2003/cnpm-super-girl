@@ -28,7 +28,7 @@ const Search = ({ placeholder = "Do funrise now" }) => {
   return (
     <>
       <div className="relative z-50 flex-1">
-        <div className=" flex items-center p-2 bg-white rounded-full shadow-lg w-full max-w-[458px] dark:bg-darkSecondary">
+        <div className=" flex items-center p-2 bg-white rounded-full border w-full max-w-[458px] dark:bg-darkSecondary">
           <div className="flex-1 pl-4 pr-5">
             <input
               defaultValue={""}

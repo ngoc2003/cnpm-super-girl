@@ -2,25 +2,11 @@ import React, { useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./parts/Header";
-import { Layout } from "antd";
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
-const { Footer, Sider, Content, Menu } = Layout
+import { Button, Layout, Menu } from "antd";
+import Images from "../images/Images";
+import sidebarAdminData from "../data/sidebarAdminData";
+const { Sider } = Layout;
 
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
-    const key = String(index + 1);
-    return {
-      key: `sub${key}`,
-      icon: React.createElement(icon),
-      label: `subnav ${key}`,
-      children: new Array(4).fill(null).map((_, j) => {
-        const subKey = index * 4 + j + 1;
-        return {
-          key: subKey,
-          label: `option${subKey}`,
-        };
-      }),
-    };
-  });
 const LayoutAdmin = () => {
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -33,17 +19,29 @@ const LayoutAdmin = () => {
     <>
       <Header></Header>
       <hr />
-      <Layout >
-        <Sider>
-        <Menu
+      <Layout className="bg-white ">
+        <Sider >
+          <Layout className='py-5 bg-white text-center' >
+            <img
+              className="w-1/2 min-w-[100px] mx-auto"
+              src={Images.avatar}
+              alt=""
+            />
+            <h4 className="font-semibold ">{user?.name || "Anonymous"}</h4>
+            <p className="text-xs">Management</p>
+            <div>
+              <Button className="my-3 text-darkGray">Logout</Button>
+            </div>
+          </Layout>
+          <Menu
             mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            style={{ height: '100%', borderRight: 0 }}
-            items={items2}
-          /> </Sider>
-        <Layout></Layout>
-        Admin
+            defaultSelectedKeys={["1"]}
+            defaultOpenKeys={["sub1"]}
+            style={{ height: "100%", backgroundColor: "white", borderRight: 0 }}
+            items={sidebarAdminData}
+          />{" "}
+        </Sider>
+
         <Outlet></Outlet>
       </Layout>
     </>
