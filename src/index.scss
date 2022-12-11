@@ -5,7 +5,7 @@
 @import "react-quill/dist/quill.snow.css";
 @layer base {
   body {
-    @apply mx-auto text-base font-normal;
+    @apply mx-auto text-base font-normal leading-relaxed;
     line-height: 1.5;
   }
   input {
@@ -17,4 +17,48 @@
   .container {
     @apply px-8 py-2;
   }
+  .error-value {
+    @apply text-error capitalize;
+  }
+  // .quickLink-container:hover .quickLink-list {
+  //   @apply opacity-100 translate-y-0;
+  // }
+  .stroke-text {
+    color: white;
+    text-shadow: -1px -1px 0 #ccc, 1px -1px 0 #ccc, -1px 1px 0 #ccc,
+      1px 1px 0 #ccc;
+  }
+  .box-shadow-creative {
+    @apply shadow-primary shadow-[7px_7px_0] duration-100;
+    &:hover {
+      box-shadow: 1px 1px 0;
+    }
+    &-large {
+
+      @apply shadow-[10px_10px_0] shadow-darkGray
+    }
+  }
+}
+
+.ant-tabs-tab {
+  background-color: transparent !important;
+  border: none !important;
+  color: #ccc;
+}
+.ant-tabs-tab-active,
+.ant-tabs-content-holder {
+  background-color: #fff !important;
+}
+.ant-tabs-nav {
+  margin: 0 !important;
+}
+.ant-tabs-content-holder {
+  @apply px-10 py-5;
+}
+
+.Toastify__toast--success .Toastify__progress-bar--success {
+  @apply bg-primary;
+}
+.Toastify__toast--success svg {
+  @apply fill-primary;
 }

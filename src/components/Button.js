@@ -24,7 +24,7 @@ const Button = ({
     <button
       type={type}
       onClick={onClick}
-      className={`py-3 text-base min-h-[56px] font-semibold px-5 rounded-xl inline-flex items-center justify-center  ${
+      className={`hover:bg-opacity-80 py-3 text-base min-h-[56px] font-semibold px-5 rounded-xl inline-flex items-center justify-center  ${
         primary
           ? "bg-primary text-white"
           : secondary
@@ -42,7 +42,7 @@ const Button = ({
       {child}
     </button>
   );
-  return to ? <Link to={to}>{btn}</Link> : btn;
+  return to ? <a href={to}>{btn}</a> : btn;
 };
 
 export default Button;

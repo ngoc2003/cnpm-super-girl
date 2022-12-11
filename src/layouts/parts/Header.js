@@ -1,23 +1,30 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import headerData from "../../data/headerData";
 import Images from "../../images/Images";
+import Cart from "../../components/cart/Cart";
 
 const Header = () => {
-  // const [active, setActive] =
   const { pathname } = useLocation();
+  const { user } = useSelector((state) => state.auth);
+
   return (
-    <div className=" container ">
-      <div className="px-1 inline-block float-right text-xs bg-lightGray text-darkGray ">
-        Staff
-      </div>
-      <div className="clear-both flex items-center justify-between">
+    <div className="container ">
+      {user?.role === 1 && (
+        <div className="inline-block float-right px-1 text-xs bg-lightGray text-darkGray ">
+          Staff
+        </div>
+      )}
+      <div className="flex items-center justify-between clear-both">
         <div className="flex items-center">
           <Link to="/">
             <img className="h-[4rem]" src={Images.logo} alt="" />
           </Link>
-          <div className=" px-1 flex items-start justify-center flex-col">
-            <h4 className="font-semibold text-primary">TRƯỜNG ĐẠI HỌC THUỶ LỢI</h4>
+          <div className="flex flex-col items-start justify-center px-1 ">
+            <h4 className="font-semibold text-primary">
+              TRƯỜNG ĐẠI HỌC THUỶ LỢI
+            </h4>
             <h4 className="text-sm">THUY LOI UNIVERSITY</h4>
           </div>
         </div>
@@ -36,6 +43,11 @@ const Header = () => {
               </Link>
             );
           })}
+          {user?.role !== 1 && (
+            <span className="text-xl text-primary">
+              <Cart></Cart>
+            </span>
+          )}
         </div>
       </div>
     </div>
