@@ -4,12 +4,12 @@ import Button from "../components/Button";
 import Search from "../components/Search";
 import IconUser from "../icons/IconUser";
 
-const HomePageUser = () => {
+const HomePageStaff = () => {
   return (
     <div className="container">
       <div className="flex items-center justify-between">
         <Search placeholder="Find book, author, . . ."></Search>
-        <Link className="flex gap-3 font-semibold text-white hover:text-secondary " to="/">
+        <Link to='./account' className="flex gap-3 font-semibold text-white hover:text-secondary ">
           My Account
           <IconUser></IconUser>
         </Link>
@@ -35,4 +35,4 @@ const HomePageUser = () => {
   );
 };
 
-export default HomePageUser;
+export default HomePageStaff;

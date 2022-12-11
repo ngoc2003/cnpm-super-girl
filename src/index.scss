@@ -5,7 +5,7 @@
 @import "react-quill/dist/quill.snow.css";
 @layer base {
   body {
-    @apply mx-auto text-base font-normal;
+    @apply mx-auto text-base font-normal leading-relaxed;
     line-height: 1.5;
   }
   input {
