@@ -8,6 +8,8 @@ import HomePageStaff from "./pages/HomePageStaff";
 import HomePageUser from "./pages/HomePageUser";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import Bookstore from "./pages/admin/bookstore";
+import AddBook from './pages/admin/bookstore/AddBook'
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         </Route>
         <Route element={<LayoutAdmin />}>
           <Route path="/staff/account" element={<Staff />}></Route>
+          <Route path="/staff/account/Bookstore" element={<Bookstore />}></Route>
+          <Route path="/staff/account/Bookstore/add" element={<AddBook />}></Route>
         </Route>
       </Routes>
     </Suspense>

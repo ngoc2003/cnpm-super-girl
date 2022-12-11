@@ -1,7 +1,13 @@
 import React from "react";
-import { DownOutlined } from '@ant-design/icons';
+import { DownOutlined } from "@ant-design/icons";
 import { Button, Dropdown } from "antd";
-const MenuDropdown = ({ data =[{key: '1', label: '1'}], item='', name = "Select", setItem = () => {} }) => {
+const MenuDropdown = ({
+  fluid = false,
+  data = [{ key: "1", label: "1" }],
+  item = "",
+  name = "Select",
+  setItem = () => {},
+}) => {
   const handleMenuClick = (e) => {
     setItem(e.key);
   };
@@ -10,16 +16,17 @@ const MenuDropdown = ({ data =[{key: '1', label: '1'}], item='', name = "Select"
     onClick: handleMenuClick,
   };
   return (
-    <Dropdown menu={menu} className='w-[150px] rounded-md'     trigger={['click']}>
-      <Button className=''
-
-      >
+    <Dropdown
+      menu={menu}
+      className={`rounded-md  ${fluid ? "w-full" : "w-[300px]"} `}
+      trigger={["click"]}
+    >
+      <Button fluid>
         {item || <span className="">{name}</span>}
         <DownOutlined />
       </Button>
     </Dropdown>
   );
 };
-
 
 export default MenuDropdown;
