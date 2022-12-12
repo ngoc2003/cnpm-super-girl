@@ -6,6 +6,7 @@ const MenuDropdown = ({
   data = [{ key: "1", label: "1" }],
   item = "",
   name = "Select",
+  children = "",
   setItem = () => {},
 }) => {
   const handleMenuClick = (e) => {

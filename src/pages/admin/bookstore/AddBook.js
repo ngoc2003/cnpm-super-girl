@@ -10,12 +10,12 @@ import { apiURL } from "../../../config/config";
 import { toast } from "react-toastify";
 import axios from "axios";
 const AddBook = () => {
-    const [languages, setLanguages] = useState("");
-    const [groups, setGroups] = useState("");
-    
-    const [language, setLanguage] = useState("");
-    const [group, setGroup] = useState("");
-    const [image, setImage] = useState("");
+  const [languages, setLanguages] = useState("");
+  const [groups, setGroups] = useState("");
+
+  const [language, setLanguage] = useState("");
+  const [group, setGroup] = useState("");
+  const [image, setImage] = useState("");
 
   const handleAddNewBook = async (values) => {
     try {
@@ -30,12 +30,32 @@ const AddBook = () => {
   useEffect(() => {
     async function fetchLanguageList() {
       const response = await axios.get(`${apiURL}/languages/all`);
-      setLanguages(response.data);
+      const data = response.data.map((item) => ({
+        label: item.name,
+        key: item.name,
+      }));
+      setLanguages(data);
     }
-    async function fetchGroupList() {
-      const response = await axios.get(`${apiURL}/group/all`);
-      setGroups(response.data);
+    async function fetchTypeList() {
+      const responseGroup = await axios.get(`${apiURL}/groups/all`);
+      const responseType = await axios.get(`${apiURL}/types/all`);
+      const data = responseGroup.data.map((gr) => {
+        let temp = {
+          label: gr.name,
+          key: gr.key,
+        };
+        let children = responseType.data
+          .filter((tp) => tp.group === temp.key)
+          .map((item) => ({ label: item.name, key: item.key }));
+        let result = children.length
+          ? { ...temp, children: [...children] }
+          : temp;
+        return result;
+      });
+      setGroups(data);
     }
+    fetchLanguageList();
+    fetchTypeList();
   }, []);
   return (
     <div className="bg-lightGray  w-full">
@@ -105,13 +125,15 @@ const AddBook = () => {
                     setItem={setGroup}
                     item={group}
                     fluid
+                    data={groups}
                   ></MenuDropdown>
                 </FormGroup>
                 <FormGroup className="flex-1">
                   <Label>Language</Label>
                   <MenuDropdown
                     setItem={setLanguage}
-                    iten={language}
+                    item={language}
+                    data={languages}
                     fluid
                   ></MenuDropdown>
                 </FormGroup>
