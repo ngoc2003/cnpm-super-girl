@@ -43,6 +43,7 @@ export default function Input({
             <input
               type={!showPassword && icon ? "password" : "text"}
               placeholder={placeholder}
+              onChange={onChange}
               className={`outline-none  px-3  bg-transparent w-full py-4  font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4    `}
               {...rest}
             />

@@ -4,8 +4,10 @@ import MenuDropdown from "../../components/MenuDropdown";
 import Search from "../../components/Search";
 import optionsAdminData from "../../data/optionsAdminData";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Staff = () => {
+
   return (
     <Layout className=" bg-lightGray">
       <div className="flex items-center w-full gap-5 p-3 m-5 bg-white rounded-xl">
@@ -18,7 +20,11 @@ const Staff = () => {
         <h4 className="text-xl font-semibold">Management Tools</h4>
         <div className="grid grid-cols-3 gap-5 my-5">
           {optionsAdminData.map((item) => (
-            <Link to={item.url} key={item.label} className="flex items-center gap-5">
+            <Link
+              to={item.url}
+              key={item.label}
+              className="flex items-center gap-5"
+            >
               <div className="w-20 h-20 rounded-full overflow-hidden object-cover">
                 <img src={item.image} className="h-full" alt="" />
               </div>

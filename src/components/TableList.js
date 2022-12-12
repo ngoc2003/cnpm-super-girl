@@ -23,38 +23,16 @@ const columnsPrev = [
     title: "Pages",
     key: "pages",
     dataIndex: "pages",
-    // render: (tags) => (
-    //   <span>
-    //     {tags.map((tag) => {
-    //       let color = tag.length > 5 ? "geekblue" : "green";
-    //       if (tag === "loser") {
-    //         color = "volcano";
-    //       }
-    //       return (
-    //         <Tag color={color} key={tag}>
-    //           {tag.toUpperCase()}
-    //         </Tag>
-    //       );
-    //     })}
-    //   </span>
-    // ),
   },
   {
     title: "Language",
     key: "language",
     dataIndex: 'language'
-    // render: (text, record) => (
-    //   <span>
-    //     <a>Delete</a>
-    //     <Divider type="vertical" />
-    //     <a>Delete</a>
-    //   </span>
-    // ),
   },
   {
-    title: "Group",
-    key: "group",
-    dataIndex: "group",
+    title: "Type",
+    key: "type",
+    dataIndex: "type",
   },
   {
     title: "Author",
@@ -114,7 +92,7 @@ const dataPrev = [
     edition: 2,
     createdAt: "04/12/2022",
     borrowAmount: 4,
-  },
+  }
 ];
 
 export default function TableList({ columns = columnsPrev, data = dataPrev }) {

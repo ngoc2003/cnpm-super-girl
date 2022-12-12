@@ -74,7 +74,6 @@ const AddBook = () => {
           publisher: "", //
           publishYear: "", //
           edition: "",
-          createdAt: "", //
           borrowAmount: 0, //
         }}
         onSubmit={(values) => handleAddNewBook(values)}
