@@ -9,7 +9,9 @@ import HomePageUser from "./pages/HomePageUser";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import Bookstore from "./pages/admin/bookstore";
-import AddBook from './pages/admin/bookstore/AddBook'
+import AddBook from "./pages/admin/bookstore/AddBook";
+import ListBook from "./pages/admin/bookstore/ListBook";
+import UpdateBook from "./pages/admin/bookstore/UpdateBook";
 
 function App() {
   return (
@@ -26,8 +28,22 @@ function App() {
         </Route>
         <Route element={<LayoutAdmin />}>
           <Route path="/staff/account" element={<Staff />}></Route>
-          <Route path="/staff/account/Bookstore" element={<Bookstore />}></Route>
-          <Route path="/staff/account/Bookstore/add" element={<AddBook />}></Route>
+          <Route
+            path="/staff/account/Bookstore"
+            element={<Bookstore />}
+          ></Route>
+          <Route
+            path="/staff/account/Bookstore/add"
+            element={<AddBook />}
+          ></Route>
+          <Route
+            path="/staff/account/Bookstore/all"
+            element={<ListBook />}
+          ></Route>
+          <Route
+            path="/staff/account/Bookstore/update/:slug"
+            element={<UpdateBook />}
+          ></Route>
         </Route>
       </Routes>
     </Suspense>

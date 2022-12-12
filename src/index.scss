@@ -18,3 +18,10 @@
     @apply px-8 py-2;
   }
 }
+
+.Toastify__toast--success .Toastify__progress-bar--success {
+  @apply bg-primary;
+}
+.Toastify__toast--success svg {
+  @apply fill-primary;
+}

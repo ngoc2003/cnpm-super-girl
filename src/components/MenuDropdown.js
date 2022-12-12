@@ -6,7 +6,7 @@ const MenuDropdown = ({
   data = [{ key: "1", label: "1" }],
   item = "",
   name = "Select",
-  children = "",
+  defaultValue,
   setItem = () => {},
 }) => {
   const handleMenuClick = (e) => {
@@ -18,8 +18,12 @@ const MenuDropdown = ({
   };
   return (
     <Dropdown
-      menu={menu}
-      className={`rounded-md  ${fluid ? "w-full" : "w-[300px]"} `}
+      menu={{
+        ...menu,
+        selectable: true,
+        defaultSelectedKeys: [`${defaultValue}`],
+      }}
+      className={`rounded-md  ${fluid ? "w-full" : "w-[250px]"} `}
       trigger={["click"]}
     >
       <Button fluid>

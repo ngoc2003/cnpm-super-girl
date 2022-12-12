@@ -17,7 +17,6 @@ root.render(
     <BrowserRouter>
       <App />
       <ToastContainer></ToastContainer>
-
     </BrowserRouter>
   </Provider>
 );

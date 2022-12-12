@@ -10,41 +10,38 @@ import Button from "../../../components/Button";
 import { apiURL } from "../../../config/config";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { TitleDocument } from "../../../config/config";
-const AddBook = () => {
+const UpdateBook = () => {
   const navigate = useNavigate();
+  const { slug } = useParams();
+  const [data, setData] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [languages, setLanguages] = useState("");
   const [types, setTypes] = useState("");
 
-  const [language, setLanguage] = useState("");
-  const [type, setType] = useState("");
-  const [image, setImage] = useState("");
+  const [language, setLanguage] = useState(data.language);
+  const [type, setType] = useState(data.type);
+  const [image, setImage] = useState(data.image);
 
-  const handleAddNewBook = async (values) => {
-    try {
-      const response = await axios.post(`${apiURL}/books/create`, {
-        ...values,
-        type,
-        language,
-        image: image,
-      });
-      if (response.status === 200) {
-        toast.success("Add Book Successfully", {
-          pauseOnHover: false,
-          autoClose: 1000,
-          
-        });
-        setIsLoading(false);
-        setTimeout(() => {
-          setTimeout(() => {
-            navigate("/staff/account/Bookstore");
-          }, 1000);
-        }, 1000);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const handleUpdateBook = async (values) => {
+    await axios.post(`${apiURL}/books/update`, {
+      ...data,
+      ...values,
+      type,
+      language,
+      image,
+    });
+    toast.success("Update Book Successfully", {
+      pauseOnHover: false,
+      autoClose: 1000,
+    });
+    setIsLoading(false);
+    setTimeout(() => {
+      setTimeout(() => {
+        navigate("/staff/account/Bookstore");
+      }, 1000);
+    });
   };
   useEffect(() => {
     async function fetchLanguageList() {
@@ -73,28 +70,33 @@ const AddBook = () => {
       });
       setTypes(data);
     }
+    async function fetchOneDoc() {
+      const response = await axios.get(`${apiURL}/books/${slug}`);
+      setData(response.data);
+    }
     fetchLanguageList();
     fetchTypeList();
-    document.title = `${TitleDocument} | Add`;
+    fetchOneDoc();
+    document.title = `${TitleDocument} | Update`;
   }, []);
   return (
     <div className="bg-lightGray  w-full">
       <Formik
         initialValues={{
           image: image, //
-          name: "", //
-          amount: "", //
-          pages: "", //
-          language: "", //
-          type: "", //
-          author: "", //
-          publisher: "", //
-          publishYear: "", //
-          edition: "",
-          borrowAmount: 0, //
+          name: data.name, //
+          amount: data.amount, //
+          pages: data.pages, //
+          language: data.language, //
+          type: data.type, //
+          author: data.author, //
+          publisher: data.publisher, //
+          publishYear: data.publishYear, //
+          edition: data.edition,
+          borrowAmount: data.borrowAmount, //
         }}
         onSubmit={(values) => {
-          handleAddNewBook(values);
+          handleUpdateBook(values);
           setIsLoading(true);
         }}
       >
@@ -106,6 +108,7 @@ const AddBook = () => {
                   <FormGroup>
                     <Label>Title</Label>
                     <Input
+                      defaultValue={data.name}
                       name="name"
                       placeholder="Title"
                       error={errors.name && touched.name ? errors.name : ""}
@@ -115,6 +118,7 @@ const AddBook = () => {
                   <FormGroup>
                     <Label>Book's Amount</Label>
                     <Input
+                      defaultValue={data.amount}
                       name="amount"
                       placeholder="Amount"
                       error={
@@ -126,6 +130,7 @@ const AddBook = () => {
                   <FormGroup>
                     <Label>Page Number</Label>
                     <Input
+                      defaultValue={data.pages}
                       name="pages"
                       placeholder="Pages"
                       error={errors.pages && touched.pages ? errors.pages : ""}
@@ -136,7 +141,11 @@ const AddBook = () => {
                 <div className="flex-1">
                   <FormGroup>
                     <Label>Image</Label>
-                    <ImageUpload name="image" onChange={setImage}></ImageUpload>
+                    <ImageUpload
+                      defaultValue={data.image}
+                      name="image"
+                      onChange={setImage}
+                    ></ImageUpload>
                   </FormGroup>
                 </div>
               </div>
@@ -144,6 +153,7 @@ const AddBook = () => {
                 <FormGroup className="flex-1">
                   <Label>Group</Label>
                   <MenuDropdown
+                    defaultValue={data.type}
                     setItem={setType}
                     item={type}
                     fluid
@@ -154,6 +164,7 @@ const AddBook = () => {
                   <Label>Language</Label>
                   <MenuDropdown
                     setItem={setLanguage}
+                    defaultValue={data.language}
                     item={language}
                     data={languages}
                     fluid
@@ -166,6 +177,7 @@ const AddBook = () => {
                   <Input
                     name="author"
                     placeholder="Author"
+                    defaultValue={data.author}
                     error={errors.author && touched.author ? errors.author : ""}
                     onChange={(e) => setFieldValue("author", e.target.value)}
                   ></Input>
@@ -175,6 +187,7 @@ const AddBook = () => {
                   <Input
                     name="publisher"
                     placeholder="Publisher"
+                    defaultValue={data.publisher}
                     error={
                       errors.publisher && touched.publisher
                         ? errors.publisher
@@ -188,6 +201,7 @@ const AddBook = () => {
                   <Input
                     name="publishYear"
                     placeholder="Publish Year"
+                    defaultValue={data.publishYear}
                     error={
                       errors.publishYear && touched.publishYear
                         ? errors.publishYear
@@ -203,6 +217,7 @@ const AddBook = () => {
                   <Input
                     name="Edition"
                     placeholder="Edition"
+                    defaultValue={data.edition}
                     error={
                       errors.edition && touched.edition ? errors.edition : ""
                     }
@@ -212,7 +227,7 @@ const AddBook = () => {
               </div>
               <div className="flex gap-5">
                 <Button type="submit" isLoading={isLoading} primary fluid>
-                  Apply
+                  Update
                 </Button>
                 {/* to="/staff/account/Bookstore" */}
                 <Button
@@ -230,4 +245,4 @@ const AddBook = () => {
   );
 };
 
-export default AddBook;
+export default UpdateBook;

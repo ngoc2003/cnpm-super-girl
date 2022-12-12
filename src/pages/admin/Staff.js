@@ -10,10 +10,10 @@ const Staff = () => {
 
   return (
     <Layout className=" bg-lightGray">
-      <div className="flex items-center w-full gap-5 p-3 m-5 bg-white rounded-xl">
+      <div className="flex items-center w-full  p-3 m-5 bg-white rounded-xl gap-10 flex-wrap">
         <h4 className="text-xl font-semibold">Search tools</h4>
-        <MenuDropdown name="Everything"></MenuDropdown>
-        <MenuDropdown name="All items"></MenuDropdown>
+        <MenuDropdown  name="Everything"></MenuDropdown>
+        <MenuDropdown  name="All items"></MenuDropdown>
         <Search placeholder="Books, documents, people and more . . ."></Search>
       </div>
       <div className="bg-white p-3 mx-5 rounded-xl ">
