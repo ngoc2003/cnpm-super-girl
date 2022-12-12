@@ -6,6 +6,7 @@ export default function Input({
   children,
   icon = false,
   isFile = false,
+  onChange = () => {},
   ...props
 }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,12 +15,14 @@ export default function Input({
     <>
       {isFile ? (
         <label
-          className={`${props.className || ''} min-h-[250px] cursor-pointer flex items-center justify-center border border-dashed w-full rounded-lg  relative overflow-hidden group`}
+          className={`${
+            props.className || ""
+          } min-h-[250px] cursor-pointer flex items-center justify-center border border-dashed w-full rounded-lg  relative overflow-hidden group`}
         >
           <input
             type="file"
             className="hidden-input hidden"
-            onChange={() => {}}
+            onChange={onChange}
           />
 
           <div className="flex flex-col items-center text-center pointer-events-none">

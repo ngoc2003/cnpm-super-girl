@@ -11,16 +11,19 @@ import { toast } from "react-toastify";
 import axios from "axios";
 const AddBook = () => {
   const [languages, setLanguages] = useState("");
-  const [groups, setGroups] = useState("");
+  const [types, setTypes] = useState("");
 
   const [language, setLanguage] = useState("");
-  const [group, setGroup] = useState("");
+  const [type, setType] = useState("");
   const [image, setImage] = useState("");
 
   const handleAddNewBook = async (values) => {
     try {
       await axios.post(`${apiURL}/books/create`, {
         ...values,
+        type,
+        language,
+        image: image,
       });
       toast.success("ADD SUCCESSFULLY");
     } catch (error) {
@@ -52,7 +55,7 @@ const AddBook = () => {
           : temp;
         return result;
       });
-      setGroups(data);
+      setTypes(data);
     }
     fetchLanguageList();
     fetchTypeList();
@@ -66,7 +69,7 @@ const AddBook = () => {
           amount: "", //
           pages: "", //
           language: "", //
-          group: "", //
+          type: "", //
           author: "", //
           publisher: "", //
           publishYear: "", //
@@ -86,8 +89,8 @@ const AddBook = () => {
                     <Input
                       name="name"
                       placeholder="Title"
-                      error={errors.title && touched.title ? errors.title : ""}
-                      onChange={(e) => setFieldValue("title", e.target.value)}
+                      error={errors.name && touched.name ? errors.name : ""}
+                      onChange={(e) => setFieldValue("name", e.target.value)}
                     ></Input>
                   </FormGroup>
                   <FormGroup>
@@ -122,10 +125,10 @@ const AddBook = () => {
                 <FormGroup className="flex-1">
                   <Label>Group</Label>
                   <MenuDropdown
-                    setItem={setGroup}
-                    item={group}
+                    setItem={setType}
+                    item={type}
                     fluid
-                    data={groups}
+                    data={types}
                   ></MenuDropdown>
                 </FormGroup>
                 <FormGroup className="flex-1">
