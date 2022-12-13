@@ -3,16 +3,32 @@ import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import Search from "../components/Search";
 import IconUser from "../icons/IconUser";
-
+import { useSelector } from "react-redux";
 const HomePageUser = () => {
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+
   return (
     <div className="container">
       <div className="flex items-center justify-between">
         <Search placeholder="Find book, author, . . ."></Search>
-        <Link className="flex gap-3 font-semibold text-white hover:text-secondary " to="/">
-          My Account
-          <IconUser></IconUser>
-        </Link>
+        {!user ? (
+          <Link
+            className="flex gap-3 font-semibold text-white hover:text-secondary "
+            to="/sign-in"
+          >
+            My Account
+            <IconUser></IconUser>
+          </Link>
+        ) : (
+          <Link
+            className="flex gap-3 font-semibold text-white hover:text-secondary "
+            to="/"
+          >
+            My Account
+            <IconUser></IconUser>
+          </Link>
+        )}
       </div>
       <div>
         <h4 className="py-5 text-white text-5xl font-bold max-w-[400px]">

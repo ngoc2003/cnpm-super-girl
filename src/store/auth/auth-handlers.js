@@ -41,11 +41,9 @@ function* handleAuthSignIn(action) {
         pauseOnHover: false,
         autoClose: 1500,
       });
-      setTimeout( () => {
-        window.location.replace("/")
-      },2000)
     }
   } catch (err) {
+    console.log(err);
     toast.error("Please check your account!", {
       pauseOnHover: false,
       autoClose: 1500,

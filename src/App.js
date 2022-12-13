@@ -13,6 +13,10 @@ import AddBook from "./pages/admin/bookstore/AddBook";
 import ListBook from "./pages/admin/bookstore/ListBook";
 import UpdateBook from "./pages/admin/bookstore/UpdateBook";
 
+import Employee from "./pages/admin/employee";
+import UpdateEmployee from "./pages/admin/employee/UpdateEmployee";
+import AddEmloyee from "./pages/admin/employee/AddEmloyee";
+
 function App() {
   return (
     <Suspense>
@@ -43,6 +47,15 @@ function App() {
           <Route
             path="/staff/account/Bookstore/update/:slug"
             element={<UpdateBook />}
+          ></Route>
+          <Route path="/staff/account/Employee" element={<Employee />}></Route>
+          <Route
+            path="/staff/account/Employee/add"
+            element={<AddEmloyee />}
+          ></Route>
+          <Route
+            path="/staff/account/Employee/update/:slug"
+            element={<UpdateEmployee />}
           ></Route>
         </Route>
       </Routes>

@@ -4,25 +4,23 @@ import { Link } from "react-router-dom";
 import Checkbox from "../components/Checkbox";
 import Input from "../components/Input";
 import Label from "../components/Label";
-// import LayoutAuthen from "../layouts/LayoutAuthen";
 import * as Yup from "yup";
 import IconEyeToggle from "../icons/IconEyeToggle";
 // import useToggleValue from "../hooks/useToggleValue";
 import FormGroup from "../components/FormGroup";
 import Button from "../components/Button";
-// import { useDispatch } from "react-redux";
-// import { signUp } from "../store/auth/auth-slice";
+import { useDispatch } from "react-redux";
+import { signUp } from "../store/auth/auth-slice";
 export default function SignUpPage() {
-  //   const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
-  //     useToggleValue(false);
+  const dispatch = useDispatch();
   const [acceptTerm, setAcceptTerm] = useState(false);
   //   const dispatch = useDispatch();
   const handleSignUp = async (values) => {
-    // try {
-    //    dispatch(signUp(values));
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      dispatch(signUp(values));
+    } catch (err) {
+      console.log(err);
+    }
   };
   const infos = [
     {

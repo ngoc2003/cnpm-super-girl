@@ -16,6 +16,9 @@
 @layer components {
   .container {
     @apply px-8 py-2;
+  };
+  .err-data {
+    @apply text-error;
   }
 }
 
