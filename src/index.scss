@@ -20,6 +20,20 @@
   .error-value {
     @apply text-error capitalize;
   }
+  .quickLink-container:hover .quickLink-list {
+    @apply opacity-100 translate-y-0;
+  }
+  .stroke-text {
+    color: white;
+    text-shadow: -1px -1px 0 #ccc, 1px -1px 0 #ccc, -1px 1px 0 #ccc,
+      1px 1px 0 #ccc;
+  }
+  .box-shadow-creative {
+    @apply shadow-primary shadow-[7px_7px_0] duration-100;
+    &:hover {
+      box-shadow: 1px 1px 0;
+    }
+  }
 }
 
 .Toastify__toast--success .Toastify__progress-bar--success {

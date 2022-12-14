@@ -1,29 +1,39 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import IconIn from "../icons/IconIn";
 import Images from "../images/Images";
 import Header from "./parts/Header";
-import { useSelector } from "react-redux";
-
+import Hero from "../pages/homepage/Hero";
+import { useDispatch, useSelector } from "react-redux";
+import { refreshToken } from "../store/auth/auth-slice";
+import { logOut } from "../utils/auth";
 const LayoutDefault = () => {
+  const user = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  function handleLogOut() {
+    dispatch(refreshToken({}));
+    logOut();
+  }
+  useEffect(() => {
+    if (user && user.role === 1) {
+      window.location.replace("/staff");
+      // navigate("/staff");
+    }
+  }, []);
   return (
     <>
       <div className="flex md:h-screen">
         <div className="flex items-center px-2 bg-white">
           <span className="flex items-center justify-center w-10 h-10 duration-100 rounded-full cursor-pointer hover:bg-lightGray">
-            <IconIn></IconIn>
+            <IconIn onClick={handleLogOut}></IconIn>
           </span>
         </div>
         <div className="flex-1">
           <Header></Header>
-          <div
-            style={{
-              background: `url(${Images.bgHome}) top center/ cover no-repeat`,
-            }}
-            className="flex-1 py-5"
-          >
-            <Outlet></Outlet>
-          </div>
+          <Hero />
+          <Outlet></Outlet>
         </div>
       </div>
     </>

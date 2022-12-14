@@ -7,7 +7,7 @@ import Images from "../../images/Images";
 const Header = () => {
   // const [active, setActive] =
   const { pathname } = useLocation();
-  const { user } = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth);
 
   return (
     <div className="container ">

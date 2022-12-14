@@ -1,4 +1,5 @@
-import React, { lazy, Suspense, useEffect, useLayoutEffect } from "react";
+import React, { Suspense, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshToken, updateUser } from "./store/auth/auth-slice";
 import { getToken, logOut } from "./utils/auth";
@@ -24,6 +25,7 @@ import AddEmloyee from "./pages/admin/employee/AddEmloyee";
 
 function App() {
   const user = useSelector((state) => state.auth);
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     if (user && user._id) {

@@ -7,7 +7,7 @@ import IconUser from "../icons/IconUser";
 const HomePageStaff = () => {
   return (
     <div className="container">
-      <div className="flex items-center justify-between">
+      {/* <div className="flex items-center justify-between">
         <Search placeholder="Find book, author, . . ."></Search>
         <Link to='./account' className="flex gap-3 font-semibold text-white hover:text-secondary ">
           My Account
@@ -30,7 +30,7 @@ const HomePageStaff = () => {
       </div>
       <div className="text-[100px] tracking-wide text-center text-white">
         LIBRARY
-      </div>
+      </div> */}
     </div>
   );
 };
