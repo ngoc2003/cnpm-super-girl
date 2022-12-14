@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { apiURL } from "../../../config/config";
-import TableEmployee from "../../../components/TableUser";
+import TableUser from "../../../components/TableUser";
 import Button from "../../../components/Button";
-const Employee = () => {
+const Reader = () => {
   const [data, setData] = useState("");
   useEffect(() => {
-    async function fetchEmployee() {
-      const response = await axios.get(`${apiURL}/users/all/admin`);
+    async function fetchUser() {
+      const response = await axios.get(`${apiURL}/users/all/reader`);
       setData(response.data);
     }
-    fetchEmployee();
+    fetchUser();
   }, []);
   console.log(data);
   return (
@@ -19,15 +19,14 @@ const Employee = () => {
         <div className="mb-3 flex gap-3 justify-between">
           <Button to="/staff/account">Back</Button>
           <div className="flex gap-3">
-            <Button to="./add" primary>
-              Add new Employee
-            </Button>
+            <Button className='bg-black text-white'>Black List</Button>
+            <Button primary>Exel Export</Button>
           </div>
         </div>
-        <TableEmployee data={data}></TableEmployee>
+        <TableUser type={"reader"} data={data}></TableUser>
       </div>
     </div>
   );
 };
 
-export default Employee;
+export default Reader;

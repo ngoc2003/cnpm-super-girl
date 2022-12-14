@@ -5,8 +5,7 @@ import Checkbox from "../components/Checkbox";
 import Input from "../components/Input";
 import Label from "../components/Label";
 import * as Yup from "yup";
-import IconEyeToggle from "../icons/IconEyeToggle";
-// import useToggleValue from "../hooks/useToggleValue";
+import { useNavigate } from "react-router-dom";
 import FormGroup from "../components/FormGroup";
 import Button from "../components/Button";
 import { useDispatch } from "react-redux";
@@ -14,10 +13,11 @@ import { signUp } from "../store/auth/auth-slice";
 export default function SignUpPage() {
   const dispatch = useDispatch();
   const [acceptTerm, setAcceptTerm] = useState(false);
-  //   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSignUp = async (values) => {
     try {
       dispatch(signUp(values));
+      navigate("/");
     } catch (err) {
       console.log(err);
     }

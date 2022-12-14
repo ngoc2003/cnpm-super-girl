@@ -13,8 +13,10 @@ import AddBook from "./pages/admin/bookstore/AddBook";
 import ListBook from "./pages/admin/bookstore/ListBook";
 import UpdateBook from "./pages/admin/bookstore/UpdateBook";
 
+import Reader from "./pages/admin/reader";
+import Request from "./pages/admin/request";
 import Employee from "./pages/admin/employee";
-import UpdateEmployee from "./pages/admin/employee/UpdateEmployee";
+import UpdateUser from "./pages/admin/UpdateUser";
 import AddEmloyee from "./pages/admin/employee/AddEmloyee";
 
 function App() {
@@ -48,15 +50,21 @@ function App() {
             path="/staff/account/Bookstore/update/:slug"
             element={<UpdateBook />}
           ></Route>
+          {/* Employee */}
           <Route path="/staff/account/Employee" element={<Employee />}></Route>
           <Route
             path="/staff/account/Employee/add"
             element={<AddEmloyee />}
           ></Route>
           <Route
-            path="/staff/account/Employee/update/:slug"
-            element={<UpdateEmployee />}
+            path="/staff/account/User/update/:slug"
+            element={<UpdateUser />}
           ></Route>
+          {/* Reader */}
+          <Route path="/staff/account/Readers" element={<Reader />}></Route>
+          <Route path="/staff/account/*" element={<Staff />}></Route>
+          {/* Request */}
+          <Route path="/staff/account/Request" element={<Request />}></Route>
         </Route>
       </Routes>
     </Suspense>

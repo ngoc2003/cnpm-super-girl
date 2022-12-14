@@ -8,7 +8,8 @@ import sidebarAdminData from "../data/sidebarAdminData";
 const { Sider } = Layout;
 
 const LayoutAdmin = () => {
-  const { user } = useSelector((state) => state.auth);
+  const  user  = useSelector((state) => state.auth);
+  console.log(user)
   const navigate = useNavigate();
   // let location = useLocation();
   // console.log(location);
@@ -38,7 +39,7 @@ const LayoutAdmin = () => {
           <Layout className="py-5 bg-white text-center">
             <img
               className="w-1/2 min-w-[100px] mx-auto"
-              src={Images.avatar}
+              src={user.image || Images.avatar}
               alt=""
             />
             <h4 className="font-semibold ">{user?.name || "Anonymous"}</h4>
@@ -51,13 +52,18 @@ const LayoutAdmin = () => {
             mode="inline"
             defaultSelectedKeys={["Dashboard"]}
             defaultOpenKeys={["sub1"]}
-            style={{ height: "100%", backgroundColor: "white", borderRight: 0, textAlign: 'center' }}
+            style={{
+              height: "100%",
+              backgroundColor: "white",
+              borderRight: 0,
+              textAlign: "center",
+            }}
             // onClick={handleClick}
             // selectedKeys={[current]}
           >
             {sidebarAdminData.map((item) => (
-              <Menu.Item  key={item.key}>
-                <Link   to={item.url}>{item.label}</Link>
+              <Menu.Item key={item.key}>
+                <Link to={item.url}>{item.label}</Link>
               </Menu.Item>
             ))}
           </Menu>

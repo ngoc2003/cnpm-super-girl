@@ -10,7 +10,6 @@ import Button from "../../../components/Button";
 import { apiURL } from "../../../config/config";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { signUp } from "../../../store/auth/auth-slice";
 import { TitleDocument } from "../../../config/config";
 import { useDispatch } from "react-redux";
@@ -25,10 +24,10 @@ const UpdateEmployee = () => {
   ];
   const ethnics = [{ label: "Kinh", key: "Kinh" }];
 
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState("VietNamese");
   const [sex, setSex] = useState("");
   const [image, setImage] = useState("");
-  const [ethnic, setEthnic] = useState("");
+  const [ethnic, setEthnic] = useState("Kinh");
 
   const handleAddEmployee = async (values) => {
     dispatch(
@@ -69,13 +68,9 @@ const UpdateEmployee = () => {
     <div className="bg-lightGray  w-full">
       <Formik
         initialValues={{
-          image: "", //
           name: "", //
           email: "",
           password: "",
-          sex: "",
-          ethnic: "",
-          language: "",
           cccd: "",
           birth: "",
           location: "",
@@ -189,7 +184,7 @@ const UpdateEmployee = () => {
 
               <div className="flex gap-5">
                 <Button type="submit" isLoading={isLoading} primary fluid>
-                  Update
+                  Add
                 </Button>
                 <Button
                   onClick={() => navigate("/staff/account/Employee")}

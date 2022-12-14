@@ -54,7 +54,6 @@ function* handleAuthSignIn(action) {
 function* handleAuthFetchUser({ payload }) {
   try {
     const response = yield call(requestAuthFetchUser, payload);
-    console.log("Response ~~", response);
     if (response.status === 200) {
       yield put(
         updateUser({

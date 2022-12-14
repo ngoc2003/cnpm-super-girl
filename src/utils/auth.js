@@ -1,8 +1,8 @@
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
-const accessTokenKey = "crow_funding_access_token";
-const refreshTokenKey = "crow_funding_refesh_token";
+const accessTokenKey = "super_girl_access_token";
+const refreshTokenKey = "super_girl_refesh_token";
 const objCookies = {
   expires: 30, // 30days
   domain: process.env.COOKIE_DOMAIN,
@@ -48,7 +48,6 @@ export const logOut = () => {
       path: "/",
       domain: process.env.COOKIE_DOMAIN,
     });
-    window.location.reload()
+    window.location.reload();
   }
-
 };

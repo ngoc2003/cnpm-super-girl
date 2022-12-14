@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
-import FormGroup from "../../../components/FormGroup";
-import Label from "../../../components/Label";
-import ImageUpload from "../../../utils/ImageUpload";
-import Input from "../../../components/Input";
-import MenuDropdown from "../../../components/MenuDropdown";
-import Button from "../../../components/Button";
-import { apiURL } from "../../../config/config";
+import FormGroup from "../../components/FormGroup";
+import Label from "../../components/Label";
+import ImageUpload from "../../utils/ImageUpload";
+import Input from "../../components/Input";
+import MenuDropdown from "../../components/MenuDropdown";
+import Button from "../../components/Button";
+import { apiURL } from "../../config/config";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { TitleDocument } from "../../../config/config";
-const UpdateBook = () => {
+import { TitleDocument } from "../../config/config";
+const UpdateUser = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
   const [data, setData] = useState("");
@@ -45,7 +45,7 @@ const UpdateBook = () => {
     setIsLoading(false);
     setTimeout(() => {
       setTimeout(() => {
-        navigate("/staff/account/Employee");
+        navigate(`/staff/account/${data.role === 1 ? "Employee" : "Readers"}`);
       }, 1000);
     });
   };
@@ -176,7 +176,13 @@ const UpdateBook = () => {
                   Update
                 </Button>
                 <Button
-                  onClick={() => navigate("/staff/account/Employee")}
+                  onClick={() =>
+                    navigate(
+                      `/staff/account/${
+                        data.role === 1 ? "Employee" : "Readers"
+                      }`
+                    )
+                  }
                   fluid
                 >
                   Cancel
@@ -190,4 +196,4 @@ const UpdateBook = () => {
   );
 };
 
-export default UpdateBook;
+export default UpdateUser;

@@ -1,21 +1,32 @@
-import { Table, Divider, Tag } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { apiURL } from "../config/config";
-import { toast } from "react-toastify";
 import ReactModal from "react-modal";
 import React, { useState } from "react";
 import IconClose from "../icons/IconClose";
-import Button from "../components/Button";
-export default function TableList({ data }) {
+import Button from "./Button";
+import { Table } from "antd";
+import Images from "../images/Images";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { apiURL } from "../config/config";
+import { toast } from "react-toastify";
+
+const TableUser = ({ data, type='employee' }) => {
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
+  const [user, setUser] = useState(false);
+
   const columnsPrev = [
     {
       title: "Image",
       dataIndex: "image",
       key: "image",
-      render: (image) => <img src={image}></img>,
+      render: (image) => (
+        <img
+          className="h-10 w-10"
+          alt="avatar"
+          src={image || Images.avatar}
+        ></img>
+      ),
     },
     {
       title: "Name",
@@ -23,83 +34,77 @@ export default function TableList({ data }) {
       key: "name",
     },
     {
-      title: "Amount",
-      dataIndex: "amount",
-      key: "amount",
+      title: "Sex",
+      dataIndex: "sex",
+      key: "sex",
+      render: (value) => (
+        <span className={`${!value && "error-value"}`}>
+          {value || "not update"}
+        </span>
+      ),
     },
     {
-      title: "Pages",
-      key: "pages",
-      dataIndex: "pages",
+      title: "CCCD",
+      dataIndex: "cccd",
+      key: "cccd",
+      render: (value) => (
+        <span className={`${!value && "error-value"}`}>
+          {value || "not update"}
+        </span>
+      ),
+    },
+    {
+      title: "Location",
+      dataIndex: "location",
+      key: "location",
+      render: (value) => (
+        <span className={`${!value && "error-value"}`}>
+          {value || "not update"}
+        </span>
+      ),
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
     {
       title: "Language",
-      key: "language",
       dataIndex: "language",
-    },
-    {
-      title: "Type",
-      key: "type",
-      dataIndex: "type",
-    },
-    {
-      title: "Author",
-      key: "author",
-      dataIndex: "author",
-      // render: (author) => {let authors = author.split(','); }
-    },
-    {
-      title: "Publisher",
-      key: "publisher",
-      dataIndex: "publisher",
-    },
-    {
-      title: "Publication Year",
-      key: "publishYear",
-      dataIndex: "publishYear",
-    },
-    {
-      title: "Edition",
-      key: "edition",
-      dataIndex: "edition",
-    },
-    {
-      title: "Import Date",
-      key: "createdAt",
-      dataIndex: "createdAt",
-      render: (date) => date.slice(0, 10),
-    },
-    {
-      title: "Borrow Amount",
-      key: "borrowAmount",
-      dataIndex: "borrowAmount",
+      key: "language",
+      render: (value) => (
+        <span className={`${!value && "error-value"}`}>
+          {value || "not update"}
+        </span>
+      ),
     },
     {
       title: "Option",
       key: "option",
-      render: (book) => (
+      render: (user) => (
         <span className="flex gap-3">
           <DeleteOutlined
             onClick={() => {
-              setId(book);
+              setUser(user);
               setOpenModal(true);
             }}
           ></DeleteOutlined>
           <EditOutlined
-            onClick={() => navigate(`./update/${book._id}`)}
+            onClick={() => navigate(`/staff/account/User/update/${user._id}`)}
           ></EditOutlined>
         </span>
       ),
     },
   ];
-  async function handleDeleteBook(book) {
+  const [isLoading, setLoading] = useState(false);
+  async function handleDeleteEmployee(user) {
     setLoading(true);
-    await axios.post(`${apiURL}/books/delete`, {
-      _id: book._id,
+    await axios.post(`${apiURL}/users/delete`, {
+      _id: user._id,
     });
     setTimeout(() => {
       setLoading(false);
-      toast.success("Delete Book Successfully", {
+      toast.success(`Delete ${type} Successfully`, {
         pauseOnHover: false,
         autoClose: 1000,
       });
@@ -108,9 +113,6 @@ export default function TableList({ data }) {
       }, 1000);
     }, 1000);
   }
-  const [openModal, setOpenModal] = useState(false);
-  const [isLoading, setLoading] = useState(false);
-  const [id, setId] = useState("");
   return (
     <>
       <Table columns={columnsPrev} dataSource={data} />
@@ -130,14 +132,14 @@ export default function TableList({ data }) {
           <IconClose></IconClose>
         </button>
         <h2 className="clear-both mb-10 text-2xl font-bold text-center ">
-          Are you sure to delete this book?
+          Are you sure to delete this {type}?
         </h2>
         <div className="flex gap-x-3">
           <Button
             isLoading={isLoading}
             primary
             fluid
-            onClick={() => handleDeleteBook(id)}
+            onClick={() => handleDeleteEmployee(user)}
           >
             Accept
           </Button>
@@ -148,4 +150,6 @@ export default function TableList({ data }) {
       </ReactModal>
     </>
   );
-}
+};
+
+export default TableUser;

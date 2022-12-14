@@ -28,12 +28,12 @@ const Search = ({ placeholder = "Do funrise now" }) => {
   return (
     <>
       <div className="relative z-50 flex-1">
-        <div className=" flex items-center p-2 bg-white rounded-full border w-full max-w-[458px] dark:bg-darkSecondary">
+        <div className=" flex items-center p-2 bg-white rounded-full border w-full max-w-[458px]">
           <div className="flex-1 pl-4 pr-5">
             <input
               defaultValue={""}
               value={searchValue}
-              className="w-full text-sm bg-transparent focus:outline-none dark:text-white text-text1 placeholder:text-text4"
+              className="w-full text-sm bg-transparent focus:outline-none text-black"
               type="text"
               placeholder={placeholder}
               //   onClick={() => setShowSearch(true)}
