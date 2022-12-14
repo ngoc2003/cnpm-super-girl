@@ -1,4 +1,7 @@
 import React, { lazy, Suspense, useEffect, useLayoutEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { refreshToken, updateUser } from "./store/auth/auth-slice";
+import { getToken, logOut } from "./utils/auth";
 import { Routes, Route } from "react-router-dom";
 import LayoutAdmin from "./layouts/LayoutAdmin";
 import LayoutAuthen from "./layouts/LayoutAuthen";
@@ -20,6 +23,27 @@ import UpdateUser from "./pages/admin/UpdateUser";
 import AddEmloyee from "./pages/admin/employee/AddEmloyee";
 
 function App() {
+  const user = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (user && user._id) {
+      const { access_token } = getToken();
+      dispatch(
+        updateUser({
+          user: user,
+          accessToken: access_token,
+        })
+      );
+    } else {
+      const { refresh_token } = getToken();
+      if (refreshToken) {
+        dispatch(refreshToken(refresh_token));
+      } else {
+        dispatch(refreshToken({}));
+        logOut();
+      }
+    }
+  }, []);
   return (
     <Suspense>
       <Routes>

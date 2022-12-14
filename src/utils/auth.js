@@ -29,6 +29,7 @@ export const saveToken = (access_token, refresh_token) => {
 export const getToken = () => {
   const access_token = Cookies.get(accessTokenKey);
   const refresh_token = Cookies.get(refreshTokenKey);
+  console.log(access_token, refresh_token)
   return {
     access_token,
     refresh_token,
