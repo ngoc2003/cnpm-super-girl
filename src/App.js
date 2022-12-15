@@ -16,7 +16,7 @@ import Bookstore from "./pages/admin/bookstore";
 import AddBook from "./pages/admin/bookstore/AddBook";
 import ListBook from "./pages/admin/bookstore/ListBook";
 import UpdateBook from "./pages/admin/bookstore/UpdateBook";
-
+import LibraryPage from "./pages/LibraryPage";
 import Reader from "./pages/admin/reader";
 import Request from "./pages/admin/request";
 import Employee from "./pages/admin/employee";
@@ -55,6 +55,7 @@ function App() {
         </Route>
         <Route element={<LayoutDefault />}>
           <Route path="/" element={<HomePageUser />}></Route>
+          <Route path="/Library" element={<LibraryPage />}></Route>
           <Route path="/staff" element={<HomePageStaff />}></Route>
           <Route path="*" element={<HomePageUser />}></Route>
         </Route>

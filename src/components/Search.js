@@ -6,7 +6,11 @@ import { Link, useNavigate } from "react-router-dom";
 import IconClose from "../icons/IconClose";
 const defaultImage = `https://wallpaperaccess.com/full/508751.jpg`;
 
-const Search = ({ placeholder = "Do funrise now" }) => {
+const Search = ({
+  placeholder = "Do funrise now",
+  className = "flex-1",
+  max = true,
+}) => {
   const [data, setData] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -27,8 +31,12 @@ const Search = ({ placeholder = "Do funrise now" }) => {
   //   }, [searchValueDebounce]);
   return (
     <>
-      <div className="relative z-50 flex-1">
-        <div className=" flex items-center p-2 bg-white rounded-full border w-full max-w-[458px]">
+      <div className={`relative z-50  ${className}`}>
+        <div
+          className={` flex items-center p-2 bg-white rounded-full border w-full ${
+            max && "max-w-[458px]"
+          } `}
+        >
           <div className="flex-1 pl-4 pr-5">
             <input
               defaultValue={""}

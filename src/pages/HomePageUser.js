@@ -10,6 +10,7 @@ import Images from "../images/Images";
 import { v4 } from "uuid";
 import QuickLinks from "./homepage/user/QuickLinks";
 import SpecialCollections from "./homepage/user/SpecialCollections";
+import Upcoming from "./homepage/user/Upcoming";
 const HomePageUser = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
@@ -17,9 +18,12 @@ const HomePageUser = () => {
 
   return (
     <>
+      <Hero />
+
       <QuickLinks />
       <hr />
       <SpecialCollections />
+      <Upcoming />
     </>
   );
 };

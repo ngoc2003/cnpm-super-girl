@@ -14,7 +14,9 @@ const SpecialCollections = () => {
               alt=""
             />
             <div className="bg-white w-[80%] flex-1 -translate-y-6 p-3 text-left box-shadow-creative">
-              <h4 className='font-semibold text-primary text-lg'>{item.title}</h4>
+              <h4 className="font-semibold text-primary text-lg">
+                {item.title}
+              </h4>
               {item.description}
             </div>
           </div>

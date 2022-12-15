@@ -17,6 +17,7 @@ const Images = {
   collection1:require('./coll1.png'),
   collection2:require('./coll2.png'),
   collection3:require('./coll3.png'),
+  upcomingEvents: require('./upcomingEvents.png')
 };
 
 export default Images;

@@ -20,9 +20,9 @@
   .error-value {
     @apply text-error capitalize;
   }
-  .quickLink-container:hover .quickLink-list {
-    @apply opacity-100 translate-y-0;
-  }
+  // .quickLink-container:hover .quickLink-list {
+  //   @apply opacity-100 translate-y-0;
+  // }
   .stroke-text {
     color: white;
     text-shadow: -1px -1px 0 #ccc, 1px -1px 0 #ccc, -1px 1px 0 #ccc,
@@ -34,6 +34,22 @@
       box-shadow: 1px 1px 0;
     }
   }
+}
+
+.ant-tabs-tab {
+  background-color: transparent !important;
+  border: none !important;
+  color: #ccc;
+}
+.ant-tabs-tab-active,
+.ant-tabs-content-holder {
+  background-color: #fff !important;
+}
+.ant-tabs-nav {
+  margin: 0 !important;
+}
+.ant-tabs-content-holder {
+  @apply px-10 py-5;
 }
 
 .Toastify__toast--success .Toastify__progress-bar--success {

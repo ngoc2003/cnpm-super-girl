@@ -32,7 +32,7 @@ const LayoutDefault = () => {
         </div>
         <div className="flex-1">
           <Header></Header>
-          <Hero />
+          
           <Outlet></Outlet>
         </div>
       </div>
