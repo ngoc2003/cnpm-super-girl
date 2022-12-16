@@ -1,9 +1,8 @@
 import React from "react";
-
-const Book = ({ data }) => {
-  console.log(data);
-  return (
-    <div className="h-[400px]   overflow-hidden ">
+import { Link } from "react-router-dom";
+const Book = ({ data, to}) => {
+  const components = (
+    <div className="h-[380px]   overflow-hidden relative ">
       <div className=" justify-center flex flex-col items-center">
         <div className="  h-[300px] ">
           <img src={data.image} className="h-full object-cover " alt="" />
@@ -13,6 +12,7 @@ const Book = ({ data }) => {
       </div>
     </div>
   );
+  return <>{to ? <Link to={to}>{components}</Link> : components}</>;
 };
 
 export default Book;

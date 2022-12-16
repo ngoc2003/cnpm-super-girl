@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { TitleDocument } from "../../../config/config";
+import TextAreaInput from "../../../components/TextAreaInput";
+
 const UpdateBook = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
@@ -94,6 +96,7 @@ const UpdateBook = () => {
           publishYear: data.publishYear, //
           edition: data.edition,
           borrowAmount: data.borrowAmount, //
+          description: data.description,
         }}
         onSubmit={(values) => {
           handleUpdateBook(values);
@@ -223,6 +226,21 @@ const UpdateBook = () => {
                     }
                     onChange={(e) => setFieldValue("edition", e.target.value)}
                   ></Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label>Description</Label>
+                  <TextAreaInput
+                    defaultValue={data.description || ""}
+                    onChange={(e) =>
+                      setFieldValue("description", e.target.value)
+                    }
+                    error={
+                      errors.description && touched.description
+                        ? errors.description
+                        : ""
+                    }
+                    placeholder="Description"
+                  />
                 </FormGroup>
               </div>
               <div className="flex gap-5">

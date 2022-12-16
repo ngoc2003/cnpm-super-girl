@@ -3,11 +3,12 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import headerData from "../../data/headerData";
 import Images from "../../images/Images";
+import Cart from "../../components/cart/Cart";
 
 const Header = () => {
   // const [active, setActive] =
   const { pathname } = useLocation();
-  const user = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <div className="container ">
@@ -43,6 +44,11 @@ const Header = () => {
               </Link>
             );
           })}
+          {user?.role !== 1 && (
+            <span className="text-xl text-primary">
+              <Cart></Cart>
+            </span>
+          )}
         </div>
       </div>
     </div>

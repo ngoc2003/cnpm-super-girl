@@ -11,6 +11,7 @@ import { apiURL } from "../../../config/config";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { TitleDocument } from "../../../config/config";
+import TextAreaInput from "../../../components/TextAreaInput";
 const AddBook = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +34,6 @@ const AddBook = () => {
         toast.success("Add Book Successfully", {
           pauseOnHover: false,
           autoClose: 1000,
-          
         });
         setIsLoading(false);
         setTimeout(() => {
@@ -92,6 +92,7 @@ const AddBook = () => {
           publishYear: "", //
           edition: "",
           borrowAmount: 0, //
+          description: "",
         }}
         onSubmit={(values) => {
           handleAddNewBook(values);
@@ -208,6 +209,20 @@ const AddBook = () => {
                     }
                     onChange={(e) => setFieldValue("edition", e.target.value)}
                   ></Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label>Description</Label>
+                  <TextAreaInput
+                    onChange={(e) =>
+                      setFieldValue("description", e.target.value)
+                    }
+                    error={
+                      errors.description && touched.description
+                        ? errors.description
+                        : ""
+                    }
+                    placeholder='Description'
+                  />
                 </FormGroup>
               </div>
               <div className="flex gap-5">

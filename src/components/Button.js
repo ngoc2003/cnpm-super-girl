@@ -42,7 +42,7 @@ const Button = ({
       {child}
     </button>
   );
-  return to ? <Link  to={to}>{btn}</Link> : btn;
+  return to ? <a href={to}>{btn}</a> : btn;
 };
 
 export default Button;

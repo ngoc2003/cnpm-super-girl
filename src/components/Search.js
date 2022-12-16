@@ -31,7 +31,7 @@ const Search = ({
   //   }, [searchValueDebounce]);
   return (
     <>
-      <div className={`relative z-50  ${className}`}>
+      <div className={`relative  ${className}`}>
         <div
           className={` flex items-center p-2 bg-white rounded-full border w-full ${
             max && "max-w-[458px]"

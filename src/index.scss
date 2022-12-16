@@ -33,6 +33,10 @@
     &:hover {
       box-shadow: 1px 1px 0;
     }
+    &-large {
+
+      @apply shadow-[10px_10px_0] shadow-darkGray
+    }
   }
 }
 

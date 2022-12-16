@@ -8,28 +8,8 @@ import sidebarAdminData from "../data/sidebarAdminData";
 const { Sider } = Layout;
 
 const LayoutAdmin = () => {
-  const  user  = useSelector((state) => state.auth);
-  console.log(user)
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  // let location = useLocation();
-  // console.log(location);
-  // const [current, setCurrent] = useState(location.pathname);
-  // useEffect(() => {
-  //   if (location) {
-  //     if (current !== location.pathname) {
-  //       setCurrent(location.pathname);
-  //     }
-  //   }
-  // }, [location, current]);
-
-  // function handleClick(e) {
-  //   setCurrent(e.key);
-  // }
-  // useLayoutEffect(() => {
-  //     if (!user) {
-  //       navigate("/sign-in");
-  //     };
-  // }, []);
   return (
     <>
       <Header></Header>
@@ -39,10 +19,10 @@ const LayoutAdmin = () => {
           <Layout className="py-5 bg-white text-center">
             <img
               className="w-1/2 min-w-[100px] mx-auto"
-              src={user.image || Images.avatar}
+              src={user?.image || Images.avatar}
               alt=""
             />
-            <h4 className="font-semibold ">{user?.name || "Anonymous"}</h4>
+            <h4 className="font-semibold my-1">{user?.name || "Anonymous"}</h4>
             <p className="text-xs">Management</p>
             <div>
               <Button className="my-3 text-darkGray">Logout</Button>

@@ -6,6 +6,7 @@ const MenuDropdown = ({
   data = [{ key: "1", label: "1" }],
   item = "",
   name = "Select",
+  width = "250px",
   defaultValue,
   setItem = () => {},
 }) => {
@@ -23,11 +24,11 @@ const MenuDropdown = ({
         selectable: true,
         defaultSelectedKeys: [`${defaultValue}`],
       }}
-      className={`rounded-md  ${fluid ? "w-full" : "w-[250px]"} `}
+      className={`rounded-md  ${fluid ? "w-full" : `w-[${width}]`} `}
       trigger={["click"]}
     >
       <Button fluid>
-        {item || <span className="">{name}</span>}
+        <span className="capitalize">{item || name}</span>
         <DownOutlined />
       </Button>
     </Dropdown>
