@@ -3,50 +3,37 @@ import React, { useState } from "react";
 import IconClose from "../icons/IconClose";
 import Button from "./Button";
 import { Table, Tag } from "antd";
-import Images from "../images/Images";
 import { DownOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../config/config";
 import { toast } from "react-toastify";
 import MenuDropdown from "./MenuDropdown";
+
+const menuDropdownOptions = [
+  {
+    label: <Tag color="gold">Pending</Tag>,
+    key: "pending",
+  },
+  {
+    label: <Tag color="green">Success</Tag>,
+    key: "success",
+  },
+  {
+    label: <Tag color="blue">Returned</Tag>,
+    key: "returned",
+  },
+  {
+    label: <Tag color="red">Cancelled</Tag>,
+    key: "cancelled",
+  },
+];
+
 const TableRequest = ({ data }) => {
   const navigate = useNavigate();
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const [item, setItem] = useState(false);
   const [newStatus, setNewStatus] = useState(false);
-  //   console.log(item)
-  const menuDropdownOptions = [
-    {
-      label: <Tag color="green">Success</Tag>,
-      key: "success",
-    },
-    {
-      label: <Tag color="blue">Returned</Tag>,
-      key: "returned",
-    },
-    {
-      label: <Tag color="red">Cancelled</Tag>,
-      key: "cancelled",
-    },
-  ];
-  function TagStyle({ tag, onClick = () => {} }) {
-    let color = "red";
-    if (tag === "pending") {
-      color = "gold";
-    } else {
-      if (tag === "success") {
-        color = "green";
-      } else if (tag === "returned") {
-        color = "blue";
-      }
-    }
-    return (
-      <Tag onClick={onClick} color={color}>
-        {tag?.toUpperCase()}
-      </Tag>
-    );
-  }
   const columnsPrev = [
     {
       title: "Name",
@@ -74,16 +61,16 @@ const TableRequest = ({ data }) => {
         </span>
       ),
     },
-    {
-      title: "Return at",
-      dataIndex: "endedAt",
-      key: "endedAt",
-      render: (value) => (
-        <span className={`${!value && "error-value"}`}>
-          {value || "not update"}
-        </span>
-      ),
-    },
+    // {
+    //   title: "Return at",
+    //   dataIndex: "endedAt",
+    //   key: "endedAt",
+    //   render: (value) => (
+    //     <span className={`${!value && "error-value"}`}>
+    //       {value || "not update"}
+    //     </span>
+    //   ),
+    // },
     {
       title: "Option",
       key: "option",
@@ -98,22 +85,26 @@ const TableRequest = ({ data }) => {
     },
   ];
   const [isLoading, setLoading] = useState(false);
-  async function handleDeleteEmployee(user) {
+  async function handleChangeStatus() {
     setLoading(true);
-    await axios.post(`${apiURL}/users/delete`, {
-      _id: user._id,
+    const response = await axios.post(`${apiURL}/borrow/update`, {
+      ...item,
+      status: newStatus,
     });
-    setTimeout(() => {
-      setLoading(false);
-      toast.success(`Update status Successfully`, {
-        pauseOnHover: false,
-        autoClose: 1000,
-      });
+    if (response.status === 200) {
       setTimeout(() => {
-        window.location.reload();
+        setLoading(false);
+        toast.success(`Update status Successfully`, {
+          pauseOnHover: false,
+          autoClose: 1000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       }, 1000);
-    }, 1000);
+    }
   }
+  console.log(data)
   return (
     <>
       <Table columns={columnsPrev} dataSource={data} />
@@ -135,7 +126,7 @@ const TableRequest = ({ data }) => {
         <h2 className="clear-both mb-10 text-2xl font-bold text-center ">
           Update Status
         </h2>
-        <div>
+        <div className="my-5 text-center">
           From <TagStyle tag={item.status} /> to{" "}
           <MenuDropdown
             width="120px"
@@ -149,7 +140,7 @@ const TableRequest = ({ data }) => {
             isLoading={isLoading}
             primary
             fluid
-            // onClick={() => handleDeleteEmployee(user)}
+            onClick={handleChangeStatus}
           >
             Accept
           </Button>
@@ -162,4 +153,21 @@ const TableRequest = ({ data }) => {
   );
 };
 
+function TagStyle({ tag, onClick = () => {} }) {
+  let color = "red";
+  if (tag === "pending") {
+    color = "gold";
+  } else {
+    if (tag === "success") {
+      color = "green";
+    } else if (tag === "returned") {
+      color = "blue";
+    }
+  }
+  return (
+    <Tag onClick={onClick} color={color}>
+      {tag?.toUpperCase()}
+    </Tag>
+  );
+}
 export default TableRequest;

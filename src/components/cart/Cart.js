@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { v4 } from "uuid";
 import Button from "../Button";
 import { Link } from "react-router-dom";
+import ReactModal from "react-modal";
+import IconClose from "../../icons/IconClose";
 const Cart = () => {
   const { user } = useSelector((state) => state.auth);
   const [show, setShow] = useState(false);
@@ -19,13 +21,38 @@ const Cart = () => {
         onClick={handleToggleShow}
       />
       {show && (
-        <div className="bg-white right-0 w-[300px] shadow-md p-3 border rounded-md mt-5 absolute z-50">
+        <ReactModal
+          isOpen={show}
+          overlayClassName={
+            "modal-overlay fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center "
+          }
+          shouldCloseOnOverlayClick={true}
+          onRequestClose={() => setShow(false)}
+          className="modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden"
+        >
+          <button
+            onClick={() => setShow(false)}
+            className="float-right w-6 h-6 duration-300  text-text1"
+          >
+            <IconClose></IconClose>
+          </button>
+          <div className="h-2 w-full clear-both"></div>
+
           {!user ? (
-            <div className='text-sm p-2 text-darkGray'>
-              You need to <Link className='text-primary' to="/sign-in">log in</Link> first{" "}
+            <div className="text-sm p-2 text-darkGray">
+              You need to{" "}
+              <Link className="text-primary" to="/sign-in">
+                log in
+              </Link>{" "}
+              first{" "}
             </div>
           ) : !cart.length ? (
-            <div>No items</div>
+            <>
+              <div className="p-3">No items</div>
+              <Button to="/List" primary fluid>
+                Your List Order
+              </Button>
+            </>
           ) : (
             <>
               <h4 className="text-xs mb-5">Your cart has {cart.length} item</h4>
@@ -49,13 +76,16 @@ const Cart = () => {
                 </>
               ))}
               <div className="flex gap-5">
+                <Button to="/List" fluid>
+                  Your List Order
+                </Button>
                 <Button to="/Order" primary fluid>
                   Order
                 </Button>
               </div>
             </>
           )}
-        </div>
+        </ReactModal>
       )}
     </div>
   );

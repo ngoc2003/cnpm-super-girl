@@ -13,6 +13,7 @@ const Request = () => {
         const userResponse = await axios.get(`${apiURL}/users/${item.userId}`);
         const bookResponse = await axios.get(`${apiURL}/books/${item.bookId}`);
         return {
+          _id: item._id,
           name: bookResponse.data?.name,
           author: bookResponse.data.author,
           reader: userResponse.data?.name,
@@ -37,7 +38,7 @@ const Request = () => {
         <div className="mb-3 flex gap-3 justify-between">
           <Button to="/staff/account">Back</Button>
         </div>
-        <TableRequest data={data.length && data}></TableRequest>
+        <TableRequest data={data}></TableRequest>
       </div>
     </div>
   );

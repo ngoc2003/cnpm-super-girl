@@ -1,15 +1,22 @@
 import React, { useLayoutEffect, useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import Header from "./parts/Header";
 import { Button, Layout, Menu } from "antd";
 import Images from "../images/Images";
 import sidebarAdminData from "../data/sidebarAdminData";
+import { refreshToken } from "../store/auth/auth-slice";
+import { logOut } from "../utils/auth";
 const { Sider } = Layout;
 
 const LayoutAdmin = () => {
   const { user } = useSelector((state) => state.auth);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  function handleLogOut() {
+    dispatch(refreshToken({}));
+    logOut();
+  }
+
   return (
     <>
       <Header></Header>
@@ -25,7 +32,9 @@ const LayoutAdmin = () => {
             <h4 className="font-semibold my-1">{user?.name || "Anonymous"}</h4>
             <p className="text-xs">Management</p>
             <div>
-              <Button className="my-3 text-darkGray">Logout</Button>
+              <Button onClick={handleLogOut} className="my-3 text-darkGray">
+                Logout
+              </Button>
             </div>
           </Layout>
           <Menu
@@ -38,8 +47,6 @@ const LayoutAdmin = () => {
               borderRight: 0,
               textAlign: "center",
             }}
-            // onClick={handleClick}
-            // selectedKeys={[current]}
           >
             {sidebarAdminData.map((item) => (
               <Menu.Item key={item.key}>

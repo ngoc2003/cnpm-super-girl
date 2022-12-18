@@ -10,25 +10,11 @@ const Search = ({
   placeholder = "Do funrise now",
   className = "flex-1",
   max = true,
+  searchValue = "",
+  onChange = () => {},
+  onClick = () => {},
 }) => {
-  const [data, setData] = useState("");
-  const [showSearch, setShowSearch] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const searchValueDebounce = useDebounce(searchValue);
-  function handleSearch(e) {
-    setSearchValue(e.target.value);
-  }
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       if (searchValueDebounce) {
-  //         const response = await axios.get(`${apiURL}/search`, {
-  //           params: { value: searchValueDebounce },
-  //         });
-  //         setData(response.data);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, [searchValueDebounce]);
+  
   return (
     <>
       <div className={`relative  ${className}`}>
@@ -44,11 +30,13 @@ const Search = ({
               className="w-full text-sm bg-transparent focus:outline-none text-black"
               type="text"
               placeholder={placeholder}
-              //   onClick={() => setShowSearch(true)}
-              onChange={handleSearch}
+              onChange={onChange}
             />
           </div>
-          <button className="flex-shrink-0 w-[72px] h-10 flex items-center justify-center rounded-full text-white bg-primary">
+          <button
+            onClick={onClick}
+            className="flex-shrink-0 w-[72px] h-10 flex items-center justify-center rounded-full text-white bg-primary"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

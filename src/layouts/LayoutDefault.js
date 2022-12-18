@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "../store/auth/auth-slice";
 import { logOut } from "../utils/auth";
 const LayoutDefault = () => {
-  const user = useSelector((state) => state.auth);
+  const {user} = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,21 +18,26 @@ const LayoutDefault = () => {
   }
   useEffect(() => {
     if (user && user.role === 1) {
-      window.location.replace("/staff");
-      // navigate("/staff");
+      // window.location.replace("/staff");
+      navigate("/staff");
     }
-  }, []);
+    if (window.location.href.includes("staff") && !user) {
+      // window.location.replace("/");
+      navigate('/')
+
+    }
+  }, [user]);
   return (
     <>
       <div className="flex md:h-screen">
-        <div className="flex items-center px-2 bg-white">
-          <span className="flex items-center justify-center w-10 h-10 duration-100 rounded-full cursor-pointer hover:bg-lightGray">
+        <div className="flex items-center px-2 bg-white ">
+          <span className="flex items-center justify-center w-10 h-10 duration-100 rounded-full cursor-pointer border mr-2  hover:bg-lightGray">
             <IconIn onClick={handleLogOut}></IconIn>
           </span>
         </div>
         <div className="flex-1">
           <Header></Header>
-          
+
           <Outlet></Outlet>
         </div>
       </div>

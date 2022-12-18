@@ -10,7 +10,7 @@ const bookSlice = createSlice({
     : [],
   reducers: {
     add: (state, action) => {
-      if (state.length > 5) {
+      if (state.length < 5) {
         toast.success("Add successfully", {
           pauseOnHover: false,
           autoClose: 1000,
@@ -38,6 +38,7 @@ const bookSlice = createSlice({
     },
     clear: (state, action) => {
       state.splice(0, state.length);
+      console.log(state);
       setDataLocalStorage(state);
     },
   },

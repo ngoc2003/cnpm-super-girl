@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Book from "../components/Book/Book";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
@@ -7,11 +7,13 @@ import ReactModal from "react-modal";
 import IconClose from "../icons/IconClose";
 import axios from "axios";
 import { apiURL } from "../config/config";
+import { clear } from "../store/book/book-slice";
 const OrderPage = () => {
   const orders = useSelector((state) => state.book);
   const { user } = useSelector((state) => state.auth);
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
   if (!user) {
     return (
       <div className="h-full bg-lightGray flex items-center justify-center">
@@ -32,8 +34,11 @@ const OrderPage = () => {
       await axios.post(`${apiURL}/borrow/create`, {
         userId: user._id,
         bookId: orders[i]._id,
+        bookName: orders[i].name,
       });
     }
+    dispatch(clear());
+    window.location.replace('/Library')
   }
   return (
     <div>

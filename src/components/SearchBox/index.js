@@ -7,25 +7,19 @@ import Label from "../Label";
 import { Checkbox } from "antd";
 import axios from "axios";
 import { apiURL } from "../../config/config";
-const onChange = (checkedValues) => {
-  console.log("checked = ", checkedValues);
-};
 const options = [
   {
     label: "avaiable",
     value: "Apple",
   },
-  // {
-  //   label: "Pear",
-  //   value: "Pear",
-  // },
-  // {
-  //   label: "Orange",
-  //   value: "Orange",
-  // },
 ];
 
-const SearchBox = ({ className = "bg-lightGray " }) => {
+const SearchBox = ({
+  className = "bg-lightGray ",
+  value,
+  onClick = () => {},
+  onChange = () => {},
+}) => {
   const [languages, setLanguages] = useState("");
   const [types, setTypes] = useState("");
 
@@ -65,10 +59,42 @@ const SearchBox = ({ className = "bg-lightGray " }) => {
     <>
       <div className="flex items-center rounded-xl justify-between w-full gap-5 mb-5">
         <h4 className="text-xl font-semibold">Search tools</h4>
-        <Search
-          max={false}
-          placeholder="Books, documents, people and more . . ."
-        ></Search>
+
+        <div className={`flex-1`}>
+          <div
+            className={` flex items-center p-2 bg-white rounded-full border w-full 
+           `}
+          >
+            <div className="flex-1 pl-4 pr-5">
+              <input
+                value={value}
+                className="w-full text-sm bg-transparent focus:outline-none text-black"
+                type="text"
+                placeholder="Books, documents, people and more . . ."
+                onChange={onChange}
+              />
+            </div>
+            <button
+              onClick={onClick}
+              className="flex-shrink-0 w-[72px] h-10 flex items-center justify-center rounded-full text-white bg-primary"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
       <div className="flex items-center gap-10">
         <h4 className="text-xl font-semibold">Advance Searching</h4>
@@ -101,32 +127,8 @@ const SearchBox = ({ className = "bg-lightGray " }) => {
       key: "All",
       children: <SearchingDefault />,
     },
-    // {
-    //   label: "Books",
-    //   key: "Books",
-    //   children: <SearchingDefault />,
-    // },
-    // {
-    //   label: "Jornals & Newspaper",
-    //   key: "Jornals & Newspaper",
-    //   children: <SearchingDefault />,
-    // },
   ];
   return (
-    // <div className={`${className} py-5 `}>
-    //   <Tabs
-    //     onChange={(key) => console.log(key)}
-    //     defaultActiveKey="All"
-    //     type="card"
-    //     items={data.map((item, i) => {
-    //       return {
-    //         label: item.label,
-    //         key: item.key,
-    //         children: item.children,
-    //       };
-    //     })}
-    //   />
-    // </div>
     <div className={`${className} px-5 py-5`}>
       <SearchingDefault />
     </div>

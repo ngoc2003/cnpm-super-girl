@@ -14,6 +14,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import BookDetail from "./pages/BookDetail";
 import OrderPage from "./pages/OrderPage";
+import ListRequest from "./pages/ListRequest";
 // Admin
 import Bookstore from "./pages/admin/bookstore";
 import AddBook from "./pages/admin/bookstore/AddBook";
@@ -63,6 +64,7 @@ function App() {
           <Route path="/Order" element={<OrderPage />}></Route>
           <Route path="/staff" element={<HomePageStaff />}></Route>
           <Route path="/Library/:slug" element={<BookDetail />}></Route>
+          <Route path="/List" element={<ListRequest id={user._id} />}></Route>
           <Route path="*" element={<HomePageUser />}></Route>
         </Route>
         {/* admin */}
