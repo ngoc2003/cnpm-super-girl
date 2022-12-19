@@ -11,6 +11,7 @@ import { apiURL } from "../../../config/config";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { TitleDocument } from "../../../config/config";
+import * as Yup from "yup";
 import TextAreaInput from "../../../components/TextAreaInput";
 const AddBook = () => {
   const navigate = useNavigate();
@@ -81,12 +82,9 @@ const AddBook = () => {
     <div className="bg-lightGray  w-full">
       <Formik
         initialValues={{
-          image: image, //
           name: "", //
           amount: "", //
           pages: "", //
-          language: "", //
-          type: "", //
           author: "", //
           publisher: "", //
           publishYear: "", //
@@ -94,6 +92,17 @@ const AddBook = () => {
           borrowAmount: 0, //
           description: "",
         }}
+        validationSchema={Yup.object({
+          name: Yup.string().required("This field is required!"),
+          amount: Yup.number().required("This field is required!"),
+          pages: Yup.number().required("This field is required!"),
+          author: Yup.string().required("This field is required!"),
+          publisher: Yup.string().required("This field is required!"),
+          publisherYear: Yup.number().required("This field is required!"),
+          edition: Yup.number().required("This field is required!"),
+          borrowAmount: Yup.number().required("This field is required!"),
+          description: Yup.string().required("This field is required!"),
+        })}
         onSubmit={(values) => {
           handleAddNewBook(values);
           setIsLoading(true);
@@ -221,7 +230,7 @@ const AddBook = () => {
                         ? errors.description
                         : ""
                     }
-                    placeholder='Description'
+                    placeholder="Description"
                   />
                 </FormGroup>
               </div>

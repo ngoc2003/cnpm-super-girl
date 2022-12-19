@@ -52,8 +52,8 @@ const SearchBox = ({
       });
       setTypes(data);
     }
-    fetchLanguageList();
-    fetchTypeList();
+    // fetchLanguageList();
+    // fetchTypeList();
   }, []);
   const SearchingDefault = () => (
     <>
@@ -67,6 +67,7 @@ const SearchBox = ({
           >
             <div className="flex-1 pl-4 pr-5">
               <input
+                defaultValue={""}
                 value={value}
                 className="w-full text-sm bg-transparent focus:outline-none text-black"
                 type="text"
@@ -96,7 +97,7 @@ const SearchBox = ({
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-10">
+      {/* <div className="flex items-center gap-10">
         <h4 className="text-xl font-semibold">Advance Searching</h4>
         <Checkbox.Group
           options={options}
@@ -118,7 +119,7 @@ const SearchBox = ({
           <Label>Type</Label>
           <MenuDropdown setItem={setType} item={type} data={types} />
         </FormGroup>
-      </div>
+      </div> */}
     </>
   );
   const data = [

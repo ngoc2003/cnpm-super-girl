@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDebounce } from "../hooks/useDebounce";
-import axios from "axios";
-import { v4 } from "uuid";
-import { Link, useNavigate } from "react-router-dom";
-import IconClose from "../icons/IconClose";
-const defaultImage = `https://wallpaperaccess.com/full/508751.jpg`;
 
 const Search = ({
   placeholder = "Do funrise now",
   className = "flex-1",
   max = true,
-  searchValue = "",
+  searchValue,
   onChange = () => {},
   onClick = () => {},
 }) => {

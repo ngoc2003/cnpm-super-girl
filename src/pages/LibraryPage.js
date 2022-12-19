@@ -5,8 +5,8 @@ import { apiURL } from "../config/config";
 import { v4 } from "uuid";
 import Book from "../components/Book/Book";
 const LibraryPage = () => {
-  const [books, setBooks] = useState("");
-  const [data, setData] = useState("");
+  const [books, setBooks] = useState({});
+  const [data, setData] = useState([]);
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -25,7 +25,6 @@ const LibraryPage = () => {
     setData(
       books.length
         ? books.filter((item) => {
-            console.log(item);
             if (
               item.name.includes(searchValue) ||
               item.author.includes(searchValue) ||
@@ -41,7 +40,7 @@ const LibraryPage = () => {
 
   return (
     <div>
-      <SearchBox onClick={handleSearch} value={searchValue} onChange={handleChange}></SearchBox>
+      <SearchBox onClick={handleSearch}  value={searchValue} onChange={handleChange}></SearchBox>
       <div className="text-2xl text-primary font-semibold py-5 ">
         {data.length} books has been founded!
       </div>

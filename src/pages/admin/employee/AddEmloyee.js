@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { signUp } from "../../../store/auth/auth-slice";
 import { TitleDocument } from "../../../config/config";
+import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 const UpdateEmployee = () => {
   const dispatch = useDispatch();
@@ -72,10 +73,20 @@ const UpdateEmployee = () => {
           email: "",
           password: "",
           cccd: "",
-          birth: "",
           location: "",
           role: 1,
         }}
+        validationSchema={Yup.object({
+          name: Yup.string().required("This field is required!"),
+          email: Yup.string()
+            .email("Invalid email address")
+            .required("This field is required!"),
+          password: Yup.string()
+            .required("This field is required!")
+            .min(8, "Password must at least 8 char"),
+          cccd: Yup.string().required("This field is required!"),
+          location: Yup.string().required("This field is required!"),
+        })}
         onSubmit={(values) => {
           handleAddEmployee(values);
           setIsLoading(true);

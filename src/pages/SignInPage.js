@@ -12,20 +12,18 @@ const SignInPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
   useEffect(() => {
     if (user) {
       if (user.role === 1) {
         navigate("/staff");
       } else navigate("/");
     }
-  }, []);
+  }, [navigate, user]);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const [loading, setLoading] = useState(false);
   const handleSignIn = () => {
-    // setLoading(true);
     if (!email || !password) {
       toast.error("Values not valid");
       setLoading(false);
