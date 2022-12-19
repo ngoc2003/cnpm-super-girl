@@ -8,14 +8,14 @@ import ReactModal from "react-modal";
 import React, { useState } from "react";
 import IconClose from "../icons/IconClose";
 import Button from "../components/Button";
-export default function TableList({ data }) {
+export default function TableList({ data, loading }) {
   const navigate = useNavigate();
   const columnsPrev = [
     {
       title: "Image",
       dataIndex: "image",
       key: "image",
-      render: (image) => <img src={image}></img>,
+      render: (image) => <img alt="cover" src={image}></img>,
     },
     {
       title: "Name",
@@ -113,7 +113,7 @@ export default function TableList({ data }) {
   const [id, setId] = useState("");
   return (
     <>
-      <Table columns={columnsPrev} dataSource={data} />
+      <Table loading={loading} columns={columnsPrev} dataSource={data} />
       <ReactModal
         isOpen={openModal}
         overlayClassName={

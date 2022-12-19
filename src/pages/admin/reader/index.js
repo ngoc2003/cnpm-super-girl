@@ -19,11 +19,11 @@ const Reader = () => {
         <div className="mb-3 flex gap-3 justify-between">
           <Button to="/staff/account">Back</Button>
           <div className="flex gap-3">
-            <Button className='bg-black text-white'>Black List</Button>
+            <Button className="bg-black text-white">Black List</Button>
             <Button primary>Exel Export</Button>
           </div>
         </div>
-        <TableUser type={"reader"} data={data}></TableUser>
+        {data.length && <TableUser type={"reader"} data={data}></TableUser>}
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ const SignInPage = () => {
         navigate("/staff");
       } else navigate("/");
     }
-  }, [user]);
+  }, []);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 

@@ -45,12 +45,14 @@ const LayoutAdmin = () => {
               height: "100%",
               backgroundColor: "white",
               borderRight: 0,
-              textAlign: "center",
             }}
           >
             {sidebarAdminData.map((item) => (
               <Menu.Item key={item.key}>
-                <Link to={item.url}>{item.label}</Link>
+                <a className="flex items-left items-center justify-left gap-5" href={item.url}>
+                  {item.icon}
+                  {item.label}
+                </a>
               </Menu.Item>
             ))}
           </Menu>

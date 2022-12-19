@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import TableList from "../../../components/TableList";
 import Button from "../../../components/Button";
 import axios from "axios";
-import {apiURL} from '../../../config/config'
+import { apiURL } from "../../../config/config";
 const Bookstore = () => {
   const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchBook() {
+      setLoading(true);
       const response = await axios.get(`${apiURL}/books/all`);
+      if (response.status) {
+        setLoading(false);
+      }
       setData(response.data);
     }
     fetchBook();
@@ -19,15 +24,15 @@ const Bookstore = () => {
         <div className="mb-3 flex gap-3 justify-between">
           <Button to="/staff/account">Back</Button>
           <div className="flex gap-3">
-            <Button to="./add" primary>
+            <Button to="/staff/account/Bookstore/add" primary>
               Add new
             </Button>
-            <Button to="./all" primary>
+            <Button to="/staff/account/Bookstore/all" primary>
               List Library
             </Button>
           </div>
         </div>
-        <TableList data={data}></TableList>
+        <TableList loading={loading} data={data}></TableList>
       </div>
     </div>
   );

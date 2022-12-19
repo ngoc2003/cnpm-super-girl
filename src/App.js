@@ -1,31 +1,32 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshToken, updateUser } from "./store/auth/auth-slice";
 import { getToken, logOut } from "./utils/auth";
 import { Routes, Route } from "react-router-dom";
-import LayoutAdmin from "./layouts/LayoutAdmin";
-import LayoutAuthen from "./layouts/LayoutAuthen";
-import LayoutDefault from "./layouts/LayoutDefault";
-import Staff from "./pages/admin/Staff";
-import HomePageStaff from "./pages/HomePageStaff";
-import HomePageUser from "./pages/HomePageUser";
-import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
-import BookDetail from "./pages/BookDetail";
-import OrderPage from "./pages/OrderPage";
-import ListRequest from "./pages/ListRequest";
+const LayoutAdmin = lazy(() => import("./layouts/LayoutAdmin"));
+const LayoutAuthen = lazy(() => import("./layouts/LayoutAuthen"));
+const LayoutDefault = lazy(() => import("./layouts/LayoutDefault"));
+const Staff = lazy(() => import("./pages/admin/Staff"));
+const HomePageStaff = lazy(() => import("./pages/HomePageStaff"));
+const HomePageUser = lazy(() => import("./pages/HomePageUser"));
+const SignInPage = lazy(() => import("./pages/SignInPage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage"));
+const BookDetail = lazy(() => import("./pages/BookDetail"));
+const OrderPage = lazy(() => import("./pages/OrderPage"));
+const ListRequest = lazy(() => import("./pages/ListRequest"));
 // Admin
-import Bookstore from "./pages/admin/bookstore";
-import AddBook from "./pages/admin/bookstore/AddBook";
-import ListBook from "./pages/admin/bookstore/ListBook";
-import UpdateBook from "./pages/admin/bookstore/UpdateBook";
-import LibraryPage from "./pages/LibraryPage";
-import Reader from "./pages/admin/reader";
-import Request from "./pages/admin/request";
-import Employee from "./pages/admin/employee";
-import UpdateUser from "./pages/admin/UpdateUser";
-import AddEmloyee from "./pages/admin/employee/AddEmloyee";
+const Bookstore = lazy(() => import("./pages/admin/bookstore"));
+const AddBook = lazy(() => import("./pages/admin/bookstore/AddBook"));
+const ListBook = lazy(() => import("./pages/admin/bookstore/ListBook"));
+const UpdateBook = lazy(() => import("./pages/admin/bookstore/UpdateBook"));
+const LibraryPage = lazy(() => import("./pages/LibraryPage"));
+const Reader = lazy(() => import("./pages/admin/reader"));
+const Request = lazy(() => import("./pages/admin/request"));
+const Statistic = lazy(() => import("./pages/admin/statistic"));
+const Employee = lazy(() => import("./pages/admin/employee"));
+const UpdateUser = lazy(() => import("./pages/admin/UpdateUser"));
+const AddEmloyee = lazy(() => import("./pages/admin/employee/AddEmloyee"));
 
 function App() {
   const user = useSelector((state) => state.auth);
@@ -101,6 +102,11 @@ function App() {
           <Route path="/staff/account/*" element={<Staff />}></Route>
           {/* Request */}
           <Route path="/staff/account/Request" element={<Request />}></Route>
+          {/* Statistic */}
+          <Route
+            path="/staff/account/Statistic"
+            element={<Statistic />}
+          ></Route>
         </Route>
       </Routes>
     </Suspense>

@@ -10,7 +10,7 @@ import axios from "axios";
 import { apiURL } from "../config/config";
 import { toast } from "react-toastify";
 
-const TableUser = ({ data, type='employee' }) => {
+const TableUser = ({ data, type='employee', loading }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState(false);
@@ -115,7 +115,7 @@ const TableUser = ({ data, type='employee' }) => {
   }
   return (
     <>
-      <Table columns={columnsPrev} dataSource={data} />
+      <Table columns={columnsPrev} loading={loading} dataSource={data} />
       <ReactModal
         isOpen={openModal}
         overlayClassName={

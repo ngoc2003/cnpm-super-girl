@@ -28,14 +28,19 @@ function TagStyle({ tag, onClick = () => {} }) {
 const ListRequest = () => {
   const [data, setData] = useState([]);
   const { user } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
   async function fetchData() {
+    setLoading(true);
     const bookResponse = await axios.get(`${apiURL}/borrow/user/${user._id}`);
-    setData(bookResponse.data);
+    console.log(bookResponse);
+    if (bookResponse.status === 200) {
+      setLoading(false);
+      setData(bookResponse.data);
+    }
   }
 
   useEffect(() => {
     if (user?._id) {
-      console.log(user._id);
       fetchData();
     }
   }, []);
@@ -78,7 +83,14 @@ const ListRequest = () => {
     {
       title: "Link",
       key: "option",
-      render: (value) => <Link className='italic underline text-blue-500' to={`/Library/${value.bookId}`}>{"link"}</Link>,
+      render: (value) => (
+        <Link
+          className="italic underline text-blue-500"
+          to={`/Library/${value.bookId}`}
+        >
+          {"link"}
+        </Link>
+      ),
     },
   ];
   return (
@@ -86,7 +98,7 @@ const ListRequest = () => {
       <div className="text-2xl text-primary font-semibold py-5 ">
         {data.length} books has been founded!
       </div>
-      <Table columns={columnsPrev} dataSource={data} />
+      <Table loading={loading} columns={columnsPrev} dataSource={data} />
     </>
   );
 };

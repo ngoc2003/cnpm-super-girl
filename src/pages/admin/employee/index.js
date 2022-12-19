@@ -19,7 +19,7 @@ const Employee = () => {
         <div className="mb-3 flex gap-3 justify-between">
           <Button to="/staff/account">Back</Button>
           <div className="flex gap-3">
-            <Button to="./add" primary>
+            <Button to="/staff/account/Employee/add" primary>
               Add new Employee
             </Button>
           </div>

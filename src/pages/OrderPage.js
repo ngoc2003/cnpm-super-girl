@@ -35,10 +35,11 @@ const OrderPage = () => {
         userId: user._id,
         bookId: orders[i]._id,
         bookName: orders[i].name,
+        userName: user.name,
       });
     }
     dispatch(clear());
-    window.location.replace('/Library')
+    window.location.replace("/Library");
   }
   return (
     <div>

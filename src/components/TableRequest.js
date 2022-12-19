@@ -29,7 +29,7 @@ const menuDropdownOptions = [
   },
 ];
 
-const TableRequest = ({ data }) => {
+const TableRequest = ({ data = "", loading }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [item, setItem] = useState(false);
@@ -37,12 +37,12 @@ const TableRequest = ({ data }) => {
   const columnsPrev = [
     {
       title: "Name",
-      dataIndex: "name",
+      dataIndex: "bookName",
       key: "name",
     },
     {
       title: "Reader",
-      dataIndex: "reader", // người mượn
+      dataIndex: "userName", // người mượn
       key: "reader",
     },
     {
@@ -61,16 +61,16 @@ const TableRequest = ({ data }) => {
         </span>
       ),
     },
-    // {
-    //   title: "Return at",
-    //   dataIndex: "endedAt",
-    //   key: "endedAt",
-    //   render: (value) => (
-    //     <span className={`${!value && "error-value"}`}>
-    //       {value || "not update"}
-    //     </span>
-    //   ),
-    // },
+    {
+      title: "Return at",
+      dataIndex: "endedAt",
+      key: "endedAt",
+      render: (value) => (
+        <span className={`${!value && "error-value"}`}>
+          {value || "not update"}
+        </span>
+      ),
+    },
     {
       title: "Option",
       key: "option",
@@ -90,6 +90,7 @@ const TableRequest = ({ data }) => {
     const response = await axios.post(`${apiURL}/borrow/update`, {
       ...item,
       status: newStatus,
+      endedAt: newStatus === "returned" ? new Date().getTime() : item.endedAt,
     });
     if (response.status === 200) {
       setTimeout(() => {
@@ -104,10 +105,9 @@ const TableRequest = ({ data }) => {
       }, 1000);
     }
   }
-  console.log(data)
   return (
     <>
-      <Table columns={columnsPrev} dataSource={data} />
+      <Table loading={loading} columns={columnsPrev} dataSource={data} />
       <ReactModal
         isOpen={openModal}
         overlayClassName={
