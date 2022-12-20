@@ -29,21 +29,20 @@ const ListRequest = () => {
   const [data, setData] = useState([]);
   const { user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
-  async function fetchData() {
-    setLoading(true);
-    const bookResponse = await axios.get(`${apiURL}/borrow/user/${user._id}`);
-    console.log(bookResponse);
-    if (bookResponse.status === 200) {
-      setLoading(false);
-      setData(bookResponse.data);
-    }
-  }
-
   useEffect(() => {
-    if (user?._id) {
+    async function fetchData() {
+      setLoading(true);
+      const bookResponse = await axios.get(`${apiURL}/borrow/user/${user._id}`);
+      console.log(bookResponse);
+      if (bookResponse.status === 200) {
+        setLoading(false);
+        setData(bookResponse.data);
+      }
+    }
+    if (!data.length) {
       fetchData();
     }
-  }, []);
+  }, [user, data]);
   if (!user) {
     return <div>No user</div>;
   }
@@ -96,7 +95,7 @@ const ListRequest = () => {
   return (
     <>
       <div className="text-2xl text-primary font-semibold py-5 ">
-        {data.length} books has been founded!
+        {data.length} books have been founded!
       </div>
       <Table loading={loading} columns={columnsPrev} dataSource={data} />
     </>
