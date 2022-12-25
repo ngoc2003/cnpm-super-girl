@@ -9,7 +9,7 @@ const LibraryPage = () => {
   const [books, setBooks] = useState({});
   const [data, setData] = useState([]);
   const { state } = useLocation();
-  const value = state.value || "";
+  const value = state?.value || "";
   const [searchValue, setSearchValue] = useState(value);
 
   useEffect(() => {
