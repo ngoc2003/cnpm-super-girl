@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import Search from "../../components/Search";
 import IconUser from "../../icons/IconUser";
@@ -7,6 +7,19 @@ import { useSelector } from "react-redux";
 import Images from "../../images/Images";
 const Hero = () => {
   const { user } = useSelector((state) => state.auth);
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
+      navigate(`Library`, {
+        state: {
+          value: searchValue,
+        },
+      });
+    } else {
+      setSearchValue(e.target.value);
+    }
+  };
   return (
     <div
       style={{
@@ -15,7 +28,11 @@ const Hero = () => {
       className="flex-1 py-5 px-10"
     >
       <div className="flex items-center justify-between">
-        <Search placeholder="Find book, author, . . ."></Search>
+        <Search
+          onKeyUp={handleSearch}
+          onClick={handleSearch}
+          placeholder="Find book, author, . . ."
+        ></Search>
         {!user ? (
           <Link
             className="flex gap-3 font-semibold text-white hover:text-secondary "

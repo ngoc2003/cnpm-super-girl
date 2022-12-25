@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 const Search = ({
   placeholder = "Do funrise now",
   className = "flex-1",
+  defaultValue = "",
   max = true,
   searchValue,
   onChange = () => {},
   onClick = () => {},
+  onKeyUp = () => {},
 }) => {
-  
   return (
     <>
       <div className={`relative  ${className}`}>
@@ -19,12 +20,13 @@ const Search = ({
         >
           <div className="flex-1 pl-4 pr-5">
             <input
-              defaultValue={""}
+              defaultValue={defaultValue}
               value={searchValue}
               className="w-full text-sm bg-transparent focus:outline-none text-black"
               type="text"
               placeholder={placeholder}
               onChange={onChange}
+              onKeyUp={onKeyUp}
             />
           </div>
           <button

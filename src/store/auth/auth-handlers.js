@@ -17,9 +17,6 @@ export default function* handleAuthSignUp(action) {
         pauseOnHover: false,
         autoClose: 1500,
       });
-      // setTimeout(() => {
-      //   window.location.replace("/");
-      // }, 2000);
     }
   } catch (err) {
     if (err.response.status === 409) {
@@ -62,7 +59,6 @@ function* handleAuthFetchUser({ payload }) {
         })
       );
     }
-    // response.data
   } catch (err) {
     console.log(err);
   }
@@ -90,8 +86,5 @@ function* handleAuthLogOut() {
     })
   );
   logOut();
-  // setTimeout( () => {
-  //   window.location.replace("/")
-  // },0)
 }
 export { handleAuthSignIn, handleAuthRefreshToken, handleAuthLogOut };
