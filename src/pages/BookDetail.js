@@ -3,12 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Images from "../images/Images";
 import { apiURL } from "../config/config";
-import {
-  HeartOutlined,
-  HeartFilled,
-  StarFilled,
-  ShoppingCartOutlined,
-} from "@ant-design/icons";
+import Review from "./bookDetail/review/Review";
+import { HeartOutlined } from "@ant-design/icons";
 import Button from "../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../store/book/book-slice";
@@ -29,6 +25,7 @@ const BookDetail = () => {
   if (!data) {
     return;
   }
+  console.log(data);
   function handleAddCart() {
     if (!user) {
       toast.error("You need to log in to use this feature!", {
@@ -71,34 +68,8 @@ const BookDetail = () => {
           </p>
           <p>{data.description}</p>
           <hr className="my-5" />
-          <div className="flex gap-5 items-center">
-            Rate
-            <StarFilled className="text-secondary" />
-            <StarFilled className="text-secondary" />
-            <StarFilled className="text-secondary" />
-            <StarFilled className="text-secondary" />
-            <span className="text-">(x comments)</span>
-          </div>
-          <div>
-            <div className="bg-white p-3 my-3">
-              <div className="flex gap-5 mb-1">
-                <img
-                  className="w-10 h-10 object-cover rounded-full"
-                  src={Images.avatar}
-                  alt=""
-                />
-                <h4>{"anonymous"}</h4>
-              </div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Vestibulum eleifend porta tortor vitae rutrum. Class aptent
-                taciti sociosqu ad litora torquent per conubia nostra, per
-                inceptos himenaeos. Mauris pharetra pharetra metus id placerat.
-                Aenean hendrerit hendrerit lacinia. In hac habitasse platea
-                dictumst.
-              </p>
-            </div>
-          </div>
+
+          <Review id={data._id}></Review>
         </div>
       </div>
     </>

@@ -28,6 +28,7 @@ const SignInPage = () => {
       toast.error("Values not valid");
       setLoading(false);
     } else {
+      console.log(dispatch(signIn({ email, password })));
       dispatch(signIn({ email, password }));
     }
   };

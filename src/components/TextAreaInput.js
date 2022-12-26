@@ -3,7 +3,9 @@ import React from "react";
 const TextAreaInput = ({
   children,
   onChange = () => {},
+  onKeyUp = () => {},
   defaultValue,
+  row = 10,
   ...props
 }) => {
   const { error = "", name, placeholder = "Text here", ...rest } = props;
@@ -18,9 +20,10 @@ const TextAreaInput = ({
         }`}
       >
         <textarea
-          rows="10"
+          rows={row}
           placeholder={placeholder}
           onChange={onChange}
+          onKeyUp={onKeyUp}
           defaultValue={defaultValue}
           className={`outline-none  px-3  bg-transparent w-full py-4  font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4    `}
           {...rest}

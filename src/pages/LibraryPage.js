@@ -27,7 +27,6 @@ const LibraryPage = () => {
             return false;
           })
         : [];
-      console.log(dataTemp);
       setBooks(response.data);
       setData(dataTemp);
     }
@@ -39,7 +38,6 @@ const LibraryPage = () => {
     } else {
       setSearchValue(e.target.value);
     }
-    console.log(e);
   }
   function handleSearch() {
     setData(
