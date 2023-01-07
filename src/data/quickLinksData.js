@@ -1,21 +1,19 @@
-import React from "react";
-
 const quickLinksData = [
   {
-    title: "Journal & Newspaper",
+    title: 'Journal & Newspaper',
     // url: "/About",
   },
   {
-    title: "Borrow & Return Books",
+    title: 'Borrow & Return Books',
   },
   {
-    title: "New Books Arrival",
+    title: 'New Books Arrival',
   },
   {
-    title: "Research Guide",
+    title: 'Research Guide',
   },
   {
-    title: "Ask us",
+    title: 'Ask us',
   },
 ];
 

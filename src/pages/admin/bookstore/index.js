@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import TableList from "../../../components/TableList";
-import Button from "../../../components/Button";
-import axios from "axios";
-import { apiURL } from "../../../config/config";
-const Bookstore = () => {
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import TableList from '../../../components/TableList';
+import Button from '../../../components/Button';
+import { apiURL } from '../../../config/config';
+
+function Bookstore() {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -19,23 +20,23 @@ const Bookstore = () => {
     fetchBook();
   }, []);
   return (
-    <div className="bg-lightGray w-full">
-      <div className="bg-white p-3 m-5 h-full">
-        <div className="mb-3 flex gap-3 justify-between">
-          <Button to="/staff/account">Back</Button>
-          <div className="flex gap-3">
-            <Button to="/staff/account/Bookstore/add" primary>
+    <div className='bg-lightGray w-full'>
+      <div className='bg-white p-3 m-5 h-full'>
+        <div className='mb-3 flex gap-3 justify-between'>
+          <Button to='/staff/account'>Back</Button>
+          <div className='flex gap-3'>
+            <Button to='/staff/account/Bookstore/add' primary>
               Add new
             </Button>
-            <Button to="/staff/account/Bookstore/all" primary>
+            <Button to='/staff/account/Bookstore/all' primary>
               List Library
             </Button>
           </div>
         </div>
-        <TableList loading={loading} data={data}></TableList>
+        <TableList loading={loading} data={data} />
       </div>
     </div>
   );
-};
+}
 
 export default Bookstore;

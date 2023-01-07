@@ -1,9 +1,10 @@
-import React from "react";
-import Hero from "./homepage/Hero";
-import QuickLinks from "./homepage/user/QuickLinks";
-import SpecialCollections from "./homepage/user/SpecialCollections";
-import Upcoming from "./homepage/user/Upcoming";
-const HomePageUser = () => {
+import React from 'react';
+import Hero from './homepage/Hero';
+import QuickLinks from './homepage/user/QuickLinks';
+import SpecialCollections from './homepage/user/SpecialCollections';
+import Upcoming from './homepage/user/Upcoming';
+
+function HomePageUser() {
   return (
     <>
       <Hero />
@@ -13,6 +14,6 @@ const HomePageUser = () => {
       <Upcoming />
     </>
   );
-};
+}
 
 export default HomePageUser;

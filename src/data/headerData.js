@@ -1,21 +1,19 @@
-import React from "react";
-
 const headerData = [
   {
-    title: "About",
-    url: "/About",
+    title: 'About',
+    url: '/About',
   },
   {
-    title: "Help",
-    url: "/Help",
+    title: 'Help',
+    url: '/Help',
   },
   {
-    title: "Library",
-    url: "/Library",
+    title: 'Library',
+    url: '/Library',
   },
   {
-    title: "Event",
-    url: "/Event",
+    title: 'Event',
+    url: '/Event',
   },
 ];
 

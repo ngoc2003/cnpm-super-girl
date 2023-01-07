@@ -1,15 +1,16 @@
-import React, { useLayoutEffect, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
-import Header from "./parts/Header";
-import { Button, Layout, Menu } from "antd";
-import Images from "../images/Images";
-import sidebarAdminData from "../data/sidebarAdminData";
-import { refreshToken } from "../store/auth/auth-slice";
-import { logOut } from "../utils/auth";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+import { Button, Layout, Menu } from 'antd';
+import Header from './parts/Header';
+import Images from '../images/Images';
+import sidebarAdminData from '../data/sidebarAdminData';
+import { refreshToken } from '../store/auth/auth-slice';
+import { logOut } from '../utils/auth';
+
 const { Sider } = Layout;
 
-const LayoutAdmin = () => {
+function LayoutAdmin() {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   function handleLogOut() {
@@ -19,37 +20,40 @@ const LayoutAdmin = () => {
 
   return (
     <>
-      <Header></Header>
+      <Header />
       <hr />
-      <Layout className="bg-white md:min-h-screen overflow-hidden ">
+      <Layout className='bg-white md:min-h-screen overflow-hidden '>
         <Sider>
-          <Layout className="py-5 bg-white text-center">
+          <Layout className='py-5 bg-white text-center'>
             <img
-              className="w-1/2 min-w-[100px] mx-auto"
+              className='w-1/2 min-w-[100px] mx-auto'
               src={user?.image || Images.avatar}
-              alt=""
+              alt=''
             />
-            <h4 className="font-semibold my-1">{user?.name || "Anonymous"}</h4>
-            <p className="text-xs">Management</p>
+            <h4 className='font-semibold my-1'>{user?.name || 'Anonymous'}</h4>
+            <p className='text-xs'>Management</p>
             <div>
-              <Button onClick={handleLogOut} className="my-3 text-darkGray">
+              <Button onClick={handleLogOut} className='my-3 text-darkGray'>
                 Logout
               </Button>
             </div>
           </Layout>
           <Menu
-            mode="inline"
-            defaultSelectedKeys={["Dashboard"]}
-            defaultOpenKeys={["sub1"]}
+            mode='inline'
+            defaultSelectedKeys={['Dashboard']}
+            defaultOpenKeys={['sub1']}
             style={{
-              height: "100%",
-              backgroundColor: "white",
+              height: '100%',
+              backgroundColor: 'white',
               borderRight: 0,
             }}
           >
             {sidebarAdminData.map((item) => (
               <Menu.Item key={item.key}>
-                <a className="flex items-left items-center justify-left gap-5" href={item.url}>
+                <a
+                  className='flex items-left items-center justify-left gap-5'
+                  href={item.url}
+                >
                   {item.icon}
                   {item.label}
                 </a>
@@ -57,11 +61,11 @@ const LayoutAdmin = () => {
             ))}
           </Menu>
         </Sider>
-        <div className="overfolw-scroll"></div>
-        <Outlet></Outlet>
+        <div className='overfolw-scroll' />
+        <Outlet />
       </Layout>
     </>
   );
-};
+}
 
 export default LayoutAdmin;

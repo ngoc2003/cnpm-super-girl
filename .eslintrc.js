@@ -13,15 +13,33 @@ module.exports = {
   rules: {
     'no-mixed-spaces-and-tabs': 0,
     'react/prop-types': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.js', '.jsx'],
+      },
+    ],
     '@typescript-eslint/explicit-module-boundary-types': 0,
     'no-underscore-dangle': 0,
     'react/jsx-no-bind': [
       'error',
-      { ignoreDOMComponents: true, allowFunctions: true },
+      {
+        ignoreDOMComponents: true,
+        allowFunctions: true,
+        allowArrowFunctions: true,
+      },
     ],
     indent: 'off',
+    camelcase: 'off',
+    'object-curly-newline': 'off',
+    'jsx-quotes': 'off',
+    'no-nested-ternary': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/button-has-type': 'off',
     'no-tabs': 0,
     'no-console': 0,
+    'react/jsx-one-expression-per-line': 0,
+    'react/no-unescaped-entities': 0,
+    'operator-linebreak': 0,
   },
 };
