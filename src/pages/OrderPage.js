@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Book from "../components/Book/Book";
-import Button from "../components/Button";
-import { Link } from "react-router-dom";
-import ReactModal from "react-modal";
-import IconClose from "../icons/IconClose";
-import axios from "axios";
-import { apiURL } from "../config/config";
-import { clear } from "../store/book/book-slice";
-const OrderPage = () => {
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import ReactModal from 'react-modal';
+import axios from 'axios';
+import Book from '../components/Book/Book';
+import Button from '../components/Button';
+import IconClose from '../icons/IconClose';
+import { apiURL } from '../config/config';
+import { clear } from '../store/book/book-slice';
+
+function OrderPage() {
   const orders = useSelector((state) => state.book);
   const { user } = useSelector((state) => state.auth);
   const [open, setOpen] = useState(false);
@@ -16,13 +17,13 @@ const OrderPage = () => {
   const dispatch = useDispatch();
   if (!user) {
     return (
-      <div className="h-full bg-lightGray flex items-center justify-center">
-        Please{" "}
-        <Link to="/sign-in" className="text-primary font-semibold">
-          {" "}
+      <div className='h-full bg-lightGray flex items-center justify-center'>
+        Please{' '}
+        <Link to='/sign-in' className='text-primary font-semibold'>
+          {' '}
           log in
-        </Link>{" "}
-        to use this page{" "}
+        </Link>{' '}
+        to use this page{' '}
       </div>
     );
   }
@@ -30,7 +31,7 @@ const OrderPage = () => {
     setOpen(true);
   }
   async function handleOrderSubmit() {
-    for (let i = 0; i < orders.length; i++) {
+    for (let i = 0; i < orders.length; i += 1) {
       await axios.post(`${apiURL}/borrow/create`, {
         userId: user._id,
         bookId: orders[i]._id,
@@ -39,52 +40,51 @@ const OrderPage = () => {
       });
     }
     dispatch(clear());
-    window.location.replace("/Library");
+    setIsLoading(false);
+    window.location.replace('/Library');
   }
   return (
     <div>
-      <div className="bg-lightGray p-5">
-        <div className="flex justify-between gap-5">
-          <h4 className="text-xl">
-            Your order:{" "}
-            <span className="text-primary font-semibold">
+      <div className='bg-lightGray p-5'>
+        <div className='flex justify-between gap-5'>
+          <h4 className='text-xl'>
+            Your order:{' '}
+            <span className='text-primary font-semibold'>
               {orders.length} books
-            </span>{" "}
+            </span>{' '}
           </h4>
           <Button onClick={handleOrder} primary>
             Order now
           </Button>
         </div>
-        <hr className="my-3" />
-        <div className="grid grid-cols-5 gap-5">
+        <hr className='my-3' />
+        <div className='grid grid-cols-5 gap-5'>
           {orders.map((item) => (
-            <Book key={item._id} data={item}></Book>
+            <Book key={item._id} data={item} />
           ))}
         </div>
 
-        <div className="my-2 bg-primary p-1 rounded-md  bg-opacity-70 text-white ">
+        <div className='my-2 bg-primary p-1 rounded-md  bg-opacity-70 text-white '>
           Thank you for your order
         </div>
       </div>
       <ReactModal
         isOpen={open}
-        overlayClassName={
-          "modal-overlay fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center "
-        }
-        shouldCloseOnOverlayClick={true}
+        overlayClassName='modal-overlay fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center '
+        shouldCloseOnOverlayClick
         onRequestClose={() => setOpen(false)}
-        className="modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden"
+        className='modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden'
       >
         <button
           onClick={() => setOpen(false)}
-          className="float-right w-6 h-6 duration-300  text-text1"
+          className='float-right w-6 h-6 duration-300  text-text1'
         >
-          <IconClose></IconClose>
+          <IconClose />
         </button>
-        <h2 className="clear-both mb-10 text-2xl font-bold text-center ">
+        <h2 className='clear-both mb-10 text-2xl font-bold text-center '>
           Are you sure to borrow these books?
         </h2>
-        <div className="flex gap-x-3">
+        <div className='flex gap-x-3'>
           <Button
             isLoading={isLoading}
             primary
@@ -100,6 +100,6 @@ const OrderPage = () => {
       </ReactModal>
     </div>
   );
-};
+}
 
 export default OrderPage;

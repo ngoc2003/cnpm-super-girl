@@ -31,6 +31,9 @@ module.exports = {
     ],
     indent: 'off',
     camelcase: 'off',
+    'react/jsx-curly-newline': 0,
+    'implicit-arrow-linebreak': 0,
+    'global-require': 0,
     'object-curly-newline': 'off',
     'jsx-quotes': 'off',
     'no-nested-ternary': 'off',
@@ -41,5 +44,6 @@ module.exports = {
     'react/jsx-one-expression-per-line': 0,
     'react/no-unescaped-entities': 0,
     'operator-linebreak': 0,
+    'no-await-in-loop': 0,
   },
 };

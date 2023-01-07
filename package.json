@@ -6,6 +6,7 @@
     "@ant-design/icons": "^4.8.0",
     "@coreui/react-chartjs": "^2.1.1",
     "@jridgewell/gen-mapping": "^0.3.2",
+    "@redux-saga/core": "^1.2.2",
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
