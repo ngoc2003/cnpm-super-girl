@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-const Label = (props) => {
-  const { children, htmlFor = "", className = "" } = props;
+function Label(props) {
+  const { children, htmlFor = '', className = '' } = props;
   return (
     <label
       htmlFor={htmlFor}
@@ -10,5 +10,5 @@ const Label = (props) => {
       {children}
     </label>
   );
-};
+}
 export default Label;

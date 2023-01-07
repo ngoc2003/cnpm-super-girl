@@ -1,37 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
+
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: {
     user: undefined,
     accessToken: null,
   },
   reducers: {
-    signIn: (state, action) => {
-      return {
-        ...state,
-      };
-    },
-    signUp: (state, action) => {
-      return {
-        ...state,
-        ...action.payload,
-      };
-    },
-    updateUser: (state, action) => {
-      return {
-        ...state,
-        user: action.payload.user,
-        accessToken: action.payload.accessToken,
-      };
-    },
-    refreshToken: (state, action) => {},
-    fetchUser: (state, action) => {
-      return {
-        ...state,
-        ...action.payload,
-      };
-    },
-    logOut:(state,action) => {}
+    signIn: (state) => ({
+      ...state,
+    }),
+    signUp: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    updateUser: (state, action) => ({
+      ...state,
+      user: action.payload.user,
+      accessToken: action.payload.accessToken,
+    }),
+    refreshToken: () => {},
+    fetchUser: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    logOut: () => {},
   },
 });
 

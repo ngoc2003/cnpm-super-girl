@@ -1,34 +1,34 @@
-import React from "react";
-import Images from "../images/Images";
+import Images from '../images/Images';
+
 const optionsAdminData = [
   {
-    label: "System",
-    url: "./System",
+    label: 'System',
+    url: './System',
     image: Images.systems,
   },
   {
-    label: "Bookstore",
-    url: "./Bookstore",
+    label: 'Bookstore',
+    url: './Bookstore',
     image: Images.bookstore,
   },
   {
-    label: "Borrow and Return Request",
-    url: "./Request",
+    label: 'Borrow and Return Request',
+    url: './Request',
     image: Images.request,
   },
   {
-    label: "Employee",
-    url: "./Employee",
+    label: 'Employee',
+    url: './Employee',
     image: Images.employee,
   },
   {
-    label: "Readers",
-    url: "./Readers",
+    label: 'Readers',
+    url: './Readers',
     image: Images.reader,
   },
   {
-    label: "Statistic",
-    url: "./Statistic",
+    label: 'Statistic',
+    url: './Statistic',
     image: Images.statistic,
   },
 ];

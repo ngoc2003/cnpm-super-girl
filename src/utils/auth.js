@@ -1,8 +1,7 @@
-import Cookies from "js-cookie";
-import { toast } from "react-toastify";
+import Cookies from 'js-cookie';
 
-const accessTokenKey = "super_girl_access_token";
-const refreshTokenKey = "super_girl_refesh_token";
+const accessTokenKey = 'super_girl_access_token';
+const refreshTokenKey = 'super_girl_refesh_token';
 const objCookies = {
   expires: 30, // 30days
   domain: process.env.COOKIE_DOMAIN,
@@ -15,12 +14,12 @@ export const saveToken = (access_token, refresh_token) => {
   } else {
     Cookies.remove(accessTokenKey, {
       ...objCookies,
-      path: "/",
+      path: '/',
       domain: process.env.COOKIE_DOMAIN,
     });
     Cookies.remove(refreshTokenKey, {
       ...objCookies,
-      path: "/",
+      path: '/',
       domain: process.env.COOKIE_DOMAIN,
     });
   }
@@ -29,7 +28,7 @@ export const saveToken = (access_token, refresh_token) => {
 export const getToken = () => {
   const access_token = Cookies.get(accessTokenKey);
   const refresh_token = Cookies.get(refreshTokenKey);
-  console.log(access_token, refresh_token)
+  console.log(access_token, refresh_token);
   return {
     access_token,
     refresh_token,
@@ -41,12 +40,12 @@ export const logOut = () => {
   if (access_token) {
     Cookies.remove(accessTokenKey, {
       ...objCookies,
-      path: "/",
+      path: '/',
       domain: process.env.COOKIE_DOMAIN,
     });
     Cookies.remove(refreshTokenKey, {
       ...objCookies,
-      path: "/",
+      path: '/',
       domain: process.env.COOKIE_DOMAIN,
     });
     window.location.reload();

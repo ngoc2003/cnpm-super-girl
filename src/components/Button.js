@@ -1,10 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
 
-const Button = ({
-  type = "button",
+function Button({
+  type = 'button',
   children,
-  to = "",
+  to = '',
   className,
   primary = false,
   secondary = false,
@@ -14,9 +13,9 @@ const Button = ({
   transparent = false,
   onClick = () => {},
   ...rest
-}) => {
-  const child = !!isLoading ? (
-    <div className="w-8 h-8 border-4 border-white rounded-full border-t-transparent animate-spin"></div>
+}) {
+  const child = isLoading ? (
+    <div className='w-8 h-8 border-4 border-white rounded-full border-t-transparent animate-spin' />
   ) : (
     children
   );
@@ -26,16 +25,16 @@ const Button = ({
       onClick={onClick}
       className={`hover:bg-opacity-80 py-3 text-base min-h-[56px] font-semibold px-5 rounded-xl inline-flex items-center justify-center  ${
         primary
-          ? "bg-primary text-white"
+          ? 'bg-primary text-white'
           : secondary
-          ? "bg-secondary text-white"
+          ? 'bg-secondary text-white'
           : third
-          ? "bg-white text-secondary"
+          ? 'bg-white text-secondary'
           : transparent
-          ? "bg-transparent text-primary"
-          : ""
-      } ${isLoading && "pointer-events-none opacity-50"} ${
-        fluid && "w-full"
+          ? 'bg-transparent text-primary'
+          : ''
+      } ${isLoading && 'pointer-events-none opacity-50'} ${
+        fluid && 'w-full'
       } ${className}`}
       {...rest}
     >
@@ -43,6 +42,6 @@ const Button = ({
     </button>
   );
   return to ? <a href={to}>{btn}</a> : btn;
-};
+}
 
 export default Button;

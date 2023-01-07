@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 
-const TextAreaInput = ({
+function TextAreaInput({
   children,
   onChange = () => {},
   onKeyUp = () => {},
   defaultValue,
   row = 10,
   ...props
-}) => {
-  const { error = "", name, placeholder = "Text here", ...rest } = props;
+}) {
+  const { error = '', name, placeholder = 'Text here', ...rest } = props;
 
   return (
     <div>
       <div
         className={`items-center flex border rounded-xl overflow-hidden hover:border-blue-400 text-text1  duration-200 ${
           error.length > 0
-            ? "border-error"
-            : "border-stroke dark:border-darkStroke"
+            ? 'border-error'
+            : 'border-stroke dark:border-darkStroke'
         }`}
       >
         <textarea
@@ -25,19 +25,17 @@ const TextAreaInput = ({
           onChange={onChange}
           onKeyUp={onKeyUp}
           defaultValue={defaultValue}
-          className={`outline-none  px-3  bg-transparent w-full py-4  font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4    `}
+          className='outline-none  px-3  bg-transparent w-full py-4  font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4    '
           {...rest}
         />
       </div>
       {error.length > 0 && (
-        <span
-          className={" text-sm font-medium pointer-events-none text-error "}
-        >
+        <span className=' text-sm font-medium pointer-events-none text-error '>
           {error}
         </span>
       )}
     </div>
   );
-};
+}
 
 export default TextAreaInput;
