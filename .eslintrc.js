@@ -12,9 +12,9 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'no-mixed-spaces-and-tabs': 0,
+    'react/prop-types': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     '@typescript-eslint/explicit-module-boundary-types': 0,
-    'jsx-quotes': ['error', 'prefer-single'],
     'no-underscore-dangle': 0,
     'react/jsx-no-bind': [
       'error',
