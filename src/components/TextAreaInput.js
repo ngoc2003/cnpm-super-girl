@@ -1,14 +1,13 @@
 import React from 'react';
 
 function TextAreaInput({
-  children,
   onChange = () => {},
   onKeyUp = () => {},
   defaultValue,
   row = 10,
   ...props
 }) {
-  const { error = '', name, placeholder = 'Text here', ...rest } = props;
+  const { error = '', placeholder = 'Text here', ...rest } = props;
 
   return (
     <div>

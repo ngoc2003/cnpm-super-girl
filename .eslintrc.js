@@ -1,15 +1,19 @@
 module.exports = {
   env: {
-    browser: true,
+    node: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb'],
+  extends: [
+    'plugin:import/recommended',
+    'plugin:react/recommended',
+    'eslint:recommended',
+  ],
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react'],
+  plugins: ['import', 'react', 'jsx-a11y', 'react-hooks'],
   rules: {
     'no-mixed-spaces-and-tabs': 0,
     'react/prop-types': 'off',
@@ -31,9 +35,10 @@ module.exports = {
     ],
     indent: 'off',
     camelcase: 'off',
+    'import/no-unresolved': 0,
     'react/jsx-curly-newline': 0,
     'implicit-arrow-linebreak': 0,
-    'global-require': 0,
+    'react/jsx-no-undef': ['error', { allowGlobals: true }],
     'object-curly-newline': 'off',
     'jsx-quotes': 'off',
     'no-nested-ternary': 'off',
@@ -45,5 +50,6 @@ module.exports = {
     'react/no-unescaped-entities': 0,
     'operator-linebreak': 0,
     'no-await-in-loop': 0,
+    'no-undef': 0,
   },
 };

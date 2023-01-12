@@ -1,25 +1,20 @@
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import IconIn from '../icons/IconIn';
 import IconOut from '../icons/IconOut';
 import Header from './parts/Header';
-import { refreshToken } from '../store/auth/auth-slice';
-import { logOut } from '../utils/auth';
+import { handleLogout } from '../stores/thunk/auth';
 
 function LayoutDefault() {
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  function handleLogOut() {
-    dispatch(refreshToken({}));
-    logOut();
-  }
   useEffect(() => {
     if (user && user.role === 1) {
       navigate('/staff');
     }
+    // eslint-disable-next-line no-undef
     if (window.location.href.includes('staff') && !user) {
       navigate('/');
     }
@@ -31,7 +26,7 @@ function LayoutDefault() {
           {!user ? (
             <IconIn onClick={() => navigate('/sign-in')} />
           ) : (
-            <IconOut onClick={handleLogOut} />
+            <IconOut onClick={handleLogout} />
           )}
         </span>
       </div>

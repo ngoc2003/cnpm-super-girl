@@ -2,24 +2,23 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
 import Label from '../components/Label';
 import FormGroup from '../components/FormGroup';
 import Button from '../components/Button';
-import { signUp } from '../store/auth/auth-slice';
 
 export default function SignUpPage() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [acceptTerm, setAcceptTerm] = useState(false);
   const navigate = useNavigate();
   const handleSignUp = async (values) => {
     try {
-      dispatch(signUp(values));
+      // dispatch(signUp(values));
       navigate('/');
     } catch (err) {
-      console.log(err);
+      console.log(values);
     }
   };
   const infos = [

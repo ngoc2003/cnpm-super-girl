@@ -21,9 +21,9 @@ function LibraryPage() {
       const dataTemp = response.data.length
         ? response.data.filter((item) => {
             if (
-              item.name.toLowerCase().includes(searchValue)
-              || item.author.toLowerCase().includes(searchValue)
-              || item.type.toLowerCase().includes(searchValue)
+              item.name.toLowerCase().includes(searchValue) ||
+              item.author.toLowerCase().includes(searchValue) ||
+              item.type.toLowerCase().includes(searchValue)
             ) {
               return true;
             }
@@ -43,9 +43,9 @@ function LibraryPage() {
       books.length
         ? books.filter((item) => {
             if (
-              item.name.toLowerCase().includes(searchValue)
-              || item.author.toLowerCase().includes(searchValue)
-              || item.type.toLowerCase().includes(searchValue)
+              item.name.toLowerCase().includes(searchValue) ||
+              item.author.toLowerCase().includes(searchValue) ||
+              item.type.toLowerCase().includes(searchValue)
             ) {
               return true;
             }
@@ -63,15 +63,15 @@ function LibraryPage() {
     }
   }
   return loading ? (
-    <div className="flex items-center justify-center h-[80vh]">
+    <div className='flex items-center justify-center h-[80vh]'>
       <Spin />
     </div>
   ) : (
     <div>
-      <div className="bg-lightGray px-5 py-5">
-        <div className="flex items-center rounded-xl justify-between w-full gap-5 mb-5">
-          <h4 className="text-xl font-semibold">Search tools</h4>
-          <div className="flex-1">
+      <div className='bg-lightGray px-5 py-5'>
+        <div className='flex items-center rounded-xl justify-between w-full gap-5 mb-5'>
+          <h4 className='text-xl font-semibold'>Search tools</h4>
+          <div className='flex-1'>
             <Search
               defaultValue={value}
               onClick={handleSearch}
@@ -81,14 +81,12 @@ function LibraryPage() {
           </div>
         </div>
       </div>
-      <div className="text-2xl text-primary font-semibold py-5 ">
-        {data.length}
-        {' '}
-        books has been founded!
+      <div className='text-2xl text-primary font-semibold py-5 '>
+        {data.length} books has been founded!
       </div>
-      <div className="grid grid-cols-6 gap-5">
-        {data.length
-          && data.map((item) => (
+      <div className='grid grid-cols-6 gap-5'>
+        {!!data.length &&
+          data.map((item) => (
             <Book to={`/Library/${item._id}`} data={item} key={v4()} />
           ))}
       </div>

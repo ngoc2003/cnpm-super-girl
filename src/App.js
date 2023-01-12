@@ -1,8 +1,7 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
-import { refreshToken, updateUser } from './store/auth/auth-slice';
-import { getToken, logOut } from './utils/auth';
+import { useSelector } from 'react-redux';
+import { Spin } from 'antd';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 const LayoutAdmin = lazy(() => import('./layouts/LayoutAdmin'));
 const LayoutAuthen = lazy(() => import('./layouts/LayoutAuthen'));
@@ -29,29 +28,22 @@ const UpdateUser = lazy(() => import('./pages/admin/UpdateUser'));
 const AddEmloyee = lazy(() => import('./pages/admin/employee/AddEmloyee'));
 
 function App() {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
   useEffect(() => {
-    if (user && user._id) {
-      const { access_token } = getToken();
-      dispatch(
-        updateUser({
-          user,
-          accessToken: access_token,
-        }),
-      );
-    } else {
-      const { refresh_token } = getToken();
-      if (refreshToken) {
-        dispatch(refreshToken(refresh_token));
-      } else {
-        dispatch(refreshToken({}));
-        logOut();
-      }
+    if (!user) {
+      navigate('/sign-in');
+    }
+  }, [user]);
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    if (window.location.pathname.includes('staff')) {
+      navigate('/');
     }
   }, []);
+
   return (
-    <Suspense>
+    <Suspense fallback={<Spin />}>
       <Routes>
         <Route element={<LayoutAuthen />}>
           <Route path='/sign-in' element={<SignInPage />} />

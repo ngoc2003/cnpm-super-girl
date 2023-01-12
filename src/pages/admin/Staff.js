@@ -5,8 +5,8 @@ import optionsAdminData from '../../data/optionsAdminData';
 
 function Staff() {
   return (
-    <Layout className=' bg-lightGray'>
-      <div className='bg-white p-3 mx-5 rounded-xl '>
+    <Layout className=' bg-lightGray '>
+      <div className='bg-white p-3 m-5 rounded-xl '>
         <h4 className='text-xl font-semibold'>Management Tools</h4>
         <div className='grid grid-cols-3 gap-5 my-5'>
           {optionsAdminData.map((item) => (

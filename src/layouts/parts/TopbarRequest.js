@@ -1,11 +1,7 @@
 import React from 'react';
 
-const TopbarRequest = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
+function TopbarRequest() {
+  return <div />;
+}
 
 export default TopbarRequest;

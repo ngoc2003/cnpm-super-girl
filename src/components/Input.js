@@ -3,7 +3,6 @@ import IconEyeToggle from '../icons/IconEyeToggle';
 import IconUpload from '../icons/IconUpload';
 
 export default function Input({
-  children,
   icon = false,
   isFile = false,
   onChange = () => {},
@@ -13,7 +12,7 @@ export default function Input({
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
-  const { error = '', name, placeholder, ...rest } = props;
+  const { error = '', placeholder, ...rest } = props;
 
   return isFile ? (
     <div
