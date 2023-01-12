@@ -1,8 +1,8 @@
 const { default: axios } = require('axios');
 
 export default axios.create({
-  // baseURL: 'https://supergirl-db.vercel.app/api/auth',
-  baseURL: 'http://localhost:3001/api/auth',
+  baseURL: 'https://supergirl-db.vercel.app/api/auth',
+  // baseURL: 'http://localhost:3001/api/auth',
 });
 
 const SGConnectionInstance = axios.create({
