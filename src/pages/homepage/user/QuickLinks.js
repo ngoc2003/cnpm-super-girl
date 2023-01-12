@@ -24,7 +24,7 @@ function QuickkLinks() {
           ))}
         </div>
       </div>
-      <div className=' bg-secondary text-white bg-opacity-80 text-2xl px-5 py-10 -translate-y-1/2 font-semibold'>
+      <div className=' bg-secondary text-white bg-opacity-80 text-2xl px-5 py-10 -translate-y-1/2 font-semibold hover:bg-opacity-100 duration-100'>
         Discover Special Collection
       </div>
     </div>
