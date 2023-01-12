@@ -7,10 +7,11 @@ import { toast } from 'react-toastify';
 import Images from '../images/Images';
 import { apiURL } from '../config/config';
 import Review from './bookDetail/review/Review';
+import { bookActions } from '../stores/slices/book';
 import Button from '../components/Button';
-import { add } from '../store/book/book-slice';
 
 function BookDetail() {
+  // @ts-ignore
   const { user } = useSelector((state) => state.auth);
   const { slug } = useParams();
   const dispatch = useDispatch();
@@ -25,7 +26,6 @@ function BookDetail() {
   if (!data) {
     return <div />;
   }
-  console.log(data);
   function handleAddCart() {
     if (!user) {
       toast.error('You need to log in to use this feature!', {
@@ -35,7 +35,7 @@ function BookDetail() {
       });
     } else {
       dispatch(
-        add({
+        bookActions.add({
           ...data,
         }),
       );

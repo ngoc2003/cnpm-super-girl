@@ -4,20 +4,24 @@ import './index.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Spin } from 'antd';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { store } from './store/configureStore';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { store, persistor } from './stores';
+// eslint-disable-next-line no-undef
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-      <ToastContainer />
-    </BrowserRouter>
+    <PersistGate loading={<Spin />} persistor={persistor}>
+      <BrowserRouter>
+        <App />
+        <ToastContainer />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
 );
 

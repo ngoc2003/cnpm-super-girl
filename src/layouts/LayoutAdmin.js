@@ -1,22 +1,16 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { Button, Layout, Menu } from 'antd';
 import Header from './parts/Header';
 import Images from '../images/Images';
 import sidebarAdminData from '../data/sidebarAdminData';
-import { refreshToken } from '../store/auth/auth-slice';
-import { logOut } from '../utils/auth';
+import { handleLogout } from '../stores/thunk/auth';
 
 const { Sider } = Layout;
 
 function LayoutAdmin() {
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  function handleLogOut() {
-    dispatch(refreshToken({}));
-    logOut();
-  }
 
   return (
     <>
@@ -33,7 +27,7 @@ function LayoutAdmin() {
             <h4 className='font-semibold my-1'>{user?.name || 'Anonymous'}</h4>
             <p className='text-xs'>Management</p>
             <div>
-              <Button onClick={handleLogOut} className='my-3 text-darkGray'>
+              <Button onClick={handleLogout} className='my-3 text-darkGray'>
                 Logout
               </Button>
             </div>

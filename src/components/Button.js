@@ -2,9 +2,9 @@ import React from 'react';
 
 function Button({
   type = 'button',
-  children,
+  children = <></>,
   to = '',
-  className,
+  className = '',
   primary = false,
   secondary = false,
   third = false,

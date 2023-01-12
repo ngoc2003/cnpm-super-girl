@@ -4,18 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import FormGroup from '../../../components/FormGroup';
 import Label from '../../../components/Label';
 import ImageUpload from '../../../utils/ImageUpload';
 import Input from '../../../components/Input';
 import MenuDropdown from '../../../components/MenuDropdown';
 import Button from '../../../components/Button';
-import { apiURL, TitleDocument } from '../../../config/config';
-import { signUp } from '../../../store/auth/auth-slice';
+import { apiURL } from '../../../config/config';
 
 function UpdateEmployee() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [languages, setLanguages] = useState('');
@@ -30,21 +29,22 @@ function UpdateEmployee() {
   const [image, setImage] = useState('');
   const [ethnic, setEthnic] = useState('Kinh');
 
-  const handleAddEmployee = async (values) => {
-    dispatch(
-      signUp({
-        ...values,
-        sex,
-        language,
-        image,
-        ethnic,
-      }),
-    );
+  const handleAddEmployee = async () => {
+    // dispatch(
+    //   signUp({
+    //     ...values,
+    //     sex,
+    //     language,
+    //     image,
+    //     ethnic,
+    //   }),
+    // );
 
     toast.success('Add Employee Successfully', {
       pauseOnHover: false,
       autoClose: 1000,
     });
+    console.log(image);
     setIsLoading(false);
     setTimeout(() => {
       setTimeout(() => {
@@ -63,7 +63,7 @@ function UpdateEmployee() {
     }
 
     fetchLanguageList();
-    document.title = `${TitleDocument} | Add Employee`;
+    // document.title = `${TitleDocument} | Add Employee`;
   }, []);
   return (
     <div className='bg-lightGray  w-full'>

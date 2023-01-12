@@ -6,12 +6,17 @@ import Button from '../components/Button';
 import FormGroup from '../components/FormGroup';
 import Input from '../components/Input';
 import Label from '../components/Label';
-import { signIn } from '../store/auth/auth-slice';
+import { handleSignIn as SignIn } from '../stores/thunk/auth';
 
 function SignInPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [loading, setLoading] = useState(false);
+
   const { user } = useSelector((state) => state.auth);
+
   useEffect(() => {
     if (user) {
       if (user.role === 1) {
@@ -19,17 +24,19 @@ function SignInPage() {
       } else navigate('/');
     }
   }, [navigate, user]);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-
-  const [loading, setLoading] = useState(false);
   const handleSignIn = () => {
     if (!email || !password) {
       toast.error('Values not valid');
       setLoading(false);
     } else {
-      console.log(dispatch(signIn({ email, password })));
-      dispatch(signIn({ email, password }));
+      dispatch(SignIn({ email, password }))
+        .unwrap()
+        .then(() => {
+          console.log('OK');
+        })
+        .catch(() => {
+          console.log('NOT OK');
+        });
     }
   };
 
@@ -58,7 +65,13 @@ function SignInPage() {
         </Link>
       </div>
       <div className='p-2' />
-      <Button isLoading={loading} onClick={handleSignIn} fluid primary>
+      <Button
+        isLoading={loading}
+        onClick={handleSignIn}
+        loading={loading}
+        fluid
+        primary
+      >
         Sign In
       </Button>
     </div>

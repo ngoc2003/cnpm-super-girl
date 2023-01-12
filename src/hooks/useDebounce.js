@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-export  const useDebounce = (initial = "", delay = 800) => {
+// eslint-disable-next-line import/prefer-default-export
+export const useDebounce = (initial = '', delay = 800) => {
   const [debounceValue, setDebounceValue] = useState(initial);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -12,4 +13,4 @@ export  const useDebounce = (initial = "", delay = 800) => {
   }, [delay, initial]);
 
   return debounceValue;
-}
+};

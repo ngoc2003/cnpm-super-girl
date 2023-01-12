@@ -24,6 +24,7 @@ function ImageUpload({ onChange = () => {}, defaultValue }) {
     if (!file) return;
     handleSetPreview(file);
 
+    // eslint-disable-next-line no-undef
     const bodyFormData = new FormData();
     bodyFormData.append('image', file);
     const response = await axios({

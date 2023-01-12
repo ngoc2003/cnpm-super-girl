@@ -7,7 +7,7 @@ import Book from '../components/Book/Book';
 import Button from '../components/Button';
 import IconClose from '../icons/IconClose';
 import { apiURL } from '../config/config';
-import { clear } from '../store/book/book-slice';
+import { bookActions } from '../stores/slices/book';
 
 function OrderPage() {
   const orders = useSelector((state) => state.book);
@@ -39,8 +39,9 @@ function OrderPage() {
         userName: user.name,
       });
     }
-    dispatch(clear());
+    dispatch(bookActions.clear());
     setIsLoading(false);
+    // eslint-disable-next-line no-undef
     window.location.replace('/Library');
   }
   return (
