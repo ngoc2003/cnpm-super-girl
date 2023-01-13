@@ -1,14 +1,43 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import specialCollectionsData from '../../../data/specialCollectionsData';
 
 function SpecialCollections() {
+  const linksRef = useRef(null);
+
+  useEffect(() => {
+    const animate = async () => {
+      if (linksRef.current) {
+        const ScrollReveal = (await import('scrollreveal')).default;
+        ScrollReveal().reveal('.header-links', {
+          delay: 500,
+          distance: '300px',
+          origin: 'top',
+        });
+        ScrollReveal().reveal('.header-links-item', {
+          delay: 700,
+          interval: 300,
+          origin: 'left',
+          distance: '300px',
+        });
+      }
+    };
+    animate();
+  }, []);
+
   return (
-    <div className='text-center p-10'>
-      <h4 className='text-primary font-bold text-2xl'>Our Special</h4>
-      <p className='text-[140px] leading-none stroke-text mb-5'>Collections</p>
+    <div ref={linksRef} className='text-center p-10'>
+      <h4 className='header-links text-primary font-bold text-2xl'>
+        Our Special
+      </h4>
+      <p className='header-links text-[140px] leading-none stroke-text mb-5'>
+        Collections
+      </p>
       <div className='flex gap-8'>
         {specialCollectionsData.map((item) => (
-          <div className='flex-1 flex flex-col items-center' key={item.title}>
+          <div
+            className='header-links-item flex-1 flex flex-col items-center'
+            key={item.title}
+          >
             <img
               src={item.image}
               className='w-full h-[300px] object-cover rounded-xl'
