@@ -77,7 +77,6 @@ function UpdateBook() {
     fetchLanguageList();
     fetchTypeList();
     fetchOneDoc();
-    // eslint-disable-next-line no-undef
     document.title = `${TitleDocument} | Update`;
   }, []);
   return (

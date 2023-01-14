@@ -14,6 +14,7 @@ const SignUpPage = lazy(() => import('./pages/SignUpPage'));
 const BookDetail = lazy(() => import('./pages/BookDetail'));
 const OrderPage = lazy(() => import('./pages/OrderPage'));
 const ListRequest = lazy(() => import('./pages/ListRequest'));
+const EventPage = lazy(() => import('./pages/EventPage'));
 // Admin
 const Bookstore = lazy(() => import('./pages/admin/bookstore'));
 const AddBook = lazy(() => import('./pages/admin/bookstore/AddBook'));
@@ -36,7 +37,6 @@ function App() {
     }
   }, [user]);
   useEffect(() => {
-    // eslint-disable-next-line no-undef
     if (window.location.pathname.includes('staff')) {
       navigate('/');
     }
@@ -57,6 +57,7 @@ function App() {
           <Route path='/staff' element={<HomePageStaff />} />
           <Route path='/Library/:slug' element={<BookDetail />} />
           <Route path='/List' element={<ListRequest id={user._id} />} />
+          <Route path='/Event' element={<EventPage />} />
           <Route path='*' element={<HomePageUser />} />
         </Route>
         {/* admin */}

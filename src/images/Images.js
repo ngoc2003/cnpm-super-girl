@@ -10,6 +10,12 @@ const Images = {
   request: require('./admin/request.png'),
   statistic: require('./admin/statistic.png'),
   systems: require('./admin/systems.png'),
+  // events
+  event1: require('./event/event1.png'),
+  event2: require('./event/event2.png'),
+  event3: require('./event/event3.png'),
+  event4: require('./event/event4.png'),
+  event5: require('./event/event5.png'),
   // defaults
   quickLinks: require('./quickLink.png'),
   collection1: require('./coll1.png'),

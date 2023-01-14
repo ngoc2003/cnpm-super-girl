@@ -25,6 +25,7 @@ function SignInPage() {
     }
   }, [navigate, user]);
   const handleSignIn = () => {
+    setLoading(true);
     if (!email || !password) {
       toast.error('Values not valid');
       setLoading(false);
@@ -32,10 +33,10 @@ function SignInPage() {
       dispatch(SignIn({ email, password }))
         .unwrap()
         .then(() => {
-          console.log('OK');
+          setLoading(false);
         })
         .catch(() => {
-          console.log('NOT OK');
+          setLoading(false);
         });
     }
   };
