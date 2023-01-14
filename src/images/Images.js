@@ -17,6 +17,7 @@ const Images = {
   event4: require('./event/event4.png'),
   event5: require('./event/event5.png'),
   // defaults
+  empty: require('./empty.png'),
   quickLinks: require('./quickLink.png'),
   collection1: require('./coll1.png'),
   collection2: require('./coll2.png'),

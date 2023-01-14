@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
 import React, { useState } from 'react';
 import { apiURL } from '../config/config';
-import IconClose from '../icons/IconClose';
 import Button from './Button';
 
 export default function TableList({ data, loading }) {
@@ -123,12 +122,6 @@ export default function TableList({ data, loading }) {
         onRequestClose={() => setOpenModal(false)}
         className='modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden'
       >
-        <button
-          onClick={() => setOpenModal(false)}
-          className='float-right w-6 h-6 duration-300  text-text1'
-        >
-          <IconClose />
-        </button>
         <h2 className='clear-both mb-10 text-2xl font-bold text-center '>
           Are you sure to delete this book?
         </h2>

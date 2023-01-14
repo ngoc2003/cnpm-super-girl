@@ -5,7 +5,6 @@ import ReactModal from 'react-modal';
 import axios from 'axios';
 import Book from '../components/Book/Book';
 import Button from '../components/Button';
-import IconClose from '../icons/IconClose';
 import { apiURL } from '../config/config';
 import { bookActions } from '../stores/slices/book';
 
@@ -63,10 +62,6 @@ function OrderPage() {
             <Book key={item._id} data={item} />
           ))}
         </div>
-
-        <div className='my-2 bg-primary p-1 rounded-md  bg-opacity-70 text-white '>
-          Thank you for your order
-        </div>
       </div>
       <ReactModal
         isOpen={open}
@@ -75,12 +70,6 @@ function OrderPage() {
         onRequestClose={() => setOpen(false)}
         className='modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden'
       >
-        <button
-          onClick={() => setOpen(false)}
-          className='float-right w-6 h-6 duration-300  text-text1'
-        >
-          <IconClose />
-        </button>
         <h2 className='clear-both mb-10 text-2xl font-bold text-center '>
           Are you sure to borrow these books?
         </h2>
