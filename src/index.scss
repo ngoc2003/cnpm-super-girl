@@ -1,8 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "~antd/dist/antd.css";
-@import "react-quill/dist/quill.snow.css";
+@import '~antd/dist/antd.css';
+@import 'react-quill/dist/quill.snow.css';
 @layer base {
   body {
     @apply mx-auto text-base font-normal leading-relaxed;
@@ -20,9 +20,6 @@
   .error-value {
     @apply text-error capitalize;
   }
-  // .quickLink-container:hover .quickLink-list {
-  //   @apply opacity-100 translate-y-0;
-  // }
   .stroke-text {
     color: white;
     text-shadow: -1px -1px 0 #ccc, 1px -1px 0 #ccc, -1px 1px 0 #ccc,
@@ -34,8 +31,19 @@
       box-shadow: 1px 1px 0;
     }
     &-large {
-
-      @apply shadow-[10px_10px_0] shadow-darkGray
+      @apply shadow-[10px_10px_0] shadow-darkGray;
+    }
+  }
+  .item-deco {
+    position: relative;
+    padding: 8px;
+    &::after {
+      content: '';
+      @apply absolute bg-black h-4 w-20 top-8 left-0;
+    }
+    &::before {
+      content: '';
+      @apply absolute bg-black h-4 w-20 bottom-8 right-0;
     }
   }
 }

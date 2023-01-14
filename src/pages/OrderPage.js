@@ -41,7 +41,6 @@ function OrderPage() {
     }
     dispatch(bookActions.clear());
     setIsLoading(false);
-    // eslint-disable-next-line no-undef
     window.location.replace('/Library');
   }
   return (

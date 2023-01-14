@@ -1,7 +1,7 @@
 const headerData = [
   {
-    title: 'About',
-    url: '/About',
+    title: 'Home',
+    url: '/',
   },
   {
     title: 'Help',

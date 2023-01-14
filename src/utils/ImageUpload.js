@@ -24,7 +24,6 @@ function ImageUpload({ onChange = () => {}, defaultValue }) {
     if (!file) return;
     handleSetPreview(file);
 
-    // eslint-disable-next-line no-undef
     const bodyFormData = new FormData();
     bodyFormData.append('image', file);
     const response = await axios({
@@ -35,7 +34,6 @@ function ImageUpload({ onChange = () => {}, defaultValue }) {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log(response.data.data.url);
     onChange(response.data.data.url);
   };
   return (

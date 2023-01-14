@@ -16,7 +16,6 @@ function LayoutDefault() {
     if (user && user.role === 1) {
       navigate('/staff');
     }
-    // eslint-disable-next-line no-undef
     if (window.location.href.includes('staff') && !user) {
       navigate('/');
     }
