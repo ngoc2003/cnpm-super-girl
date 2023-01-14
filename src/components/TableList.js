@@ -7,6 +7,7 @@ import ReactModal from 'react-modal';
 import React, { useState } from 'react';
 import { apiURL } from '../config/config';
 import Button from './Button';
+import { t } from 'i18next';
 
 export default function TableList({ data, loading }) {
   const navigate = useNavigate();
@@ -123,7 +124,7 @@ export default function TableList({ data, loading }) {
         className='modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden'
       >
         <h2 className='clear-both mb-10 text-2xl font-bold text-center '>
-          Are you sure to delete this book?
+          {t('question.areYouSureTo', { action: 'delete this book' })}
         </h2>
         <div className='flex gap-x-3'>
           <Button
@@ -132,10 +133,10 @@ export default function TableList({ data, loading }) {
             fluid
             onClick={() => handleDeleteBook(id)}
           >
-            Accept
+            {t('button.accept')}
           </Button>
           <Button transparent fluid onClick={() => setOpenModal(false)}>
-            Cancel
+            {t('button.cancel')}
           </Button>
         </div>
       </ReactModal>

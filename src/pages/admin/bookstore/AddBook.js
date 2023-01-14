@@ -12,6 +12,7 @@ import MenuDropdown from '../../../components/MenuDropdown';
 import Button from '../../../components/Button';
 import { apiURL, TitleDocument } from '../../../config/config';
 import TextAreaInput from '../../../components/TextAreaInput';
+import { t } from 'i18next';
 
 function AddBook() {
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ function AddBook() {
       console.log(error);
     }
   };
+
   useEffect(() => {
     async function fetchLanguageList() {
       const response = await axios.get(`${apiURL}/languages/all`);
@@ -78,30 +80,31 @@ function AddBook() {
     fetchTypeList();
     document.title = `${TitleDocument} | Add`;
   }, []);
+
   return (
     <div className='bg-lightGray  w-full'>
       <Formik
         initialValues={{
-          name: '', //
-          amount: '', //
-          pages: '', //
-          author: '', //
-          publisher: '', //
-          publishYear: '', //
+          name: '',
+          amount: '',
+          pages: '',
+          author: '',
+          publisher: '',
+          publishYear: '',
           edition: '',
-          borrowAmount: 0, //
+          borrowAmount: 0,
           description: '',
         }}
         validationSchema={Yup.object({
-          name: Yup.string().required('This field is required!'),
-          amount: Yup.number().required('This field is required!'),
-          pages: Yup.number().required('This field is required!'),
-          author: Yup.string().required('This field is required!'),
-          publisher: Yup.string().required('This field is required!'),
-          publisherYear: Yup.number().required('This field is required!'),
-          edition: Yup.number().required('This field is required!'),
-          borrowAmount: Yup.number().required('This field is required!'),
-          description: Yup.string().required('This field is required!'),
+          name: Yup.string().required(t('fieldIsRequire')),
+          amount: Yup.number().required(t('fieldIsRequire')),
+          pages: Yup.number().required(t('fieldIsRequire')),
+          author: Yup.string().required(t('fieldIsRequire')),
+          publisher: Yup.string().required(t('fieldIsRequire')),
+          publisherYear: Yup.number().required(t('fieldIsRequire')),
+          edition: Yup.number().required(t('fieldIsRequire')),
+          borrowAmount: Yup.number().required(t('fieldIsRequire')),
+          description: Yup.string().required(t('fieldIsRequire')),
         })}
         onSubmit={(values) => {
           handleAddNewBook(values);
@@ -113,28 +116,28 @@ function AddBook() {
             <div className='flex gap-5'>
               <div className='flex-1'>
                 <FormGroup>
-                  <Label>Title</Label>
+                  <Label>{t('label.title')}</Label>
                   <Input
                     name='name'
-                    placeholder='Title'
+                    placeholder={t('placeholder.title')}
                     error={errors.name && touched.name ? errors.name : ''}
                     onChange={(e) => setFieldValue('name', e.target.value)}
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label>Book's Amount</Label>
+                  <Label>{t('label.bookAmount')}</Label>
                   <Input
                     name='amount'
-                    placeholder='Amount'
+                    placeholder={t('placeholder.bookAmount')}
                     error={errors.amount && touched.amount ? errors.amount : ''}
                     onChange={(e) => setFieldValue('amount', e.target.value)}
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label>Page Number</Label>
+                  <Label>{t('label.pageNumber')}</Label>
                   <Input
                     name='pages'
-                    placeholder='Pages'
+                    placeholder={t('placeholder.pageNumber')}
                     error={errors.pages && touched.pages ? errors.pages : ''}
                     onChange={(e) => setFieldValue('pages', e.target.value)}
                   />
@@ -142,14 +145,14 @@ function AddBook() {
               </div>
               <div className='flex-1'>
                 <FormGroup>
-                  <Label>Image</Label>
+                  <Label>{t('label.image')}</Label>
                   <ImageUpload name='image' onChange={setImage} />
                 </FormGroup>
               </div>
             </div>
-            <div className=' flex gap-5'>
+            <div className='flex gap-5'>
               <FormGroup className='flex-1'>
-                <Label>Group</Label>
+                <Label>{t('label.group')}</Label>
                 <MenuDropdown
                   setItem={setType}
                   item={type}
@@ -158,7 +161,7 @@ function AddBook() {
                 />
               </FormGroup>
               <FormGroup className='flex-1'>
-                <Label>Language</Label>
+                <Label>{t('label.language')}</Label>
                 <MenuDropdown
                   setItem={setLanguage}
                   item={language}
@@ -169,19 +172,19 @@ function AddBook() {
             </div>
             <div>
               <FormGroup>
-                <Label>Author</Label>
+                <Label>{t('label.author')}</Label>
                 <Input
                   name='author'
-                  placeholder='Author'
+                  placeholder={t('placeholder.author')}
                   error={errors.author && touched.author ? errors.author : ''}
                   onChange={(e) => setFieldValue('author', e.target.value)}
                 />
               </FormGroup>
               <FormGroup>
-                <Label>Publisher</Label>
+                <Label>{t('label.publisher')}</Label>
                 <Input
                   name='publisher'
-                  placeholder='Publisher'
+                  placeholder={t('placeholder.publisher')}
                   error={
                     errors.publisher && touched.publisher
                       ? errors.publisher
@@ -191,10 +194,10 @@ function AddBook() {
                 />
               </FormGroup>
               <FormGroup>
-                <Label>Publish Year</Label>
+                <Label>{t('label.publishYear')}</Label>
                 <Input
                   name='publishYear'
-                  placeholder='Publish Year'
+                  placeholder={t('placeholder.publishYear')}
                   error={
                     errors.publishYear && touched.publishYear
                       ? errors.publishYear
@@ -204,10 +207,10 @@ function AddBook() {
                 />
               </FormGroup>
               <FormGroup>
-                <Label>Edition</Label>
+                <Label>{t('label.edition')}</Label>
                 <Input
                   name='Edition'
-                  placeholder='Edition'
+                  placeholder={t('placeholder.edition')}
                   error={
                     errors.edition && touched.edition ? errors.edition : ''
                   }
@@ -215,7 +218,7 @@ function AddBook() {
                 />
               </FormGroup>
               <FormGroup>
-                <Label>Description</Label>
+                <Label>{t('label.description')}</Label>
                 <TextAreaInput
                   onChange={(e) => setFieldValue('description', e.target.value)}
                   error={
@@ -223,20 +226,16 @@ function AddBook() {
                       ? errors.description
                       : ''
                   }
-                  placeholder='Description'
+                  placeholder={t('placeholder.description')}
                 />
               </FormGroup>
             </div>
             <div className='flex gap-5'>
               <Button type='submit' isLoading={isLoading} primary fluid>
-                Apply
+                {t('button.apply')}
               </Button>
-              {/* to="/staff/account/Bookstore" */}
-              <Button
-                onClick={() => navigate('/staff/account/Bookstore')}
-                fluid
-              >
-                Cancel
+              <Button to={'/staff/account/Bookstore'} fluid>
+                {t('button.cancel')}
               </Button>
             </div>
           </Form>

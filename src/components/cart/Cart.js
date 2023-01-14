@@ -7,6 +7,7 @@ import ReactModal from 'react-modal';
 import Button from '../Button';
 import { Typography } from 'antd';
 import Images from '../../images/Images';
+import { t } from 'i18next';
 
 function Cart() {
   const { user } = useSelector((state) => state.auth);
@@ -33,27 +34,23 @@ function Cart() {
           <div className='h-2 w-full clear-both' />
 
           {!user ? (
-            <div className=' p-2 text-darkGray'>
-              Hey bro, you need to{' '}
-              <Link className='text-primary' to='/sign-in'>
-                log in
-              </Link>{' '}
-              first to access your cart list!
-            </div>
+            <Link to='/sign-in' className=' p-2 text-darkGray'>
+              {t('signInToAccessCart')}
+            </Link>
           ) : !cart.length ? (
             <>
               <img src={Images.empty} alt='' />
               <Typography className='italic p-3 text-center'>
-                There is no new book order in your cart!!
+                {t('cart', { count: cart.length })}
               </Typography>
               <Button to='/Library' primary fluid>
-                Find new book!
+                {t('button.findNewBook')}
               </Button>
             </>
           ) : (
             <>
               <h4 className='inline-block text-xs mb-5 bg-green-100 p-1 text-green-500 rounded-md'>
-                Your cart has {cart.length} new order!
+                {t('cart', { count: cart.length })}
               </h4>
               {cart.map((item) => (
                 <>
@@ -76,10 +73,10 @@ function Cart() {
               ))}
               <div className='flex gap-5'>
                 <Button to='/List' fluid>
-                  Find new book!
+                  {t('button.findNewBook')}
                 </Button>
                 <Button to='/Order' primary fluid>
-                  Order now!
+                  {t('button.orderNow')}
                 </Button>
               </div>
             </>

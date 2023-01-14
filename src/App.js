@@ -37,7 +37,7 @@ function App() {
     }
   }, [user]);
   useEffect(() => {
-    if (window.location.pathname.includes('staff')) {
+    if (!user && window.location.pathname.includes('staff')) {
       navigate('/');
     }
   }, []);

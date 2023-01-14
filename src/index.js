@@ -10,7 +10,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'react-toastify/dist/ReactToastify.css';
 import { store, persistor } from './stores';
-// eslint-disable-next-line no-undef
+import './services/i18n';
+
 const container = document.getElementById('root');
 const root = createRoot(container);
 

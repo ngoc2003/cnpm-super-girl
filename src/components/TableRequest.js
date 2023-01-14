@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { apiURL } from '../config/config';
 import Button from './Button';
 import MenuDropdown from './MenuDropdown';
+import { t } from 'i18next';
 
 const menuDropdownOptions = [
   {
@@ -113,7 +114,7 @@ function TableRequest({ data = '', loading }) {
         className='modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden'
       >
         <h2 className='clear-both mb-10 text-2xl font-bold text-center '>
-          Update Status
+          {t('title.update', { item: 'status' })}
         </h2>
         <div className='my-5 text-center'>
           From
@@ -133,10 +134,10 @@ function TableRequest({ data = '', loading }) {
             fluid
             onClick={handleChangeStatus}
           >
-            Accept
+            {t('button.accept')}
           </Button>
           <Button transparent fluid onClick={() => setOpenModal(false)}>
-            Cancel
+            {t('button.cancel')}
           </Button>
         </div>
       </ReactModal>

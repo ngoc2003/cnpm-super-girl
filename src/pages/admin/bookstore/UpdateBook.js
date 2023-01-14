@@ -43,6 +43,7 @@ function UpdateBook() {
       }, 1000);
     });
   };
+
   useEffect(() => {
     async function fetchLanguageList() {
       const response = await axios.get(`${apiURL}/languages/all`);
@@ -79,21 +80,22 @@ function UpdateBook() {
     fetchOneDoc();
     document.title = `${TitleDocument} | Update`;
   }, []);
+
   return (
     <div className='bg-lightGray  w-full'>
       <Formik
         initialValues={{
-          image, //
-          name: data.name, //
-          amount: data.amount, //
-          pages: data.pages, //
-          language: data.language, //
-          type: data.type, //
-          author: data.author, //
-          publisher: data.publisher, //
-          publishYear: data.publishYear, //
+          image,
+          name: data.name,
+          amount: data.amount,
+          pages: data.pages,
+          language: data.language,
+          type: data.type,
+          author: data.author,
+          publisher: data.publisher,
+          publishYear: data.publishYear,
           edition: data.edition,
-          borrowAmount: data.borrowAmount, //
+          borrowAmount: data.borrowAmount,
           description: data.description,
         }}
         onSubmit={(values) => {
@@ -238,11 +240,7 @@ function UpdateBook() {
               <Button type='submit' isLoading={isLoading} primary fluid>
                 Update
               </Button>
-              {/* to="/staff/account/Bookstore" */}
-              <Button
-                onClick={() => navigate('/staff/account/Bookstore')}
-                fluid
-              >
+              <Button to='/staff/account/Bookstore' fluid>
                 Cancel
               </Button>
             </div>

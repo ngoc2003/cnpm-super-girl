@@ -5,14 +5,15 @@ import Book from '../../../components/Book/Book';
 
 function ListBook() {
   const [data, setData] = useState('');
+
   useEffect(() => {
     async function fetchList() {
       const response = await axios.get(`${apiURL}/books/all`);
       setData(response.data);
-      console.log(response.data);
     }
     fetchList();
   }, []);
+
   return (
     <div className='bg-lightGray w-full '>
       <div className='p-3 m-5 h-full grid grid-cols-3 gap-5'>
