@@ -123,5 +123,3 @@ export default function SignUpPage() {
     </Formik>
   );
 }
-
-// export default SignUpPage
