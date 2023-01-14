@@ -14,7 +14,6 @@ import Button from '../../../components/Button';
 import { apiURL } from '../../../config/config';
 
 function UpdateEmployee() {
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [languages, setLanguages] = useState('');

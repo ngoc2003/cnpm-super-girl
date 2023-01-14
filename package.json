@@ -44,7 +44,10 @@
     "yup": "^0.32.11",
     "scrollreveal": "^4.0.9",
     "redux-persist": "^6.0.0",
-    "@types/redux-logger": "^3.0.9"
+    "@types/redux-logger": "^3.0.9",
+    "react-i18next": "^11.14.3",
+    "i18next": "^21.5.3",
+    "i18next-browser-languagedetector": "^6.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

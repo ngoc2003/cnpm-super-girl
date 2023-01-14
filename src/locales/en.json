@@ -1,0 +1,54 @@
+{
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "signInToUseThisPage": "Please sign in to access this page!",
+  "signInToAccessCart": "Hey brooo, you need to sign in first to access your cart list!",
+  "yourOrder_zero": "You havent oreder any book yet!",
+  "yourOrder_one": "You order 1 book",
+  "yourOrder_other": "You order {{count}} books",
+  "cart_zero": "There is no new book order in your cart!!",
+  "cart_one": "Your cart has one new order!!",
+  "cart_other": "Your cart has {{count}} new orders!!",
+  "fieldIsRequire": "This field is required!",
+  "button": {
+    "accept": "Accept",
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "back": "Back",
+    "addNew": "Add new",
+    "list": "List {{item}}",
+    "orderNow": "Order now!",
+    "findNewBook": "Find new book!"
+  },
+  "title": {
+    "update": "Update {{item}}",
+    "add": "Add {{item}}",
+    "delete": "Delete {{item}}"
+  },
+  "question": {
+    "areYouSureTo": "Are you sure to {{action}} ?"
+  },
+  "label": {
+    "title": "Title",
+    "bookAmount": "Book amount",
+    "pageNumber": "Page number",
+    "image": "Image",
+    "group": "Group",
+    "language": "Language",
+    "author": "Author",
+    "publisher": "Publisher",
+    "publishYear": "Publish year",
+    "edition": "Edition",
+    "description": "Description"
+  },
+  "placeholder": {
+    "title": "Title",
+    "bookAmount": "Book amount",
+    "pageNumber": "Page number",
+    "author": "Author",
+    "publisher": "Publisher",
+    "publishYear": "Publish year",
+    "edition": "Edition",
+    "description": "Description"
+  }
+}

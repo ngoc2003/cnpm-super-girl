@@ -84,9 +84,7 @@ export default function SignUpPage() {
                       : ''
                   }
                   onChange={(e) => setFieldValue(info.name, e.target.value)}
-                >
-                  {info.icon && info.icon}
-                </Input>
+                ></Input>
               </FormGroup>
             ))}
             <div className='flex items-start mb-5 gap-x-5'>

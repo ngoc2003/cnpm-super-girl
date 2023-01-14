@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { apiURL } from '../config/config';
 import Images from '../images/Images';
 import Button from './Button';
+import { t } from 'i18next';
 
 function TableUser({ data, type = 'employee', loading }) {
   const navigate = useNavigate();
@@ -119,7 +120,7 @@ function TableUser({ data, type = 'employee', loading }) {
         className='modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden'
       >
         <h2 className='clear-both mb-10 text-2xl font-bold text-center '>
-          Are you sure to delete this {type}?
+          {t('question.areYouSureTo', { action: `delete this ${type}` })}
         </h2>
         <div className='flex gap-x-3'>
           <Button
@@ -128,10 +129,10 @@ function TableUser({ data, type = 'employee', loading }) {
             fluid
             onClick={() => handleDeleteEmployee(user)}
           >
-            Accept
+            {t('button.accept')}
           </Button>
           <Button transparent fluid onClick={() => setOpenModal(false)}>
-            Cancel
+            {t('button.cancel')}
           </Button>
         </div>
       </ReactModal>

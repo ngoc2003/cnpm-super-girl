@@ -7,6 +7,7 @@ import Book from '../components/Book/Book';
 import Button from '../components/Button';
 import { apiURL } from '../config/config';
 import { bookActions } from '../stores/slices/book';
+import i18n from '../services/i18n';
 
 function OrderPage() {
   const orders = useSelector((state) => state.book);
@@ -16,14 +17,12 @@ function OrderPage() {
   const dispatch = useDispatch();
   if (!user) {
     return (
-      <div className='h-full bg-lightGray flex items-center justify-center'>
-        Please{' '}
-        <Link to='/sign-in' className='text-primary font-semibold'>
-          {' '}
-          log in
-        </Link>{' '}
-        to use this page{' '}
-      </div>
+      <Link
+        to='/sign-in'
+        className='h-full bg-lightGray flex items-center justify-center'
+      >
+        {i18n.t('signInToUseThisPage')}
+      </Link>
     );
   }
   function handleOrder() {
@@ -47,13 +46,10 @@ function OrderPage() {
       <div className='bg-lightGray p-5'>
         <div className='flex justify-between gap-5'>
           <h4 className='text-xl'>
-            Your order:{' '}
-            <span className='text-primary font-semibold'>
-              {orders.length} books
-            </span>{' '}
+            {i18n.t('yourOrder', { count: orders.length })}
           </h4>
           <Button onClick={handleOrder} primary>
-            Order now
+            {i18n.t('button.orderNow')}
           </Button>
         </div>
         <hr className='my-3' />
@@ -71,7 +67,7 @@ function OrderPage() {
         className='modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden'
       >
         <h2 className='clear-both mb-10 text-2xl font-bold text-center '>
-          Are you sure to borrow these books?
+          {i18n.t('question.areYouSureTo', { action: 'order these books' })}
         </h2>
         <div className='flex gap-x-3'>
           <Button
@@ -80,10 +76,10 @@ function OrderPage() {
             fluid
             onClick={handleOrderSubmit}
           >
-            Accept
+            {i18n.t('button.accept')}
           </Button>
           <Button transparent fluid onClick={() => setOpen(false)}>
-            Cancel
+            {i18n.t('button.cancel')}
           </Button>
         </div>
       </ReactModal>
