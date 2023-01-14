@@ -5,7 +5,8 @@ import { v4 } from 'uuid';
 import { Link } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import Button from '../Button';
-import IconClose from '../../icons/IconClose';
+import { Typography } from 'antd';
+import Images from '../../images/Images';
 
 function Cart() {
   const { user } = useSelector((state) => state.auth);
@@ -29,32 +30,31 @@ function Cart() {
           onRequestClose={() => setShow(false)}
           className='modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden'
         >
-          <button
-            onClick={() => setShow(false)}
-            className='float-right w-6 h-6 duration-300  text-text1'
-          >
-            <IconClose />
-          </button>
           <div className='h-2 w-full clear-both' />
 
           {!user ? (
-            <div className='text-sm p-2 text-darkGray'>
-              You need to{' '}
+            <div className=' p-2 text-darkGray'>
+              Hey bro, you need to{' '}
               <Link className='text-primary' to='/sign-in'>
                 log in
               </Link>{' '}
-              first{' '}
+              first to access your cart list!
             </div>
           ) : !cart.length ? (
             <>
-              <div className='p-3'>No items</div>
-              <Button to='/List' primary fluid>
-                Your List Order
+              <img src={Images.empty} alt='' />
+              <Typography className='italic p-3 text-center'>
+                There is no new book order in your cart!!
+              </Typography>
+              <Button to='/Library' primary fluid>
+                Find new book!
               </Button>
             </>
           ) : (
             <>
-              <h4 className='text-xs mb-5'>Your cart has {cart.length} item</h4>
+              <h4 className='inline-block text-xs mb-5 bg-green-100 p-1 text-green-500 rounded-md'>
+                Your cart has {cart.length} new order!
+              </h4>
               {cart.map((item) => (
                 <>
                   <div className='flex gap-5' key={v4()}>
@@ -76,10 +76,10 @@ function Cart() {
               ))}
               <div className='flex gap-5'>
                 <Button to='/List' fluid>
-                  Your List Order
+                  Find new book!
                 </Button>
                 <Button to='/Order' primary fluid>
-                  Order
+                  Order now!
                 </Button>
               </div>
             </>

@@ -41,7 +41,13 @@ function Button({
       {child}
     </button>
   );
-  return to ? <a href={to}>{btn}</a> : btn;
+  return to ? (
+    <a className='block w-full' href={to}>
+      {btn}
+    </a>
+  ) : (
+    btn
+  );
 }
 
 export default Button;

@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import { apiURL } from '../config/config';
 import Images from '../images/Images';
 import Button from './Button';
-import IconClose from '../icons/IconClose';
 
 function TableUser({ data, type = 'employee', loading }) {
   const navigate = useNavigate();
@@ -119,12 +118,6 @@ function TableUser({ data, type = 'employee', loading }) {
         onRequestClose={() => setOpenModal(false)}
         className='modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden'
       >
-        <button
-          onClick={() => setOpenModal(false)}
-          className='float-right w-6 h-6 duration-300  text-text1'
-        >
-          <IconClose />
-        </button>
         <h2 className='clear-both mb-10 text-2xl font-bold text-center '>
           Are you sure to delete this {type}?
         </h2>
