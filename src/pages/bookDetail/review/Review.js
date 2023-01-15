@@ -14,7 +14,7 @@ function Review({ id }) {
   const [commentValue, setCommentValue] = useState('');
   const [reviews, setReview] = useState('');
   const [star, setStar] = useState(4);
-  // const [average, setAverage] = useState(0);
+  const [average, setAverage] = useState(0);
   const { user } = useSelector((state) => state.auth);
   const handleSetComment = (e) => {
     setCommentValue(e.target.value);
@@ -54,22 +54,30 @@ function Review({ id }) {
   const handleStar = (num) => {
     setStar(num);
   };
-  const fetchComment = async () => {
-    const response = await axios.get(`${apiURL}/review/${id}`);
-    setReview(response.data);
-  };
+
   useEffect(() => {
+    const fetchComment = async () => {
+      const response = await axios.get(`${apiURL}/review/${id}`);
+      setReview(response.data);
+    };
     fetchComment();
-    // const totalStar = (reviews || [])
-    //   .map((item) => parseInt(item.star))
-    //   .reduce((total, val) => total + val, 0);
-    // setAverage(parseInt(totalStar / reviews.length));
   }, []);
+
+  useEffect(() => {
+    const totalStar =
+      reviews.length &&
+      reviews
+        .map((item) => parseInt(item.star))
+        .reduce((total, val) => total + val, 0);
+
+    setAverage(parseInt(totalStar / reviews.length));
+  }, [reviews]);
+
   return (
     <>
       <div className='flex gap-5 items-center'>
-        {/* <Rate disabled defaultValue={!!average && parseInt(average)} /> */}
-        <span className='text-'>({reviews.length} comments)</span>
+        {average ? <Rate disabled defaultValue={Number(average)} /> : ''}
+        <span className=''>({reviews.length} comments)</span>
       </div>
       <div className='bg-white p-3 my-5 pt-5'>
         <FormGroup>
