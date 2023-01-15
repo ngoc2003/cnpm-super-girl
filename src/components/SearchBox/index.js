@@ -1,15 +1,15 @@
+import { Layout, Typography } from 'antd';
 import React from 'react';
 import Search from '../Search';
 
 function SearchingDefault({ onClick, onKeyUp }) {
   return (
-    <div className='flex items-center rounded-xl justify-between w-full gap-5 mb-5'>
-      <h4 className='text-xl font-semibold'>Search tools</h4>
-
+    <Layout className='flex items-center rounded-xl justify-between gap-5'>
+      <Typography className='font-semibold'>Search tools</Typography>
       <div className='flex-1'>
         <Search onClick={onClick} onKeyUp={onKeyUp} max={false} />
       </div>
-    </div>
+    </Layout>
   );
 }
 

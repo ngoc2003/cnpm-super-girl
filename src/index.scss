@@ -47,7 +47,9 @@
     }
   }
 }
-
+.ant-layout {
+  @apply bg-transparent;
+}
 .ant-tabs-tab {
   background-color: transparent !important;
   border: none !important;
@@ -62,6 +64,15 @@
 }
 .ant-tabs-content-holder {
   @apply px-10 py-5;
+}
+.ant-card-meta-title,
+.ant-card-meta-description {
+  white-space: pre-line;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Toastify__toast--success .Toastify__progress-bar--success {

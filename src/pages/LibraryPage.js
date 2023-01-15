@@ -85,7 +85,7 @@ function LibraryPage() {
       <div className='text-2xl text-primary font-semibold py-5 '>
         {data.length} books has been founded!
       </div>
-      <div className='grid grid-cols-6 gap-5'>
+      <div className='grid grid-cols-5 mr-5 gap-5'>
         {!!data.length &&
           data.map((item) => (
             <Book to={`/Library/${item._id}`} data={item} key={v4()} />

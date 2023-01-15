@@ -2,7 +2,7 @@ import React from 'react';
 
 function Search({
   placeholder = 'Do funrise now',
-  className = 'flex-1',
+  className,
   defaultValue = '',
   max = true,
   searchValue,
@@ -11,7 +11,7 @@ function Search({
   onKeyUp = () => {},
 }) {
   return (
-    <div className={`relative  ${className}`}>
+    <div className={`relative flex-1  ${className}`}>
       <div
         className={` flex items-center p-2 bg-white rounded-full border w-full ${
           max && 'max-w-[458px]'
