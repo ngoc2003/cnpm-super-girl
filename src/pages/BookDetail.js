@@ -15,6 +15,7 @@ function BookDetail() {
   const { slug } = useParams();
   const dispatch = useDispatch();
   const [data, setData] = useState();
+
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(`${apiURL}/books/${slug}`);
@@ -22,9 +23,11 @@ function BookDetail() {
     }
     fetchData();
   }, []);
+
   if (!data) {
     return <div />;
   }
+
   function handleAddCart() {
     if (!user) {
       toast.error('You need to log in to use this feature!', {
@@ -57,7 +60,7 @@ function BookDetail() {
             <Button onClick={handleAddCart} primary>
               Add to Cart
             </Button>
-            <HeartOutlined className='text-xl' />
+            <HeartOutlined className='text-xl cursor-pointer' />
           </div>
         </div>
         <div className='col-span-3'>
