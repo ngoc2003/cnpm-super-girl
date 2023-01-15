@@ -5,7 +5,7 @@ import { v4 } from 'uuid';
 import { Link } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import Button from '../Button';
-import { Typography } from 'antd';
+import { Typography, Layout, Space } from 'antd';
 import Images from '../../images/Images';
 import { t } from 'i18next';
 
@@ -18,7 +18,7 @@ function Cart() {
     setShow(!show);
   }
   return (
-    <div className='relative'>
+    <Layout className='relative'>
       <ShoppingCartOutlined
         className='cursor-pointer'
         onClick={handleToggleShow}
@@ -31,7 +31,7 @@ function Cart() {
           onRequestClose={() => setShow(false)}
           className='modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden'
         >
-          <div className='h-2 w-full clear-both' />
+          <Layout className='h-2 w-full clear-both' />
 
           {!user ? (
             <Link to='/sign-in' className=' p-2 text-darkGray'>
@@ -49,25 +49,28 @@ function Cart() {
             </>
           ) : (
             <>
-              <h4 className='inline-block text-xs mb-5 bg-green-100 p-1 text-green-500 rounded-md'>
+              <Typography.Text
+                type='success'
+                className=' bg-green-100 p-1 rounded-md inline-block mb-5 text-sm'
+              >
                 {t('cart', { count: cart.length })}
-              </h4>
+              </Typography.Text>
               {cart.map((item) => (
                 <>
-                  <div className='flex gap-5' key={v4()}>
-                    <div className='h-[100px] '>
+                  <Space size='large' key={v4()}>
+                    <Layout className='h-[100px] '>
                       <img
                         src={item.image}
                         className='h-full object-cover'
                         alt=''
                       />
-                    </div>
-                    <div>
+                    </Layout>
+                    <Layout>
                       <h4 className='text-lg'>{item.name}</h4>
                       <p className='text-sm'>{item.author}</p>
                       <p className='text-xs text-darkGray'>x 1</p>
-                    </div>
-                  </div>
+                    </Layout>
+                  </Space>
                   <hr className='my-5' />
                 </>
               ))}
@@ -83,7 +86,7 @@ function Cart() {
           )}
         </ReactModal>
       )}
-    </div>
+    </Layout>
   );
 }
 

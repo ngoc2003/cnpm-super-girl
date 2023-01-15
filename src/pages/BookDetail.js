@@ -11,7 +11,6 @@ import { bookActions } from '../stores/slices/book';
 import Button from '../components/Button';
 
 function BookDetail() {
-  // @ts-ignore
   const { user } = useSelector((state) => state.auth);
   const { slug } = useParams();
   const dispatch = useDispatch();
