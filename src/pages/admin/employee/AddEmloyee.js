@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 import * as Yup from 'yup';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import FormGroup from '../../../components/FormGroup';
 import Label from '../../../components/Label';
 import ImageUpload from '../../../utils/ImageUpload';
@@ -12,9 +11,11 @@ import Input from '../../../components/Input';
 import MenuDropdown from '../../../components/MenuDropdown';
 import Button from '../../../components/Button';
 import { apiURL } from '../../../config/config';
+import { handleSignUp } from '../../../stores/thunk/auth';
 
 function UpdateEmployee() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [languages, setLanguages] = useState('');
   const sexs = [
@@ -29,21 +30,15 @@ function UpdateEmployee() {
   const [ethnic, setEthnic] = useState('Kinh');
 
   const handleAddEmployee = async () => {
-    // dispatch(
-    //   signUp({
-    //     ...values,
-    //     sex,
-    //     language,
-    //     image,
-    //     ethnic,
-    //   }),
-    // );
-
-    toast.success('Add Employee Successfully', {
-      pauseOnHover: false,
-      autoClose: 1000,
-    });
-    console.log(image);
+    dispatch(
+      handleSignUp({
+        ...values,
+        sex,
+        language,
+        image,
+        ethnic,
+      }),
+    );
     setIsLoading(false);
     setTimeout(() => {
       setTimeout(() => {
@@ -62,7 +57,7 @@ function UpdateEmployee() {
     }
 
     fetchLanguageList();
-    // document.title = `${TitleDocument} | Add Employee`;
+    document.title = `${TitleDocument} | Add Employee`;
   }, []);
   return (
     <div className='bg-lightGray  w-full'>

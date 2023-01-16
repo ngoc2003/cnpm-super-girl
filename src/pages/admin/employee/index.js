@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { apiURL } from '../../../config/config';
+import React from 'react';
 import TableEmployee from '../../../components/TableUser';
 import Button from '../../../components/Button';
+import { useGetAdminsQuery } from '../../../stores/services/admin';
+import { Spin } from 'antd';
 
 function Employee() {
-  const [data, setData] = useState('');
-  useEffect(() => {
-    async function fetchEmployee() {
-      const response = await axios.get(`${apiURL}/users/all/admin`);
-      setData(response.data);
-    }
-    fetchEmployee();
-  }, []);
-  console.log(data);
+  const { data, isFetching } = useGetAdminsQuery();
+
+  if (isFetching) {
+    return <Spin />;
+  }
+
   return (
     <div className='bg-lightGray w-full'>
       <div className='bg-white p-3 m-5 h-full'>

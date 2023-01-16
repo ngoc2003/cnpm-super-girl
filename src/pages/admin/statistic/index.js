@@ -40,6 +40,7 @@ function BookYear() {
     </div>
   );
 }
+
 function Type() {
   const [TypeAdd, setTypeAdd] = useState([]);
   useEffect(() => {
@@ -69,12 +70,13 @@ function Type() {
     </div>
   );
 }
+
 function Request() {
   const [data, setData] = useState([]);
   useEffect(() => {
     const handleFetch = async () => {
       const responseAmount = await axios.get(`${apiURL}/books/amount`);
-      const responseRequest = await axios.get(`${apiURL}/borrow/amount`);
+      const responseRequest = await axios.get(`${apiURL}/borrows/amount`);
       setData([responseAmount.data, responseRequest.data]);
     };
     handleFetch();
@@ -147,7 +149,7 @@ function BookMonth() {
           ],
           datasets: [
             {
-              label: `Book Amount ${year}`,
+              label: `Book Add Amount ${year}`,
               backgroundColor: '#24537e',
               data: month,
             },
@@ -165,7 +167,7 @@ function RequestMonth() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`${apiURL}/borrow/amount/month`);
+      const response = await axios.get(`${apiURL}/borrows/amount/month`);
       const listYearTemp = response.data.map((item) => ({
         label: item.year,
         key: item.year,

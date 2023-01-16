@@ -1,19 +1,18 @@
 import { Table } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
 import React, { useState } from 'react';
-import { apiURL } from '../config/config';
 import Button from './Button';
 import { t } from 'i18next';
+import { useDeleteBookMutation } from '../stores/services/book';
 
 export default function TableList({ data, loading }) {
   const navigate = useNavigate();
 
+  const [deleteBook, { isLoading }] = useDeleteBookMutation();
   const [openModal, setOpenModal] = useState(false);
-  const [isLoading, setLoading] = useState(false);
   const [id, setId] = useState('');
 
   const columnsPrev = [
@@ -96,26 +95,39 @@ export default function TableList({ data, loading }) {
       ),
     },
   ];
-  async function handleDeleteBook(book) {
-    setLoading(true);
-    await axios.post(`${apiURL}/books/delete`, {
+
+  function handleDeleteBook(book) {
+    deleteBook({
       _id: book._id,
-    });
-    setTimeout(() => {
-      setLoading(false);
-      toast.success('Delete Book Successfully', {
-        pauseOnHover: false,
-        autoClose: 1000,
+    })
+      .unwrap()
+      .then(() => {
+        setTimeout(() => {
+          toast.success('Delete Book Successfully', {
+            pauseOnHover: false,
+            autoClose: 1000,
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        }, 1000);
+      })
+      .catch(() => {
+        toast.error('Error', {
+          pauseOnHover: false,
+          autoClose: 1000,
+        });
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    }, 1000);
   }
 
   return (
     <>
-      <Table loading={loading} columns={columnsPrev} dataSource={data} />
+      <Table
+        pagination={{ pageSize: 7 }}
+        loading={loading}
+        columns={columnsPrev}
+        dataSource={data}
+      />
       <ReactModal
         isOpen={openModal}
         overlayClassName='modal-overlay fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center '

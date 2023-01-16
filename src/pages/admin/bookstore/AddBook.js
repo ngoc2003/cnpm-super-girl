@@ -13,40 +13,46 @@ import Button from '../../../components/Button';
 import { apiURL, TitleDocument } from '../../../config/config';
 import TextAreaInput from '../../../components/TextAreaInput';
 import { t } from 'i18next';
+import { useAddBookMutation } from '../../../stores/services/book';
 
 function AddBook() {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
   const [languages, setLanguages] = useState('');
   const [types, setTypes] = useState('');
 
   const [language, setLanguage] = useState('');
   const [type, setType] = useState('');
+
   const [image, setImage] = useState('');
 
+  const [createBook, { isLoading }] = useAddBookMutation();
+
   const handleAddNewBook = async (values) => {
-    try {
-      const response = await axios.post(`${apiURL}/books/create`, {
-        ...values,
-        type,
-        language,
-        image,
-      });
-      if (response.status === 200) {
+    console.log(values);
+    createBook({
+      ...values,
+      type: type,
+      language: language,
+      image: image,
+    })
+      .unwrap()
+      .then(() => {
         toast.success('Add Book Successfully', {
           pauseOnHover: false,
           autoClose: 1000,
         });
-        setIsLoading(false);
         setTimeout(() => {
           setTimeout(() => {
             navigate('/staff/account/Bookstore');
           }, 1000);
         }, 1000);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+      })
+      .catch(() => {
+        toast.error('Add Book Failed', {
+          pauseOnHover: false,
+          autoClose: 1000,
+        });
+      });
   };
 
   useEffect(() => {
@@ -78,6 +84,7 @@ function AddBook() {
     }
     fetchLanguageList();
     fetchTypeList();
+
     document.title = `${TitleDocument} | Add`;
   }, []);
 
@@ -101,14 +108,13 @@ function AddBook() {
           pages: Yup.number().required(t('fieldIsRequire')),
           author: Yup.string().required(t('fieldIsRequire')),
           publisher: Yup.string().required(t('fieldIsRequire')),
-          publisherYear: Yup.number().required(t('fieldIsRequire')),
+          publishYear: Yup.number().required(t('fieldIsRequire')),
           edition: Yup.number().required(t('fieldIsRequire')),
           borrowAmount: Yup.number().required(t('fieldIsRequire')),
           description: Yup.string().required(t('fieldIsRequire')),
         })}
         onSubmit={(values) => {
           handleAddNewBook(values);
-          setIsLoading(true);
         }}
       >
         {({ errors, touched, setFieldValue }) => (
@@ -234,7 +240,7 @@ function AddBook() {
               <Button type='submit' isLoading={isLoading} primary fluid>
                 {t('button.apply')}
               </Button>
-              <Button to={'/staff/account/Bookstore'} fluid>
+              <Button to='/staff/account/Bookstore' fluid>
                 {t('button.cancel')}
               </Button>
             </div>

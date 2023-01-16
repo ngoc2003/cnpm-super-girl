@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { apiURL } from '../../../config/config';
+import React from 'react';
 import Book from '../../../components/Book/Book';
+import { useGetBooksQuery } from '../../../stores/services/book';
 
 function ListBook() {
-  const [data, setData] = useState('');
+  const { data } = useGetBooksQuery();
 
-  useEffect(() => {
-    async function fetchList() {
-      const response = await axios.get(`${apiURL}/books/all`);
-      setData(response.data);
-    }
-    fetchList();
-  }, []);
+  if (!data?.length) {
+    return;
+  }
 
   return (
     <div className='bg-lightGray w-full '>
       <div className='p-3 m-5 h-full grid grid-cols-3 gap-5'>
-        {data.length &&
-          data.map((book) => <Book key={book._id} data={book} id={book._id} />)}
+        {data.map((book) => (
+          <Book key={book._id} data={book} id={book._id} />
+        ))}
       </div>
     </div>
   );

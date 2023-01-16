@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import TableList from '../../../components/TableList';
 import Button from '../../../components/Button';
-import { apiURL } from '../../../config/config';
 import { t } from 'i18next';
+import { useGetBooksQuery } from '../../../stores/services/book';
 
 function Bookstore() {
+  const { data: books } = useGetBooksQuery();
   const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchBook() {
-      setLoading(true);
-      const response = await axios.get(`${apiURL}/books/all`);
-      if (response.status) {
-        setLoading(false);
-      }
-      setData(response.data);
+    if (books?.length) {
+      setLoading(false);
+      setData(books);
     }
-    fetchBook();
-  }, []);
+  }, [books]);
+
+  if (!data?.length) {
+    return;
+  }
 
   return (
     <div className='bg-lightGray w-full'>

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Tag, Table, Spin } from 'antd';
 import { Link, Navigate } from 'react-router-dom';
-import { apiURL } from '../config/config';
+import { useGetUserRequestQuery } from '../stores/services/request';
 
 const columnsPrev = [
   {
@@ -23,7 +22,7 @@ const columnsPrev = [
     key: 'createdAt',
     render: (value) => (
       <span className={`${!value && 'error-value'}`}>
-        {value || 'not update'}
+        {new Date(value).toLocaleString()}
       </span>
     ),
   },
@@ -33,7 +32,7 @@ const columnsPrev = [
     key: 'endedAt',
     render: (value) => (
       <span className={`${!value && 'error-value'}`}>
-        {value || 'not update'}
+        {value ? new Date(value).toLocaleString() : 'not update'}
       </span>
     ),
   },
@@ -52,31 +51,14 @@ const columnsPrev = [
 ];
 
 function ListRequest() {
-  const [data, setData] = useState([]);
   const { user } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    async function fetchData() {
-      const bookResponse = await axios.get(`${apiURL}/borrow/user/${user._id}`);
-      if (bookResponse.status === 200) {
-        setData(bookResponse.data);
-      }
-      setLoading(false);
-    }
-    if (!data.length) {
-      fetchData();
-    }
-  }, [user, data]);
+  const { data, isFetching } = useGetUserRequestQuery(user._id);
 
-  if (!user && !loading) {
+  if (!user) {
     return <Navigate to='/sign-in' />;
   }
-  if (loading) {
-    return (
-      <div className='h-[300px] flex items-center justify-center'>
-        <Spin />;
-      </div>
-    );
+  if (isFetching) {
+    return <Spin />;
   }
 
   return (
@@ -87,7 +69,12 @@ function ListRequest() {
       <div className='mb-8 text-sm bg-red-100 text-red-500 py-1 px-2 rounded-md inline-block'>
         NOTE: The largest number of books you can borrow is 5
       </div>
-      <Table loading={loading} columns={columnsPrev} dataSource={data} />
+      <Table
+        pagination={{ pageSize: 7 }}
+        loading={isFetching}
+        columns={columnsPrev}
+        dataSource={data}
+      />
     </>
   );
 }

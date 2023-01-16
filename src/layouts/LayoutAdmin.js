@@ -16,9 +16,9 @@ function LayoutAdmin() {
     <>
       <Header />
       <hr />
-      <Layout className='bg-white md:min-h-screen overflow-hidden '>
-        <Sider>
-          <Layout className='py-5 bg-white text-center'>
+      <Layout className='md:min-h-screen overflow-hidden '>
+        <Sider className='bg-white'>
+          <Layout className='py-5 text-center'>
             <img
               className='w-1/2 min-w-[100px] mx-auto'
               src={user?.image || Images.avatar}

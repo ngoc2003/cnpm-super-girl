@@ -37,7 +37,7 @@ function LibraryPage() {
       }
     }
     fetchData();
-  }, []);
+  }, [searchValue]);
 
   function handleSearch() {
     setData(
