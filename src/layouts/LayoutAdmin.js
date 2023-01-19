@@ -6,6 +6,7 @@ import Header from './parts/Header';
 import Images from '../images/Images';
 import sidebarAdminData from '../data/sidebarAdminData';
 import { handleLogout } from '../stores/thunk/auth';
+import { t } from 'i18next';
 
 const { Sider } = Layout;
 
@@ -24,11 +25,13 @@ function LayoutAdmin() {
               src={user?.image || Images.avatar}
               alt=''
             />
-            <h4 className='font-semibold my-1'>{user?.name || 'Anonymous'}</h4>
-            <p className='text-xs'>Management</p>
+            <h4 className='font-semibold my-1'>
+              {user?.name || t('role.anonymous')}
+            </h4>
+            <p className='text-xs'>{t('role.management')}</p>
             <div>
               <Button onClick={handleLogout} className='my-3 text-darkGray'>
-                Logout
+                {t('button.logOut')}
               </Button>
             </div>
           </Layout>

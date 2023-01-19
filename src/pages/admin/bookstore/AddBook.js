@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Formik, Form } from 'formik';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Formik, Form, Field } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -11,9 +11,9 @@ import Input from '../../../components/Input';
 import MenuDropdown from '../../../components/MenuDropdown';
 import Button from '../../../components/Button';
 import { apiURL, TitleDocument } from '../../../config/config';
-import TextAreaInput from '../../../components/TextAreaInput';
 import { t } from 'i18next';
 import { useAddBookMutation } from '../../../stores/services/book';
+import ReactQuill from 'react-quill';
 
 function AddBook() {
   const navigate = useNavigate();
@@ -26,6 +26,23 @@ function AddBook() {
   const [image, setImage] = useState('');
 
   const [createBook, { isLoading }] = useAddBookMutation();
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['blockquote'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+          ['link'],
+          [{ color: ['#FFFFFF', '#e60000', '#000'] }],
+          ['code-block'],
+        ],
+      },
+    }),
+    [],
+  );
 
   const handleAddNewBook = async (values) => {
     console.log(values);
@@ -225,15 +242,19 @@ function AddBook() {
               </FormGroup>
               <FormGroup>
                 <Label>{t('label.description')}</Label>
-                <TextAreaInput
-                  onChange={(e) => setFieldValue('description', e.target.value)}
-                  error={
-                    errors.description && touched.description
-                      ? errors.description
-                      : ''
-                  }
-                  placeholder={t('placeholder.description')}
-                />
+                <Field name='description'>
+                  {({ field }) => (
+                    <div>
+                      <ReactQuill
+                        theme='snow'
+                        modules={modules}
+                        value={field.value}
+                        onChange={field.onChange(field.name)}
+                        placeholder={t('placeholder.description')}
+                      />
+                    </div>
+                  )}
+                </Field>
               </FormGroup>
             </div>
             <div className='flex gap-5'>

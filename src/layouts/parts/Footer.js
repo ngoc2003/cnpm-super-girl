@@ -6,6 +6,7 @@ import {
 } from '@ant-design/icons';
 import { Layout } from 'antd';
 import Title from 'antd/lib/typography/Title';
+import { t } from 'i18next';
 import React from 'react';
 import Images from '../../images/Images';
 
@@ -20,35 +21,38 @@ const Footer = () => {
         </Layout>
         <div className='col-span-2 bg-primary p-5 flex'>
           <div className='flex-1'>
-            <Title style={{ color: '#fff' }}>TLU LIBRARY</Title>
+            <Title style={{ color: '#fff' }}>{t('logoName')}</Title>
             <ul className='list-none text-white flex flex-col gap-3'>
               <li className='flex gap-3 items-center'>
                 <MailOutlined style={{ fontSize: '20px' }} />
-                tlulib@readbook.com
+                {t('contact.email')}
               </li>
               <li className='flex gap-3 items-center'>
                 <GlobalOutlined style={{ fontSize: '20px' }} />
-                www.tlulib.com
+                {t('contact.website')}
               </li>
               <li className='flex gap-3 items-center'>
                 <PhoneOutlined style={{ fontSize: '20px' }} />
-                123 456 7890
+                {t('contact.phoneNumber')}
               </li>
               <li className='flex gap-3 items-center'>
                 <EnvironmentOutlined style={{ fontSize: '20px' }} />
-                175 Tay Son St, Dong Da, Ha Noi
+                {t('contact.address')}
               </li>
             </ul>
           </div>
           <div className='flex flex-col flex-1'>
-            <Title style={{ color: '#fff' }}>MEMBERS OF TEAMS</Title>
+            <Title style={{ color: '#fff' }}>{t('title.membersOfTeam')}</Title>
             <ul className='list-none text-white flex flex-col gap-3'>
               <li className='flex gap-3 items-center'>
                 Bui Thuy Ngoc{' '}
-                <span className='opacity-70 text-xs'>- Coder</span>
+                <span className='opacity-70 text-xs'>- {t('role.coder')}</span>
               </li>
               <li className='flex gap-3 items-center'>
-                Do Quyen <span className='opacity-70 text-xs'>- Designer</span>
+                Do Quyen{' '}
+                <span className='opacity-70 text-xs'>
+                  - {t('role.designer')}
+                </span>
               </li>
             </ul>
             <span className='text-white opacity-70 flex-1 flex items-end'>
