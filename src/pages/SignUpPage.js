@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-// import { useDispatch } from 'react-redux';
-import Checkbox from '../components/Checkbox';
+import { useDispatch } from 'react-redux';
 import Input from '../components/Input';
 import Label from '../components/Label';
 import FormGroup from '../components/FormGroup';
 import Button from '../components/Button';
+import { handleSignUp as signUp } from '../stores/thunk/auth';
 
 export default function SignUpPage() {
-  // const dispatch = useDispatch();
-  const [acceptTerm, setAcceptTerm] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSignUp = async (values) => {
-    try {
-      // dispatch(signUp(values));
-      navigate('/');
-    } catch (err) {
-      console.log(values);
-    }
+    dispatch(signUp(values))
+      .unwrap()
+      .then(() => navigate('/sign-in'));
   };
   const infos = [
     {
@@ -44,7 +40,7 @@ export default function SignUpPage() {
 
   return (
     <Formik
-      initialValues={{ name: '', email: '', password: '', term: false }}
+      initialValues={{ name: '', email: '', password: '' }}
       validationSchema={Yup.object({
         name: Yup.string().required('This field is required!'),
         email: Yup.string()
@@ -87,32 +83,6 @@ export default function SignUpPage() {
                 ></Input>
               </FormGroup>
             ))}
-            <div className='flex items-start mb-5 gap-x-5'>
-              <Checkbox
-                name='term'
-                checked={acceptTerm}
-                onClick={() => {
-                  setFieldValue('term', !acceptTerm);
-                  setAcceptTerm(!acceptTerm);
-                }}
-              >
-                <p className='flex-1 text-xs lg:text-sm text-text2 dark:text-text3'>
-                  I agree to the{' '}
-                  <span className='underline cursor-pointer text-secondary'>
-                    Terms os Use
-                  </span>{' '}
-                  and have read and understand the{' '}
-                  <span className='underline cursor-pointer text-secondary'>
-                    Privacy policy
-                  </span>{' '}
-                </p>
-              </Checkbox>
-            </div>
-            {touched.term && errors.term && (
-              <p className='pb-4 -mt-5 text-sm font-medium pointer-events-none text-error'>
-                {errors.term}
-              </p>
-            )}
 
             <Button primary fluid type='submit'>
               Create my account

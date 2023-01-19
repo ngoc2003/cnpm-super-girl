@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { apiURL } from '../../../config/config';
+import React from 'react';
 import TableUser from '../../../components/TableUser';
 import Button from '../../../components/Button';
+import { useGetReadersQuery } from '../../../stores/services/reader';
+import { Spin } from 'antd';
 
 function Reader() {
-  const [data, setData] = useState('');
-  useEffect(() => {
-    async function fetchUser() {
-      const response = await axios.get(`${apiURL}/users/all/reader`);
-      setData(response.data);
-    }
-    fetchUser();
-  }, []);
-  console.log(data);
+  const { data, isFetching } = useGetReadersQuery();
+
+  if (isFetching) {
+    return <Spin />;
+  }
+
   return (
     <div className='bg-lightGray w-full'>
       <div className='bg-white p-3 m-5 h-full'>

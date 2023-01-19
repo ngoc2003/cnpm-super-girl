@@ -11,37 +11,50 @@ import MenuDropdown from '../../../components/MenuDropdown';
 import Button from '../../../components/Button';
 import { apiURL, TitleDocument } from '../../../config/config';
 import TextAreaInput from '../../../components/TextAreaInput';
+import {
+  useGetBookQuery,
+  useUpdateBookMutation,
+} from '../../../stores/services/book';
 
 function UpdateBook() {
-  const navigate = useNavigate();
   const { slug } = useParams();
-  const [data, setData] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const { data } = useGetBookQuery(slug);
+  console.log(data);
+  const [updateBook, { isLoading }] = useUpdateBookMutation();
+  const navigate = useNavigate();
+
   const [languages, setLanguages] = useState('');
   const [types, setTypes] = useState('');
 
-  const [language, setLanguage] = useState(data.language);
-  const [type, setType] = useState(data.type);
-  const [image, setImage] = useState(data.image);
+  const [language, setLanguage] = useState(data?.language || '');
+  const [type, setType] = useState(data?.type || '');
+  const [image, setImage] = useState(data?.image || '');
 
   const handleUpdateBook = async (values) => {
-    await axios.post(`${apiURL}/books/update`, {
+    updateBook({
       ...data,
       ...values,
-      type,
-      language,
-      image,
-    });
-    toast.success('Update Book Successfully', {
-      pauseOnHover: false,
-      autoClose: 1000,
-    });
-    setIsLoading(false);
-    setTimeout(() => {
-      setTimeout(() => {
-        navigate('/staff/account/Bookstore');
-      }, 1000);
-    });
+      type: type,
+      language: language,
+      image: image,
+    })
+      .then(() => {
+        toast.success('Update Book Successfully', {
+          pauseOnHover: false,
+          autoClose: 1000,
+        });
+        setTimeout(() => {
+          setTimeout(() => {
+            navigate('/staff/account/Bookstore');
+          }, 1000);
+        });
+      })
+      .catch(() => {
+        toast.error('Update Book Failed', {
+          pauseOnHover: false,
+          autoClose: 1000,
+        });
+      });
   };
 
   useEffect(() => {
@@ -71,36 +84,33 @@ function UpdateBook() {
       });
       setTypes(dataTemp);
     }
-    async function fetchOneDoc() {
-      const response = await axios.get(`${apiURL}/books/${slug}`);
-      setData(response.data);
-    }
     fetchLanguageList();
     fetchTypeList();
-    fetchOneDoc();
     document.title = `${TitleDocument} | Update`;
   }, []);
+  if (!data) {
+    return;
+  }
 
   return (
     <div className='bg-lightGray  w-full'>
       <Formik
         initialValues={{
-          image,
-          name: data.name,
-          amount: data.amount,
-          pages: data.pages,
-          language: data.language,
-          type: data.type,
-          author: data.author,
-          publisher: data.publisher,
-          publishYear: data.publishYear,
-          edition: data.edition,
-          borrowAmount: data.borrowAmount,
-          description: data.description,
+          image: image,
+          name: data?.name || '',
+          amount: data?.amount || '',
+          pages: data?.pages || '',
+          language: language,
+          type: type,
+          author: data?.author || '',
+          publisher: data?.publisher || '',
+          publishYear: data?.publishYear || '',
+          edition: data?.edition || '',
+          borrowAmount: data?.borrowAmount || '',
+          description: data?.description || '',
         }}
         onSubmit={(values) => {
           handleUpdateBook(values);
-          setIsLoading(true);
         }}
       >
         {({ errors, touched, setFieldValue }) => (

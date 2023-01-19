@@ -1,28 +1,14 @@
-/* eslint-disable import/extensions */
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Input from '../components/Input';
 import { imgbbAPI } from '../config/config.js';
 
-function ImageUpload({ onChange = () => {}, defaultValue }) {
-  const [imagePreview, setImagePreview] = useState(''); // preview image update
-  function handleSetPreview(image) {
-    try {
-      // eslint-disable-next-line no-param-reassign
-      image.preview = URL.createObjectURL(image);
-    } catch (err) {
-      console.log(err);
-    }
-    setImagePreview(image);
-  }
-  useEffect(
-    () => imagePreview && URL.revokeObjectURL(imagePreview.preview),
-    [imagePreview],
-  );
+function ImageUpload({ onChange = () => {}, defaultValue = '' }) {
+  const [imagePreview, setImagePreview] = useState(defaultValue); // preview image update
+
   const handleChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    handleSetPreview(file);
 
     const bodyFormData = new FormData();
     bodyFormData.append('image', file);
@@ -34,12 +20,14 @@ function ImageUpload({ onChange = () => {}, defaultValue }) {
         'Content-Type': 'multipart/form-data',
       },
     });
+    setImagePreview(response.data.data.url);
     onChange(response.data.data.url);
   };
+
   return (
     <Input
       onChange={handleChange}
-      url={imagePreview.preview || defaultValue}
+      url={imagePreview}
       defaultValue={defaultValue || null}
       isFile
     />

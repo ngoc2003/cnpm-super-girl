@@ -1,13 +1,12 @@
 import ReactModal from 'react-modal';
 import React, { useState } from 'react';
-import { Table, Tag } from 'antd';
+import { Table, Tag, Button as BtnAntd, Tooltip } from 'antd';
 import { UnorderedListOutlined } from '@ant-design/icons';
-import axios from 'axios';
 import { toast } from 'react-toastify';
-import { apiURL } from '../config/config';
 import Button from './Button';
 import MenuDropdown from './MenuDropdown';
 import { t } from 'i18next';
+import { useUpdateStatusRequestMutation } from '../stores/services/request';
 
 const menuDropdownOptions = [
   {
@@ -32,11 +31,20 @@ function TableRequest({ data = '', loading }) {
   const [openModal, setOpenModal] = useState(false);
   const [item, setItem] = useState(false);
   const [newStatus, setNewStatus] = useState(false);
+
+  const [updateStatusRequest, { isLoading }] = useUpdateStatusRequestMutation();
+
   const columnsPrev = [
     {
       title: 'Name',
       dataIndex: 'bookName',
       key: 'name',
+      width: '250px',
+      render: (value) => (
+        <Tooltip placement='top' title={value}>
+          <div className='overflow-text-custom'>{value}</div>
+        </Tooltip>
+      ),
     },
     {
       title: 'Reader',
@@ -53,11 +61,7 @@ function TableRequest({ data = '', loading }) {
       title: 'Request at',
       dataIndex: 'createdAt',
       key: 'createdAt',
-      render: (value) => (
-        <span className={`${!value && 'error-value'}`}>
-          {value || 'not update'}
-        </span>
-      ),
+      render: (value) => <span>{new Date(value).toLocaleString()}</span>,
     },
     {
       title: 'Return at',
@@ -65,47 +69,51 @@ function TableRequest({ data = '', loading }) {
       key: 'endedAt',
       render: (value) => (
         <span className={`${!value && 'error-value'}`}>
-          {value || 'not update'}
+          {value ? new Date(value).toLocaleString() : 'not update'}
         </span>
       ),
     },
     {
       title: 'Option',
       key: 'option',
-      render: (value) => (
-        <UnorderedListOutlined
-          onClick={() => {
-            setOpenModal(true);
-            setItem(value);
-          }}
-        />
-      ),
+      render: (value) => {
+        console.log(value);
+        return (
+          <BtnAntd
+            disabled={value.status === 'returned'}
+            icon={
+              <UnorderedListOutlined
+                onClick={() => {
+                  setOpenModal(true);
+                  setItem(value);
+                }}
+              />
+            }
+          />
+        );
+      },
     },
   ];
-  const [isLoading, setLoading] = useState(false);
   async function handleChangeStatus() {
-    setLoading(true);
-    const response = await axios.post(`${apiURL}/borrow/update`, {
+    updateStatusRequest({
       ...item,
       status: newStatus,
       endedAt: newStatus === 'returned' ? new Date().getTime() : item.endedAt,
     });
-    if (response.status === 200) {
-      setTimeout(() => {
-        setLoading(false);
-        toast.success('Update status Successfully', {
-          pauseOnHover: false,
-          autoClose: 1000,
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      }, 1000);
-    }
+    setOpenModal(false);
+    toast.success('Update status Successfully', {
+      pauseOnHover: false,
+      autoClose: 1000,
+    });
   }
   return (
     <>
-      <Table loading={loading} columns={columnsPrev} dataSource={data} />
+      <Table
+        pagination={{ pageSize: 7 }}
+        loading={loading}
+        columns={columnsPrev}
+        dataSource={data}
+      />
       <ReactModal
         isOpen={openModal}
         overlayClassName='modal-overlay fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center '

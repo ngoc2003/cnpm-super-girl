@@ -10,49 +10,61 @@ import Input from '../../components/Input';
 import MenuDropdown from '../../components/MenuDropdown';
 import Button from '../../components/Button';
 import { apiURL, TitleDocument } from '../../config/config';
+import {
+  useGetUserQuery,
+  useUpdateUserMutation,
+} from '../../stores/services/user';
+import { Spin } from 'antd';
+
+const sexs = [
+  { label: 'Male', key: 'Male' },
+  { label: 'Female', key: 'Female' },
+];
+
+const ethnics = [{ label: 'Kinh', key: 'Kinh' }];
 
 function UpdateUser() {
   const navigate = useNavigate();
   const { slug } = useParams();
-  const [data, setData] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [languages, setLanguages] = useState('');
-  const sexs = [
-    { label: 'Male', key: 'Male' },
-    { label: 'Female', key: 'Female' },
-  ];
-  const ethnics = [{ label: 'Kinh', key: 'Kinh' }];
+  const { data, isFetching } = useGetUserQuery(slug);
+  console.log(data);
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
 
-  const [language, setLanguage] = useState(data.language);
-  const [sex, setSex] = useState(data.sex || '');
-  const [image, setImage] = useState(data.image);
-  const [ethnic, setEthnic] = useState(data.ethnic || '');
+  const [languages, setLanguages] = useState('');
+
+  const [language, setLanguage] = useState('');
+  const [sex, setSex] = useState('');
+  const [image, setImage] = useState('');
+  const [ethnic, setEthnic] = useState('');
+
+  useEffect(() => {
+    if (data) {
+      setSex(data.sex);
+      setImage(data.image);
+      setEthnic(data.ethnic);
+      setLanguage(data.language);
+    }
+  }, [data]);
 
   const handleUpdateBook = async (values) => {
-    await axios.post(`${apiURL}/users/update`, {
+    updateUser({
       ...data,
       ...values,
       sex,
       language,
       image,
       ethnic,
-    });
-    toast.success('Update Employee Successfully', {
-      pauseOnHover: false,
-      autoClose: 1000,
-    });
-    setIsLoading(false);
-    setTimeout(() => {
+    }).then(() => {
+      toast.success('Update Employee Successfully', {
+        pauseOnHover: false,
+        autoClose: 1000,
+      });
       setTimeout(() => {
         navigate(`/staff/account/${data.role === 1 ? 'Employee' : 'Readers'}`);
       }, 1000);
     });
   };
   useEffect(() => {
-    async function fetchOneDoc() {
-      const response = await axios.get(`${apiURL}/users/${slug}`);
-      setData(response.data);
-    }
     async function fetchLanguageList() {
       const response = await axios.get(`${apiURL}/languages/all`);
       const dataTemp = response.data.map((item) => ({
@@ -63,25 +75,28 @@ function UpdateUser() {
     }
 
     fetchLanguageList();
-    fetchOneDoc();
     document.title = `${TitleDocument} | Update Employee`;
   }, []);
+
+  if (isFetching) {
+    return <Spin />;
+  }
+
   return (
     <div className='bg-lightGray  w-full'>
       <Formik
         initialValues={{
-          image: image || '', //
-          name: data.name, //
-          sex: data.sex || '',
-          ethnic: data.ethnic || '',
-          language: data.language || '',
-          cccd: data.cccd || '',
-          birth: data.birth || '',
-          location: data.location || '',
+          image: image,
+          name: data.name,
+          sex: sex,
+          ethnic: ethnic,
+          language: language,
+          cccd: data.cccd,
+          birth: data.birth,
+          location: data.location,
         }}
         onSubmit={(values) => {
           handleUpdateBook(values);
-          setIsLoading(true);
         }}
       >
         {({ errors, touched, setFieldValue }) => (

@@ -55,25 +55,27 @@ function Cart() {
               >
                 {t('cart', { count: cart.length })}
               </Typography.Text>
-              {cart.map((item) => (
-                <>
-                  <Space size='large' key={v4()}>
-                    <Layout className='h-[100px] '>
-                      <img
-                        src={item.image}
-                        className='h-full object-cover'
-                        alt=''
-                      />
-                    </Layout>
-                    <Layout>
-                      <h4 className='text-lg'>{item.name}</h4>
-                      <p className='text-sm'>{item.author}</p>
-                      <p className='text-xs text-darkGray'>x 1</p>
-                    </Layout>
-                  </Space>
-                  <hr className='my-5' />
-                </>
-              ))}
+              <Layout>
+                {cart.map((item) => (
+                  <>
+                    <Space size='large' key={v4()}>
+                      <Layout className='h-[100px] '>
+                        <img
+                          src={item.image}
+                          className='h-full object-cover'
+                          alt=''
+                        />
+                      </Layout>
+                      <Layout>
+                        <h4 className='text-lg'>{item.name}</h4>
+                        <p className='text-sm'>{item.author}</p>
+                        <p className='text-xs text-darkGray'>x 1</p>
+                      </Layout>
+                    </Space>
+                    <hr className='my-5' />
+                  </>
+                ))}
+              </Layout>
               <div className='flex gap-5'>
                 <Button to='/List' fluid>
                   {t('button.findNewBook')}

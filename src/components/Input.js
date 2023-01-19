@@ -15,7 +15,7 @@ export default function Input({
   const { error = '', placeholder, ...rest } = props;
 
   return isFile ? (
-    <div
+    <label
       className={`${
         props.className || ''
       } min-h-[250px] cursor-pointer flex items-center justify-center border border-dashed w-full rounded-lg  relative overflow-hidden group`}
@@ -27,11 +27,11 @@ export default function Input({
         <p className='font-semibold'>Choose photo</p>
         {url && (
           <div className='absolute inset-0 object-cover flex items-center justify-center'>
-            <img src={url || null} className='object-cover  h-full' alt='' />
+            <img src={url} className='object-cover  h-full' alt='' />
           </div>
         )}
       </div>
-    </div>
+    </label>
   ) : (
     <>
       <div

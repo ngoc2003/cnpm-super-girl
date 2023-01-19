@@ -3,18 +3,17 @@ import React, { useState } from 'react';
 import { Table } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { toast } from 'react-toastify';
-import { apiURL } from '../config/config';
 import Images from '../images/Images';
 import Button from './Button';
 import { t } from 'i18next';
+import { useDeleteUserMutation } from '../stores/services/user';
 
 function TableUser({ data, type = 'employee', loading }) {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  const [deleteUser, { isLoading }] = useDeleteUserMutation();
 
   const columnsPrev = [
     {
@@ -87,19 +86,18 @@ function TableUser({ data, type = 'employee', loading }) {
             }}
           />
           <EditOutlined
-            onClick={() => navigate(`/staff/account/User/update/${user._id}`)}
+            onClick={() => {
+              navigate(`/staff/account/User/update/${value._id}`);
+            }}
           />
         </span>
       ),
     },
   ];
   async function handleDeleteEmployee(value) {
-    setLoading(true);
-    await axios.post(`${apiURL}/users/delete`, {
+    deleteUser({
       _id: value._id,
-    });
-    setTimeout(() => {
-      setLoading(false);
+    }).then(() => {
       toast.success(`Delete ${type} Successfully`, {
         pauseOnHover: false,
         autoClose: 1000,
@@ -107,11 +105,16 @@ function TableUser({ data, type = 'employee', loading }) {
       setTimeout(() => {
         window.location.reload();
       }, 1000);
-    }, 1000);
+    });
   }
   return (
     <>
-      <Table columns={columnsPrev} loading={loading} dataSource={data} />
+      <Table
+        pagination={{ pageSize: 7 }}
+        columns={columnsPrev}
+        loading={loading}
+        dataSource={data}
+      />
       <ReactModal
         isOpen={openModal}
         overlayClassName='modal-overlay fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center '

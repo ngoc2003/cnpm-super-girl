@@ -1,24 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { apiURL } from '../../../config/config';
+import React from 'react';
 import Button from '../../../components/Button';
 import TableRequest from '../../../components/TableRequest';
+import { useGetAllRequestsQuery } from '../../../stores/services/request';
 
 function Request() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    async function fetchRequest() {
-      const requestsResponse = await axios.get(`${apiURL}/borrow/all`);
-      if (requestsResponse.status) {
-        setLoading(false);
-      }
-      setData(requestsResponse.data);
-    }
-    fetchRequest();
-  }, []);
-  console.log(data);
+  const { data, isFetching } = useGetAllRequestsQuery();
 
   return (
     <div className='bg-lightGray w-full'>
@@ -26,7 +12,7 @@ function Request() {
         <div className='mb-3 flex gap-3 justify-between'>
           <Button to={-1}>Back</Button>
         </div>
-        <TableRequest loading={loading} data={data} />
+        <TableRequest loading={isFetching} data={data} />
       </div>
     </div>
   );

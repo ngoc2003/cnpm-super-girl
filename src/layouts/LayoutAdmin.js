@@ -16,7 +16,7 @@ function LayoutAdmin() {
     <>
       <Header />
       <hr />
-      <Layout className='bg-white md:min-h-screen overflow-hidden '>
+      <Layout className='md:min-h-screen overflow-hidden '>
         <Sider className='bg-white'>
           <Layout className='py-5 text-center'>
             <img

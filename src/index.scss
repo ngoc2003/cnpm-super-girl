@@ -46,9 +46,20 @@
       @apply absolute bg-black h-4 w-20 bottom-8 right-0;
     }
   }
+  .overflow-text-custom {
+    white-space: pre-line;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 .ant-layout {
   @apply bg-transparent;
+}
+.ant-tooltip-inner {
+  font-size: 10px;
 }
 .ant-tabs-tab {
   background-color: transparent !important;

@@ -2,18 +2,21 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ReactModal from 'react-modal';
-import axios from 'axios';
 import Book from '../components/Book/Book';
 import Button from '../components/Button';
-import { apiURL } from '../config/config';
 import { bookActions } from '../stores/slices/book';
 import i18n from '../services/i18n';
+import { useAddRequestMutation } from '../stores/services/request';
+import Images from '../images/Images';
+import { Typography } from 'antd';
+import { toast } from 'react-toastify';
 
 function OrderPage() {
   const orders = useSelector((state) => state.book);
   const { user } = useSelector((state) => state.auth);
   const [open, setOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const [addRequest, { isLoading }] = useAddRequestMutation();
   const dispatch = useDispatch();
   if (!user) {
     return (
@@ -29,18 +32,37 @@ function OrderPage() {
     setOpen(true);
   }
   async function handleOrderSubmit() {
-    for (let i = 0; i < orders.length; i += 1) {
-      await axios.post(`${apiURL}/borrow/create`, {
-        userId: user._id,
-        bookId: orders[i]._id,
-        bookName: orders[i].name,
-        userName: user.name,
+    const arr = orders.map((order) => ({
+      userId: user._id,
+      bookId: order._id,
+      bookName: order.name,
+      userName: user.name,
+    }));
+    if (arr.length) {
+      addRequest(arr).then(() => {
+        toast.success('Success', {
+          pauseOnHover: false,
+          autoClose: 1000,
+        });
+        dispatch(bookActions.clear());
       });
     }
-    dispatch(bookActions.clear());
-    setIsLoading(false);
-    window.location.replace('/Library');
   }
+  if (!orders.length) {
+    return (
+      <div className='h-[90vh] gap-5 flex items-center justify-center flex-col p-6'>
+        <img src={Images.empty} className='w-full max-w-[400px]' alt='' />
+        <Typography>{i18n.t('yourOrder', { count: orders.length })}</Typography>
+        <div className='flex gap-5'>
+          <Button primary to='/Library'>
+            {i18n.t('button.findNewBook')}
+          </Button>
+          <Button to='/List'>My List Request</Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className='bg-lightGray p-5'>
@@ -48,9 +70,14 @@ function OrderPage() {
           <h4 className='text-xl'>
             {i18n.t('yourOrder', { count: orders.length })}
           </h4>
-          <Button onClick={handleOrder} primary>
-            {i18n.t('button.orderNow')}
-          </Button>
+          <div className='flex gap-5'>
+            <Button onClick={handleOrder} primary>
+              {i18n.t('button.orderNow')}
+            </Button>
+            <Button to='/List' primary>
+              My List Request
+            </Button>
+          </div>
         </div>
         <hr className='my-3' />
         <div className='grid grid-cols-5 gap-5'>
