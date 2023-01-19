@@ -9,6 +9,9 @@ import { apiURL } from '../config/config';
 import Review from './bookDetail/review/Review';
 import { bookActions } from '../stores/slices/book';
 import Button from '../components/Button';
+import { Interweave } from 'interweave';
+import { EMPTY_VALUE } from '../constants';
+import { t } from 'i18next';
 
 function BookDetail() {
   const { user } = useSelector((state) => state.auth);
@@ -25,7 +28,7 @@ function BookDetail() {
   }, []);
 
   if (!data) {
-    return <div />;
+    return <div></div>;
   }
 
   function handleAddCart() {
@@ -33,7 +36,6 @@ function BookDetail() {
       toast.error('You need to log in to use this feature!', {
         pauseOnHover: false,
         autoClose: 1000,
-        progressClassName: 'bg-error',
       });
     } else {
       dispatch(
@@ -47,13 +49,13 @@ function BookDetail() {
   return (
     <>
       <div className='flex justify-between gap-5'>
-        <Button to={-1}>Back</Button>
+        <Button to={-1}>{t('button.back')}</Button>
       </div>
       <div className='grid grid-cols-4 gap-10 bg-lightGray py-10 px-5'>
         <div className='text-center'>
           <img
             className='mx-auto box-shadow-creative-large mb-5'
-            src={data.image || Images.logo}
+            src={data.image ?? Images.logo}
             alt=''
           />
           <div className='flex items-center justify-center gap-5'>
@@ -68,7 +70,8 @@ function BookDetail() {
           <p className='italic'>
             by <span className='text-blue-400'>{data.author}</span>{' '}
           </p>
-          <p>{data.description}</p>
+          <p>{EMPTY_VALUE}</p>
+          <Interweave content={data.description}></Interweave>
           <hr className='my-5' />
 
           <Review id={data._id} />

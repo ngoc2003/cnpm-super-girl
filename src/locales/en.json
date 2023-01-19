@@ -1,4 +1,7 @@
 {
+  "logoName": "TLU LIBRARY",
+  "schoolName": "TRƯỜNG ĐẠI HỌC THUỶ LỢI",
+  "schoolName_english": "THUY LOI UNIVERSITY",
   "signIn": "Sign In",
   "signUp": "Sign Up",
   "signInToUseThisPage": "Please sign in to access this page!",
@@ -18,12 +21,15 @@
     "addNew": "Add new",
     "list": "List {{item}}",
     "orderNow": "Order now!",
-    "findNewBook": "Find new book!"
+    "findNewBook": "Find new book!",
+    "signIn": "Sign In",
+    "logOut": "Log Out"
   },
   "title": {
     "update": "Update {{item}}",
     "add": "Add {{item}}",
-    "delete": "Delete {{item}}"
+    "delete": "Delete {{item}}",
+    "membersOfTeam": "MEMBERS OF TEAMS"
   },
   "question": {
     "areYouSureTo": "Are you sure to {{action}} ?"
@@ -50,5 +56,17 @@
     "publishYear": "Publish year",
     "edition": "Edition",
     "description": "Description"
+  },
+  "role": {
+    "management": "Management",
+    "anonymous": "Anonymous",
+    "coder": "Coder",
+    "designer": "Designer"
+  },
+  "contact": {
+    "email": "tlulib@readbook.com",
+    "website": "www.tlulib.com",
+    "phoneNumber": "123456789",
+    "address": "175 Tay Son St, Dong Da, Ha Noi"
   }
 }

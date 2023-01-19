@@ -4,10 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 import headerData from '../../data/headerData';
 import Images from '../../images/Images';
 import Cart from '../../components/cart/Cart';
+import { useTranslation } from 'react-i18next';
 
 function Header() {
   const { pathname } = useLocation();
   const { user } = useSelector((state) => state.auth);
+  const { t } = useTranslation();
 
   return (
     <div className='container '>
@@ -22,10 +24,8 @@ function Header() {
             <img className='h-[4rem]' src={Images.logo} alt='' />
           </Link>
           <div className='flex flex-col items-start justify-center px-1 '>
-            <h4 className='font-semibold text-primary'>
-              TRƯỜNG ĐẠI HỌC THUỶ LỢI
-            </h4>
-            <h4 className='text-sm'>THUY LOI UNIVERSITY</h4>
+            <h4 className='font-semibold text-primary'>{t('schoolName')}</h4>
+            <h4 className='text-sm'>{t('schoolName_english')}</h4>
           </div>
         </div>
         <div className='flex-1  max-w-[600px] flex justify-between'>
