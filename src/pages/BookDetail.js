@@ -47,7 +47,7 @@ function BookDetail() {
   return (
     <>
       <div className='flex justify-between gap-5'>
-        <Button to='/Library'>Back</Button>
+        <Button to={-1}>Back</Button>
       </div>
       <div className='grid grid-cols-4 gap-10 bg-lightGray py-10 px-5'>
         <div className='text-center'>

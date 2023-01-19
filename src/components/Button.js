@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Button({
   type = 'button',
@@ -14,6 +15,8 @@ function Button({
   onClick = () => {},
   ...rest
 }) {
+  const navigate = useNavigate();
+  const handleNavigate = () => navigate(to);
   const child = isLoading ? (
     <div className='w-8 h-8 border-4 border-white rounded-full border-t-transparent animate-spin' />
   ) : (
@@ -42,9 +45,10 @@ function Button({
     </button>
   );
   return to ? (
-    <a className='block w-full' href={to}>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div className='block w-full' onClick={handleNavigate}>
       {btn}
-    </a>
+    </div>
   ) : (
     btn
   );
