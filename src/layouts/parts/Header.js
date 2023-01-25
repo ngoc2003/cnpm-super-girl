@@ -5,6 +5,7 @@ import headerData from '../../data/headerData';
 import Images from '../../images/Images';
 import Cart from '../../components/cart/Cart';
 import { useTranslation } from 'react-i18next';
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 function Header() {
   const { pathname } = useLocation();
@@ -50,6 +51,7 @@ function Header() {
           )}
         </div>
       </div>
+      <MessengerCustomerChat pageId='100004372907257' appId='676267860854006' />
     </div>
   );
 }

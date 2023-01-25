@@ -43,6 +43,7 @@
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11",
     "scrollreveal": "^4.0.9",
+    "react-messenger-customer-chat": "^0.8.0",
     "redux-persist": "^6.0.0",
     "@types/redux-logger": "^3.0.9",
     "react-i18next": "^11.14.3",
