@@ -6,6 +6,7 @@ import { Spin } from 'antd';
 import { apiURL } from '../config/config';
 import Search from '../components/Search';
 import Book from '../components/Book/Book';
+import useCallbackDebounce from '../hooks/useCallbackDebounce';
 
 function LibraryPage() {
   const [books, setBooks] = useState({});
@@ -39,7 +40,7 @@ function LibraryPage() {
     fetchData();
   }, [searchValue]);
 
-  function handleSearch() {
+  const handleSearch = useCallbackDebounce(() => {
     setData(
       books.length
         ? books.filter((item) => {
@@ -54,7 +55,7 @@ function LibraryPage() {
           })
         : [],
     );
-  }
+  });
 
   function handleChange(e) {
     if (e.key === 'Enter') {

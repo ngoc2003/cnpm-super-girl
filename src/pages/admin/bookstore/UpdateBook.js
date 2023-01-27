@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Formik, Form } from 'formik';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Formik, Form, Field } from 'formik';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -9,17 +9,18 @@ import ImageUpload from '../../../utils/ImageUpload';
 import Input from '../../../components/Input';
 import MenuDropdown from '../../../components/MenuDropdown';
 import Button from '../../../components/Button';
+import ReactQuill from 'react-quill';
 import { apiURL, TitleDocument } from '../../../config/config';
-import TextAreaInput from '../../../components/TextAreaInput';
 import {
   useGetBookQuery,
   useUpdateBookMutation,
 } from '../../../stores/services/book';
+import { Spin } from 'antd';
+import { t } from 'i18next';
 
 function UpdateBook() {
   const { slug } = useParams();
-  const { data } = useGetBookQuery(slug);
-  console.log(data);
+  const { data, isFetching } = useGetBookQuery(slug);
   const [updateBook, { isLoading }] = useUpdateBookMutation();
   const navigate = useNavigate();
 
@@ -57,6 +58,23 @@ function UpdateBook() {
       });
   };
 
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['blockquote'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+          ['link'],
+          [{ color: ['#FFFFFF', '#e60000', '#000'] }],
+          ['code-block'],
+        ],
+      },
+    }),
+    [],
+  );
+
   useEffect(() => {
     async function fetchLanguageList() {
       const response = await axios.get(`${apiURL}/languages/all`);
@@ -88,8 +106,13 @@ function UpdateBook() {
     fetchTypeList();
     document.title = `${TitleDocument} | Update`;
   }, []);
-  if (!data) {
-    return;
+
+  if (isFetching) {
+    return (
+      <div className='flex w-full h-[80vh] items-center justify-center'>
+        <Spin />;
+      </div>
+    );
   }
 
   return (
@@ -233,17 +256,21 @@ function UpdateBook() {
                 />
               </FormGroup>
               <FormGroup>
-                <Label>Description</Label>
-                <TextAreaInput
-                  defaultValue={data.description || ''}
-                  onChange={(e) => setFieldValue('description', e.target.value)}
-                  error={
-                    errors.description && touched.description
-                      ? errors.description
-                      : ''
-                  }
-                  placeholder='Description'
-                />
+                <Label>{t('label.description')}</Label>
+                <Field name='description'>
+                  {({ field }) => (
+                    <div>
+                      <ReactQuill
+                        defaultValue={data.description}
+                        theme='snow'
+                        modules={modules}
+                        value={field.value}
+                        onChange={field.onChange(field.name)}
+                        placeholder={t('placeholder.description')}
+                      />
+                    </div>
+                  )}
+                </Field>
               </FormGroup>
             </div>
             <div className='flex gap-5'>
