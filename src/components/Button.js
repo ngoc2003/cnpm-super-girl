@@ -12,6 +12,7 @@ function Button({
   fluid = false,
   isLoading = false,
   transparent = false,
+  green = false,
   onClick = () => {},
   ...rest
 }) {
@@ -35,6 +36,8 @@ function Button({
           ? 'bg-white text-secondary'
           : transparent
           ? 'bg-transparent text-primary'
+          : green
+          ? 'bg-green text-white'
           : ''
       } ${isLoading && 'pointer-events-none opacity-50'} ${
         fluid && 'w-full'

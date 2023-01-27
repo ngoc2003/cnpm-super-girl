@@ -12,13 +12,13 @@ function Header() {
   const { t } = useTranslation();
 
   return (
-    <div className='container '>
+    <div className='py-4 px-10 '>
       {user?.role === 1 && (
-        <div className='inline-block float-right px-1 text-xs bg-lightGray text-darkGray '>
-          Staff
+        <div className='text-right  '>
+          <span className='p-1 text-xs bg-lightGray text-darkGray'>Staff</span>
         </div>
       )}
-      <div className='flex items-center justify-between clear-both'>
+      <div className='flex items-center gap-10 justify-between w-full'>
         <div className='flex items-center'>
           <Link to='/'>
             <img className='h-[4rem]' src={Images.logo} alt='' />
@@ -28,7 +28,7 @@ function Header() {
             <h4 className='text-sm'>{t('schoolName_english')}</h4>
           </div>
         </div>
-        <div className='flex-1  max-w-[600px] flex justify-between'>
+        <div className='flex-1 flex items-center gap-10 justify-end '>
           {headerData.map((item) => {
             const active = pathname === item.url;
             return (
