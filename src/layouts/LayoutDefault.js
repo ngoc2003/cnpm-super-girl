@@ -7,6 +7,7 @@ import Header from './parts/Header';
 import { handleLogout } from '../stores/thunk/auth';
 import Footer from './parts/Footer';
 import { Tooltip } from 'antd';
+import Topbar from './parts/Topbar';
 
 function LayoutDefault() {
   const { user } = useSelector((state) => state.auth);
@@ -39,6 +40,7 @@ function LayoutDefault() {
       </div>
       <div className='flex-1'>
         <Header />
+        <Topbar />
         <Outlet />
         <Footer />
       </div>
