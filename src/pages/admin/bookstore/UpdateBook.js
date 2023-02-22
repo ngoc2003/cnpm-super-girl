@@ -109,7 +109,7 @@ function UpdateBook() {
 
   if (isFetching) {
     return (
-      <div className='flex w-full h-[80vh] items-center justify-center'>
+      <div className='w-full flex w-full h-[80vh] items-center justify-center'>
         <Spin />;
       </div>
     );

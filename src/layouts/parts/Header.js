@@ -43,10 +43,19 @@ function Header() {
               </Link>
             );
           })}
-          {user?.role !== 1 && (
+          {user && user?.role !== 1 ? (
             <span className='text-xl text-primary'>
               <Cart />
             </span>
+          ) : user?.role == 1 ? (
+            ''
+          ) : (
+            <Link
+              to='/sign-in'
+              className='bg-primary text-white py-2 px-4 rounded-[20px] hover:text-white hover:bg-opacity-50 duration-150'
+            >
+              Sign In
+            </Link>
           )}
         </div>
       </div>

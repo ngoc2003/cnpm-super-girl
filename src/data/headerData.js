@@ -4,17 +4,17 @@ const headerData = [
     url: '/',
   },
   {
-    title: 'Help',
-    url: '/Help',
+    title: 'About',
+    url: '/About',
   },
   {
     title: 'Library',
     url: '/Library',
   },
-  {
-    title: 'Event',
-    url: '/Event',
-  },
+  // {
+  //   title: 'Help',
+  //   url: '/Help',
+  // },
 ];
 
 export default headerData;

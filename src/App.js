@@ -1,26 +1,28 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Spin } from 'antd';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+
+import AboutPage from './pages/AboutPage';
+import ListRequest from './pages/ListRequest';
+import OrderPage from './pages/OrderPage';
+import BookDetail from './pages/BookDetail';
+import HomePageUser from './pages/HomePageUser';
+import LibraryPage from './pages/LibraryPage';
+import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
 
 const LayoutAdmin = lazy(() => import('./layouts/LayoutAdmin'));
 const LayoutAuthen = lazy(() => import('./layouts/LayoutAuthen'));
 const LayoutDefault = lazy(() => import('./layouts/LayoutDefault'));
-const Staff = lazy(() => import('./pages/admin/Staff'));
 const HomePageStaff = lazy(() => import('./pages/HomePageStaff'));
-const HomePageUser = lazy(() => import('./pages/HomePageUser'));
-const SignInPage = lazy(() => import('./pages/SignInPage'));
-const SignUpPage = lazy(() => import('./pages/SignUpPage'));
-const BookDetail = lazy(() => import('./pages/BookDetail'));
-const OrderPage = lazy(() => import('./pages/OrderPage'));
-const ListRequest = lazy(() => import('./pages/ListRequest'));
-const EventPage = lazy(() => import('./pages/EventPage'));
 // Admin
+const Staff = lazy(() => import('./pages/admin/Staff'));
 const Bookstore = lazy(() => import('./pages/admin/bookstore'));
 const AddBook = lazy(() => import('./pages/admin/bookstore/AddBook'));
 const ListBook = lazy(() => import('./pages/admin/bookstore/ListBook'));
 const UpdateBook = lazy(() => import('./pages/admin/bookstore/UpdateBook'));
-const LibraryPage = lazy(() => import('./pages/LibraryPage'));
 const Reader = lazy(() => import('./pages/admin/reader'));
 const Request = lazy(() => import('./pages/admin/request'));
 const Statistic = lazy(() => import('./pages/admin/statistic'));
@@ -30,6 +32,7 @@ const AddEmloyee = lazy(() => import('./pages/admin/employee/AddEmloyee'));
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
   const user = useSelector((state) => state.auth);
   useEffect(() => {
     if (!user) {
@@ -44,48 +47,53 @@ function App() {
 
   return (
     <Suspense fallback={<Spin />}>
-      <Routes>
-        <Route element={<LayoutAuthen />}>
-          <Route path='/sign-in' element={<SignInPage />} />
-          <Route path='/sign-up' element={<SignUpPage />} />
-        </Route>
-        {/* default */}
-        <Route element={<LayoutDefault />}>
-          <Route path='/' element={<HomePageUser />} />
-          <Route path='/Library' element={<LibraryPage />} />
-          <Route path='/Order' element={<OrderPage />} />
-          <Route path='/staff' element={<HomePageStaff />} />
-          <Route path='/Library/:slug' element={<BookDetail />} />
-          <Route path='/List' element={<ListRequest id={user._id} />} />
-          <Route path='/Event' element={<EventPage />} />
-          <Route path='*' element={<HomePageUser />} />
-        </Route>
-        {/* admin */}
-        <Route element={<LayoutAdmin />}>
-          <Route path='/staff/account' element={<Staff />} />
-          <Route path='/staff/account/Bookstore' element={<Bookstore />} />
-          <Route path='/staff/account/Bookstore/add' element={<AddBook />} />
-          <Route path='/staff/account/Bookstore/all' element={<ListBook />} />
-          <Route
-            path='/staff/account/Bookstore/update/:slug'
-            element={<UpdateBook />}
-          />
-          {/* Employee */}
-          <Route path='/staff/account/Employee' element={<Employee />} />
-          <Route path='/staff/account/Employee/add' element={<AddEmloyee />} />
-          <Route
-            path='/staff/account/User/update/:slug'
-            element={<UpdateUser />}
-          />
-          {/* Reader */}
-          <Route path='/staff/account/Readers' element={<Reader />} />
-          <Route path='/staff/account/*' element={<Staff />} />
-          {/* Request */}
-          <Route path='/staff/account/Request' element={<Request />} />
-          {/* Statistic */}
-          <Route path='/staff/account/Statistic' element={<Statistic />} />
-        </Route>
-      </Routes>
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          <Route element={<LayoutAuthen />}>
+            <Route path='/sign-in' element={<SignInPage />} />
+            <Route path='/sign-up' element={<SignUpPage />} />
+          </Route>
+          {/* default */}
+          <Route element={<LayoutDefault />}>
+            <Route path='/' element={<HomePageUser />} />
+            <Route path='/Library' element={<LibraryPage />} />
+            <Route path='/Order' element={<OrderPage />} />
+            <Route path='/staff' element={<HomePageStaff />} />
+            <Route path='/Library/:slug' element={<BookDetail />} />
+            <Route path='/List' element={<ListRequest id={user._id} />} />
+            <Route path='/About' element={<AboutPage />} />
+            <Route path='*' element={<HomePageUser />} />
+          </Route>
+          {/* admin */}
+          <Route element={<LayoutAdmin />}>
+            <Route path='/staff/account' element={<Staff />} />
+            <Route path='/staff/account/Bookstore' element={<Bookstore />} />
+            <Route path='/staff/account/Bookstore/add' element={<AddBook />} />
+            <Route path='/staff/account/Bookstore/all' element={<ListBook />} />
+            <Route
+              path='/staff/account/Bookstore/update/:slug'
+              element={<UpdateBook />}
+            />
+            {/* Employee */}
+            <Route path='/staff/account/Employee' element={<Employee />} />
+            <Route
+              path='/staff/account/Employee/add'
+              element={<AddEmloyee />}
+            />
+            <Route
+              path='/staff/account/User/update/:slug'
+              element={<UpdateUser />}
+            />
+            {/* Reader */}
+            <Route path='/staff/account/Readers' element={<Reader />} />
+            <Route path='/staff/account/*' element={<Staff />} />
+            {/* Request */}
+            <Route path='/staff/account/Request' element={<Request />} />
+            {/* Statistic */}
+            <Route path='/staff/account/Statistic' element={<Statistic />} />
+          </Route>
+        </Routes>
+      </AnimatePresence>
     </Suspense>
   );
 }

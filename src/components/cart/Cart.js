@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { v4 } from 'uuid';
-import { Link } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import Button from '../Button';
 import { Typography, Layout, Space } from 'antd';
@@ -10,7 +9,6 @@ import Images from '../../images/Images';
 import { t } from 'i18next';
 
 function Cart() {
-  const { user } = useSelector((state) => state.auth);
   const [show, setShow] = useState(false);
   const cart = useSelector((state) => state.book);
 
@@ -33,11 +31,7 @@ function Cart() {
         >
           <Layout className='h-2 w-full clear-both' />
 
-          {!user ? (
-            <Link to='/sign-in' className=' p-2 text-darkGray'>
-              {t('signInToAccessCart')}
-            </Link>
-          ) : !cart.length ? (
+          {!cart.length ? (
             <>
               <img src={Images.empty} alt='' />
               <Typography className='italic p-3 text-center'>
@@ -78,7 +72,7 @@ function Cart() {
               </Layout>
               <div className='flex gap-5'>
                 <Button to='/List' fluid>
-                  {t('button.findNewBook')}
+                  {t('button.orderHistory')}
                 </Button>
                 <Button to='/Order' primary fluid>
                   {t('button.orderNow')}

@@ -1,8 +1,11 @@
-import { Col, Layout, Row } from 'antd';
+import { Col, Row, Card } from 'antd';
 import Paragraph from 'antd/lib/typography/Paragraph';
 import React from 'react';
 import Images from '../images/Images';
 import { v4 } from 'uuid';
+import MotionDefault from '../layouts/motions/MotionDefault';
+const { Meta } = Card;
+
 const MOCK_BLOG = [
   {
     image: Images.event1,
@@ -22,9 +25,9 @@ const MOCK_BLOG = [
   },
 ];
 
-const EventPage = () => {
+const AboutPage = () => {
   return (
-    <Layout className='flex flex-col gap-5 bg-white'>
+    <MotionDefault className='flex flex-col gap-5 bg-white'>
       <Row>
         <Col span={12}>
           <img src={Images.event1} className='h-full' alt='' />
@@ -42,25 +45,29 @@ const EventPage = () => {
           </Paragraph>
         </Col>
       </Row>
-      <Row gutter={10}>
+      <Row className='p-6'>
         {MOCK_BLOG.map((item) => (
-          <Col key={v4()} span={6}>
-            <img
-              src={item.image}
-              className='h-[200px] w-full object-cover'
-              alt=''
-            />
-            <Paragraph
-              italic
-              className='hover:text-blue-600 font-light p-1 hover:underline cursor-pointer'
+          <Col key={v4()} span={12} className='p-6'>
+            <Card
+              hoverable
+              cover={
+                <img
+                  src={item.image}
+                  className='h-[200px] w-full object-cover'
+                  alt=''
+                />
+              }
             >
-              {item.text}
-            </Paragraph>
+              <Meta
+                className='font-light p-1 cursor-pointer'
+                description={item.text}
+              />
+            </Card>
           </Col>
         ))}
       </Row>
-    </Layout>
+    </MotionDefault>
   );
 };
 
-export default EventPage;
+export default AboutPage;

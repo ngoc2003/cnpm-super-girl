@@ -7,6 +7,7 @@ import { apiURL } from '../config/config';
 import Search from '../components/Search';
 import Book from '../components/Book/Book';
 import useCallbackDebounce from '../hooks/useCallbackDebounce';
+import MotionDefault from '../layouts/motions/MotionDefault';
 
 function LibraryPage() {
   const [books, setBooks] = useState({});
@@ -64,35 +65,41 @@ function LibraryPage() {
       setSearchValue(e.target.value);
     }
   }
-  return loading ? (
-    <div className='flex items-center justify-center h-[80vh]'>
-      <Spin />
-    </div>
-  ) : (
-    <div>
-      <div className='bg-lightGray px-5 py-5'>
-        <div className='flex items-center rounded-xl justify-between w-full gap-5 mb-5'>
-          <h4 className='text-xl font-semibold'>Search tools</h4>
-          <div className='flex-1'>
-            <Search
-              defaultValue={value}
-              onClick={handleSearch}
-              onKeyUp={handleChange}
-              max={false}
-            />
+  return (
+    <MotionDefault>
+      {loading ? (
+        <div className='flex items-center justify-center w-full h-[80vh]'>
+          <Spin />
+        </div>
+      ) : (
+        <div>
+          <div className='bg-lightGray px-5 py-5'>
+            <div className='flex items-center rounded-xl justify-between w-full gap-5'>
+              <h4 className='text-xl font-semibold'>Search tools</h4>
+              <div className='flex-1'>
+                <Search
+                  defaultValue={value}
+                  onClick={handleSearch}
+                  onKeyUp={handleChange}
+                  max={false}
+                />
+              </div>
+            </div>
+          </div>
+          <div className='px-10'>
+            <div className='text-2xl text-primary font-semibold py-5 '>
+              {data.length} books has been founded!
+            </div>
+            <div className='grid grid-cols-5 mr-5 gap-5'>
+              {!!data.length &&
+                data.map((item) => (
+                  <Book to={`/Library/${item._id}`} data={item} key={v4()} />
+                ))}
+            </div>
           </div>
         </div>
-      </div>
-      <div className='text-2xl text-primary font-semibold py-5 '>
-        {data.length} books has been founded!
-      </div>
-      <div className='grid grid-cols-5 mr-5 gap-5'>
-        {!!data.length &&
-          data.map((item) => (
-            <Book to={`/Library/${item._id}`} data={item} key={v4()} />
-          ))}
-      </div>
-    </div>
+      )}
+    </MotionDefault>
   );
 }
 

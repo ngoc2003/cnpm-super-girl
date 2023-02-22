@@ -10,6 +10,7 @@ import { useAddRequestMutation } from '../stores/services/request';
 import Images from '../images/Images';
 import { Typography } from 'antd';
 import { toast } from 'react-toastify';
+import MotionDefault from '../layouts/motions/MotionDefault';
 
 function OrderPage() {
   const orders = useSelector((state) => state.book);
@@ -64,9 +65,9 @@ function OrderPage() {
   }
 
   return (
-    <div>
-      <div className='bg-lightGray p-5'>
-        <div className='flex justify-between gap-5'>
+    <MotionDefault>
+      <div className='bg-lightGray px-10 py-5'>
+        <div className='flex justify-between items-center gap-5'>
           <h4 className='text-xl'>
             {i18n.t('yourOrder', { count: orders.length })}
           </h4>
@@ -110,7 +111,7 @@ function OrderPage() {
           </Button>
         </div>
       </ReactModal>
-    </div>
+    </MotionDefault>
   );
 }
 
