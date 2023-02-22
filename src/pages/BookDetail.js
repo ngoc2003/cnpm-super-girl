@@ -1,34 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { HeartOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Images from '../images/Images';
-import { apiURL } from '../config/config';
 import Review from './bookDetail/review/Review';
 import { bookActions } from '../stores/slices/book';
 import Button from '../components/Button';
 import { Interweave } from 'interweave';
 import { EMPTY_VALUE } from '../constants';
-import { t } from 'i18next';
+import { useGetBookQuery } from '../stores/services/book';
+import { Spin } from 'antd';
+import MotionDefault from '../layouts/motions/MotionDefault';
 
 function BookDetail() {
   const { user } = useSelector((state) => state.auth);
   const { slug } = useParams();
   const dispatch = useDispatch();
-  const [data, setData] = useState();
+  const { data, isFetching } = useGetBookQuery(slug);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await axios.get(`${apiURL}/books/${slug}`);
-      setData(response.data);
-    }
-    fetchData();
-  }, []);
-
-  if (!data) {
-    return <div></div>;
+  if (isFetching) {
+    return (
+      <div className='flex items-center justify-center min-h-[80vh] w-full'>
+        <Spin />
+      </div>
+    );
   }
 
   function handleAddCart() {
@@ -47,10 +43,7 @@ function BookDetail() {
   }
 
   return (
-    <>
-      <div className='flex justify-between gap-5'>
-        <Button to={-1}>{t('button.back')}</Button>
-      </div>
+    <MotionDefault>
       <div className='grid grid-cols-4 gap-10 bg-lightGray py-10 px-5'>
         <div className='text-center'>
           <img
@@ -77,7 +70,7 @@ function BookDetail() {
           <Review id={data._id} />
         </div>
       </div>
-    </>
+    </MotionDefault>
   );
 }
 

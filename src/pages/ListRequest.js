@@ -58,11 +58,15 @@ function ListRequest() {
     return <Navigate to='/sign-in' />;
   }
   if (isFetching) {
-    return <Spin />;
+    return (
+      <div className='w-full flex items-center justify-center min-h-[80vh]'>
+        <Spin />
+      </div>
+    );
   }
 
   return (
-    <>
+    <div className='px-10'>
       <div className='text-2xl text-primary font-semibold py-5 '>
         {data.length} books have been founded!
       </div>
@@ -75,7 +79,7 @@ function ListRequest() {
         columns={columnsPrev}
         dataSource={data}
       />
-    </>
+    </div>
   );
 }
 

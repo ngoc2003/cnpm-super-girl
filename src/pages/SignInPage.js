@@ -24,6 +24,7 @@ function SignInPage() {
       } else navigate('/');
     }
   }, [navigate, user]);
+
   const handleSignIn = () => {
     setLoading(true);
     if (!email || !password) {

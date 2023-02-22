@@ -1,8 +1,8 @@
 import React from 'react';
-import Hero from './homepage/Hero';
+import { Navigate } from 'react-router-dom';
 
 function HomePageStaff() {
-  return <Hero />;
+  return <Navigate to='./account' />;
 }
 
 export default HomePageStaff;

@@ -1,26 +1,29 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Images from '../../../images/Images';
 import upcomingData from '../../../data/upcomingData';
 
 function Upcoming() {
-  const upComingRef = useRef(null);
+  // const upComingRef = useRef(null);
 
-  useEffect(() => {
-    const animate = async () => {
-      if (upComingRef.current) {
-        const ScrollReveal = (await import('scrollreveal')).default;
-        ScrollReveal().reveal(upComingRef.current, {
-          delay: 300,
-          distance: '100px',
-          origin: 'top',
-        });
-      }
-    };
-    animate();
-  }, []);
+  // useEffect(() => {
+  //   const animate = async () => {
+  //     if (upComingRef.current) {
+  //       const ScrollReveal = (await import('scrollreveal')).default;
+  //       ScrollReveal().reveal(upComingRef.current, {
+  //         delay: 300,
+  //         distance: '100px',
+  //         origin: 'top',
+  //       });
+  //     }
+  //   };
+  //   animate();
+  // }, []);
 
   return (
-    <div ref={upComingRef} className='grid grid-cols-3 gap-5 pr-10'>
+    <div
+      // ref={upComingRef}
+      className='grid grid-cols-3 gap-5 pr-10'
+    >
       <img src={Images.upcomingEvents} className='col-span-2 w-full' alt='' />
       <div>
         <h4 className='text-center text-primary text-3xl font-semibold mb-8'>

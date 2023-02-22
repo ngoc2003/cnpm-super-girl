@@ -1,31 +1,31 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { v4 } from 'uuid';
 import quickLinksData from '../../../data/quickLinksData';
 import Images from '../../../images/Images';
 
 function QuickkLinks() {
-  const containerRef = useRef();
-  useEffect(() => {
-    const animate = async () => {
-      if (containerRef.current) {
-        const ScrollReveal = (await import('scrollreveal')).default;
-        ScrollReveal().reveal(containerRef.current, {
-          delay: 500,
-          origin: 'top',
-          distance: '64px',
-        });
-        ScrollReveal().reveal('.reveal-item', {
-          delay: 650,
-          interval: 50,
-          distance: '64px',
-        });
-      }
-    };
-    animate();
-  }, []);
+  // const containerRef = useRef();
+  // useEffect(() => {
+  //   const animate = async () => {
+  //     if (containerRef.current) {
+  //       const ScrollReveal = (await import('scrollreveal')).default;
+  //       ScrollReveal().reveal(containerRef.current, {
+  //         delay: 500,
+  //         origin: 'top',
+  //         distance: '64px',
+  //       });
+  //       ScrollReveal().reveal('.reveal-item', {
+  //         delay: 650,
+  //         interval: 50,
+  //         distance: '64px',
+  //       });
+  //     }
+  //   };
+  //   animate();
+  // }, []);
   return (
     <div
-      ref={containerRef}
+      // ref={containerRef}
       className='w-full relative flex flex-col items-center '
     >
       <img src={Images.quickLinks} className='w-full' alt='' />

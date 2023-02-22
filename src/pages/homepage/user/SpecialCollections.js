@@ -1,31 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import specialCollectionsData from '../../../data/specialCollectionsData';
 
 function SpecialCollections() {
-  const linksRef = useRef(null);
-
-  useEffect(() => {
-    const animate = async () => {
-      if (linksRef.current) {
-        const ScrollReveal = (await import('scrollreveal')).default;
-        ScrollReveal().reveal('.header-links', {
-          delay: 500,
-          distance: '300px',
-          origin: 'top',
-        });
-        ScrollReveal().reveal('.header-links-item', {
-          delay: 700,
-          interval: 300,
-          origin: 'left',
-          distance: '300px',
-        });
-      }
-    };
-    animate();
-  }, []);
-
   return (
-    <div ref={linksRef} className='text-center p-10'>
+    <div className='text-center p-10'>
       <h4 className='header-links text-primary font-bold text-2xl'>
         Our Special
       </h4>

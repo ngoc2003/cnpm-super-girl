@@ -4,6 +4,7 @@ import Button from '../../../components/Button';
 import { useGetReadersQuery } from '../../../stores/services/reader';
 import { Spin } from 'antd';
 import exportUsersToExcel from '../../../utils/exportExcel';
+import { t } from 'i18next';
 const workSheetColumnName = [
   'STT',
   'Name',
@@ -23,7 +24,11 @@ function Reader() {
   const { data, isFetching } = useGetReadersQuery();
 
   if (isFetching) {
-    return <Spin />;
+    return (
+      <div className='w-full flex items-center justify-center min-h-[80vh]'>
+        <Spin />
+      </div>
+    );
   }
 
   const handleExportReader = () => {
@@ -34,7 +39,7 @@ function Reader() {
     <div className='bg-lightGray w-full'>
       <div className='bg-white p-3 m-5 h-full'>
         <div className='mb-3 flex gap-3 justify-between'>
-          <Button to={-1}>Back</Button>
+          <Button to='/staff/account'>{t('button.back')}</Button>
           <div className='flex gap-3'>
             <Button className='bg-black text-white'>Black List</Button>
             <Button green onClick={handleExportReader}>

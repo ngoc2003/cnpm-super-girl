@@ -1,3 +1,4 @@
+import { Spin } from 'antd';
 import React, { useState } from 'react';
 import IconEyeToggle from '../icons/IconEyeToggle';
 import IconUpload from '../icons/IconUpload';
@@ -8,6 +9,7 @@ export default function Input({
   onChange = () => {},
   url,
   defaultValue,
+  isLoadingFile = false,
   ...props
 }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,6 +30,11 @@ export default function Input({
         {url && (
           <div className='absolute inset-0 object-cover flex items-center justify-center'>
             <img src={url} className='object-cover  h-full' alt='' />
+          </div>
+        )}
+        {isLoadingFile && (
+          <div className='absolute inset-0 flex items-center justify-center'>
+            <Spin />
           </div>
         )}
       </div>

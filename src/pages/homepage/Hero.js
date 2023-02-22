@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Button from '../../components/Button';
@@ -10,7 +10,7 @@ function Hero() {
   const { user } = useSelector((state) => state.auth);
   const [searchValue, setSearchValue] = useState('');
   const navigate = useNavigate();
-  const containerRef = useRef(null);
+  // const containerRef = useRef(null);
   const handleSearch = (e) => {
     if (e.key === 'Enter') {
       navigate('Library', {
@@ -23,23 +23,23 @@ function Hero() {
     }
   };
 
-  useEffect(() => {
-    const animate = async () => {
-      if (containerRef.current) {
-        const ScrollReveal = (await import('scrollreveal')).default;
-        ScrollReveal().reveal('.reveal-item', {
-          delay: 750,
-          interval: 50,
-          distance: '64px',
-        });
-      }
-    };
-    animate();
-  }, []);
+  // useEffect(() => {
+  //   const animate = async () => {
+  //     if (containerRef.current) {
+  //       const ScrollReveal = (await import('scrollreveal')).default;
+  //       ScrollReveal().reveal('.reveal-item', {
+  //         delay: 750,
+  //         interval: 50,
+  //         distance: '64px',
+  //       });
+  //     }
+  //   };
+  //   animate();
+  // }, []);
 
   return (
     <div
-      ref={containerRef}
+      // ref={containerRef}
       style={{
         background: `url(${Images.bgHome}) top center/ cover no-repeat`,
       }}
@@ -52,15 +52,7 @@ function Hero() {
           onClick={handleSearch}
           placeholder='Find book, author, . . .'
         />
-        {!user ? (
-          <Link
-            className='flex gap-3 font-semibold text-white hover:text-secondary '
-            to='/sign-in'
-          >
-            My Account
-            <IconUser />
-          </Link>
-        ) : user.role === 1 ? (
+        {user && user.role === 1 ? (
           <Link
             className='flex gap-3 font-semibold text-white hover:text-secondary '
             to='/staff/account'
@@ -68,7 +60,7 @@ function Hero() {
             My Account
             <IconUser />
           </Link>
-        ) : (
+        ) : user && user.role === 0 ? (
           <Link
             className='flex gap-3 font-semibold text-white hover:text-secondary '
             to='/'
@@ -76,6 +68,8 @@ function Hero() {
             My Account
             <IconUser />
           </Link>
+        ) : (
+          ''
         )}
       </div>
       <div>

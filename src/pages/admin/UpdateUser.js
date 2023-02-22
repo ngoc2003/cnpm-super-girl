@@ -79,7 +79,11 @@ function UpdateUser() {
   }, []);
 
   if (isFetching) {
-    return <Spin />;
+    return (
+      <div className='w-full flex items-center justify-center min-h-[80vh]'>
+        <Spin />
+      </div>
+    );
   }
 
   return (

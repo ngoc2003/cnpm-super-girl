@@ -26,7 +26,7 @@ function Topbar() {
 
   return (
     <div
-      className={`fixed z-10 duration-300 ml-14 bg-white ${
+      className={`fixed z-10 duration-300  bg-white ${
         scroll ? 'top-0' : '-top-full'
       } left-0 right-0 py-4 px-10 `}
     >
@@ -60,10 +60,19 @@ function Topbar() {
               </Link>
             );
           })}
-          {user?.role !== 1 && (
+          {user && user?.role !== 1 ? (
             <span className='text-xl text-primary'>
               <Cart />
             </span>
+          ) : user?.role == 1 ? (
+            ''
+          ) : (
+            <Link
+              to='/sign-in'
+              className='bg-primary text-white py-2 px-4 rounded-[20px] hover:text-white hover:bg-opacity-50 duration-150'
+            >
+              Sign In
+            </Link>
           )}
         </div>
       </div>
