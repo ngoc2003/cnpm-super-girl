@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "allowJs": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  }
+}
