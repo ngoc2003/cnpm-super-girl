@@ -1,5 +1,5 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import { authActions } from '../slices/auth';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { SGConnectionInstance } from '../../api/axios';
 import { store } from '../index';
 import { toast } from 'react-toastify';
@@ -13,6 +13,10 @@ interface SignUpBody extends SignInBody {
   name: string;
 }
 
+interface UpdateBody {
+  userId: string;
+}
+
 export const handleLogout = () => {
   store.dispatch(authActions.setUser(null));
   toast.success('Log Out Successfully!');
@@ -24,7 +28,9 @@ export const handleSignIn = createAsyncThunk(
   async (data: SignInBody, { dispatch }) => {
     try {
       const response = await SGConnectionInstance.post('/auth/sign-in', data);
-      toast.success(`Welcom Back ${response.data.name}!`);
+      toast.success(`Welcom Back ${response.data.name}!`, {
+        pauseOnHover: false,
+      });
       dispatch(authActions.setUser(response.data));
     } catch (err) {
       throw new Error(err);
@@ -38,6 +44,19 @@ export const handleSignUp = createAsyncThunk(
     try {
       await SGConnectionInstance.post('/auth/sign-up', data);
       toast.success('Sign Up successfully!');
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+);
+
+export const handleUpdate = createAsyncThunk(
+  'auth/me',
+  async (data: UpdateBody, { dispatch }) => {
+    try {
+      const response = await SGConnectionInstance.post('/auth/me', data);
+      console.log(response.data);
+      dispatch(authActions.setUser(response.data));
     } catch (err) {
       throw new Error(err);
     }

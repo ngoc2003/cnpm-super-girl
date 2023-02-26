@@ -3,8 +3,7 @@ import { toast } from 'react-toastify';
 const { default: axios } = require('axios');
 
 export default axios.create({
-  baseURL: 'https://supergirl-db.vercel.app/api/auth',
-  // baseURL: 'http://localhost:3001/api/auth',
+  baseURL: process.env.REACT_APP_API_AUTH,
 });
 
 const SGConnectionInstance = axios.create({
