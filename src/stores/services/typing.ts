@@ -48,3 +48,8 @@ export interface UserType {
   role: number;
   like: string[];
 }
+
+export interface LikeBookBody {
+  userId: string;
+  bookId: string;
+}

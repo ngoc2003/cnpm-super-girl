@@ -66,19 +66,19 @@ function Review({ id }) {
 
   useEffect(() => {
     const totalStar =
-      reviews.length &&
+      reviews?.length &&
       reviews
         .map((item) => parseInt(item.star))
         .reduce((total, val) => total + val, 0);
 
-    setAverage(totalStar / reviews.length);
+    setAverage(totalStar / reviews?.length);
   }, [reviews]);
 
   return (
     <>
       <div className='flex gap-5 items-center'>
         {average ? <Rate disabled defaultValue={Number(average)} /> : ''}
-        <span className=''>({reviews.length} comments)</span>
+        <span className=''>({reviews?.length} comments)</span>
       </div>
       <div className='bg-white p-3 my-5 pt-5'>
         <FormGroup>
@@ -87,13 +87,17 @@ function Review({ id }) {
         </FormGroup>
         <FormGroup>
           <Label>Put your comment below</Label>
-          <TextAreaInput onChange={handleSetComment} row={5} />
+          <TextAreaInput
+            onChange={handleSetComment}
+            placeholder='Your comment . . .'
+            row={5}
+          />
           <Button onClick={handleSubmit} primary>
             Up!
           </Button>
         </FormGroup>
         <div>
-          {!!reviews.length &&
+          {!!reviews?.length &&
             reviews.map((item) => <ReviewItem key={item._id} data={item} />)}
         </div>
       </div>
