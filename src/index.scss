@@ -34,18 +34,6 @@
       @apply shadow-[10px_10px_0] shadow-darkGray;
     }
   }
-  .item-deco {
-    position: relative;
-    padding: 8px;
-    &::after {
-      content: '';
-      @apply absolute bg-black h-4 w-20 top-8 left-0;
-    }
-    &::before {
-      content: '';
-      @apply absolute bg-black h-4 w-20 bottom-8 right-0;
-    }
-  }
   .overflow-text-custom {
     white-space: pre-line;
     display: -webkit-box;

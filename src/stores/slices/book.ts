@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 

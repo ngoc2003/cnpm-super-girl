@@ -27,12 +27,12 @@ const MOCK_BLOG = [
 const AboutPage = () => {
   return (
     <MotionDefault className='flex flex-col gap-5 bg-white'>
-      <Row>
+      <Row gutter={12}>
         <Col span={12}>
           <img src={Images.event1} className='h-full' alt='' />
         </Col>
         <Col span={12}>
-          <Paragraph className='item-deco p-10 flex items-center justify-center h-full'>
+          <Paragraph className='p-10 flex items-center justify-center h-full relative'>
             Library has been receiving the investment attention of the
             University's Board of Directors, from the projects of Denmark, the
             Netherlands... The library is considered an efficient university
@@ -44,9 +44,9 @@ const AboutPage = () => {
           </Paragraph>
         </Col>
       </Row>
-      <Row className='p-6'>
+      <Row gutter={12}>
         {MOCK_BLOG.map((item) => (
-          <Col key={v4()} span={12} className='p-6'>
+          <Col key={v4()} span={6}>
             <Card
               hoverable
               cover={

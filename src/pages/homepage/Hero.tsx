@@ -49,7 +49,7 @@ function Hero() {
         ) : user && user.role === 0 ? (
           <Link
             className='flex gap-3 font-semibold text-white hover:text-secondary '
-            to='/'
+            to='/me'
           >
             My Account
             <IconUser />
@@ -64,9 +64,9 @@ function Hero() {
         </h4>
       </div>
       <div className='reveal-item w-20 border-b-2 border-b-secondary' />
-      <Button className='reveal-item rounded-[90px] mt-5 border-2 text-white bg-transparent'>
+      {/* <Button className='reveal-item rounded-[90px] mt-5 border-2 text-white bg-transparent'>
         FIND OUT HOW
-      </Button>
+      </Button> */}
       <div className='reveal-item'>
         <div className='text-[85px] text-center text-white font-brittany'>
           Welcome to TLU
