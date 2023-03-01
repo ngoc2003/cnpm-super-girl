@@ -2,6 +2,9 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    screens: {
+      smallTablet: '625px',
+    },
     extend: {
       fontFamily: {
         brittany: ['Brittany Signature'],

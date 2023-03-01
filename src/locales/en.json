@@ -22,17 +22,23 @@
     "orderNow": "Order now!",
     "findNewBook": "Find new book!",
     "signIn": "Sign In",
+    "signUp": "Sign Up",
     "logOut": "Log Out",
-    "orderHistory": "Orders history"
+    "orderHistory": "Orders history",
+    "createMyAccount": "Create my account"
   },
   "title": {
     "update": "Update {{item}}",
     "add": "Add {{item}}",
     "delete": "Delete {{item}}",
-    "membersOfTeam": "MEMBERS OF TEAMS"
+    "membersOfTeam": "MEMBERS OF TEAMS",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
   },
   "question": {
-    "areYouSureTo": "Are you sure to {{action}} ?"
+    "areYouSureTo": "Are you sure to {{action}} ? ",
+    "alraedyHaveAnAccount": "Already have an account ? ",
+    "dontHaveAnAccount": "Dont have an account ? "
   },
   "label": {
     "title": "Title",
@@ -45,7 +51,10 @@
     "publisher": "Publisher",
     "publishYear": "Publish year",
     "edition": "Edition",
-    "description": "Description"
+    "description": "Description",
+    "email": "Email *",
+    "password": "Password *"
+
   },
   "placeholder": {
     "title": "Title",
@@ -68,5 +77,10 @@
     "website": "www.tlulib.com",
     "phoneNumber": "123456789",
     "address": "175 Tay Son St, Dong Da, Ha Noi"
-  }
+  },
+  "required": {
+    "thisFieldIsRequired": "This field is required!",
+    "passwirdMustMinOf8": "Password must at least 8 char"
+  },
+  "invalid": "Invalid {{name}}"
 }

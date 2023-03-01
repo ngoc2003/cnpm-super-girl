@@ -8,6 +8,7 @@ import FormGroup from '../components/FormGroup';
 import Button from '../components/Button';
 import { handleSignUp as signUp } from '../stores/thunk/auth';
 import { AppDispatch } from '../stores';
+import { t } from 'i18next';
 
 export default function SignUpPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -42,27 +43,29 @@ export default function SignUpPage() {
     <Formik
       initialValues={{ name: '', email: '', password: '' }}
       validationSchema={Yup.object({
-        name: Yup.string().required('This field is required!'),
+        name: Yup.string().required(t('required.thisFieldIsRequired')),
         email: Yup.string()
-          .email('Invalid email address')
-          .required('This field is required!'),
+          .email(t('invalid', { name: 'email address' }))
+          .required(t('required.thisFieldIsRequired')),
         password: Yup.string()
-          .required('This field is required!')
-          .min(8, 'Password must at least 8 char'),
-        term: Yup.bool().oneOf([true], 'Accept Terms is required!'),
+          .required(t('required.thisFieldIsRequired'))
+          .min(8, t('required.passwirdMustMinOf8')),
+        term: Yup.bool().oneOf([true], t('required.thisFieldIsRequired')),
       })}
       onSubmit={(values) => {
         handleSignUp(values);
       }}
     >
       {({ errors, touched, setFieldValue }) => (
-        <div className=' mx-auto bg-white w-full max-w-[600px] p-8 rounded-md'>
-          <h4 className='text-2xl font-semibold pb-8 text-center'>Sign Up</h4>
+        <div className=' mx-auto bg-white w-full smallTablet:max-w-[600px] p-8 smallTablet:rounded-md smallTablet:h-auto h-screen'>
+          <h4 className='text-2xl font-semibold pb-8 text-center'>
+            <>{t('title.signUp')}</>
+          </h4>
 
           <p className='mb-8 text-center text-xs font-normal text-text3 lg:text-sm lg:mb-6'>
-            Already have an account?{' '}
+            <>{t('question.alraedyHaveAnAccount')}</>
             <Link to='/sign-in' className='font-medium underline text-primary'>
-              Sign in
+              <>{t('button.signIn')}</>
             </Link>
           </p>
 
@@ -82,9 +85,10 @@ export default function SignUpPage() {
                 ></Input>
               </FormGroup>
             ))}
+            <div className='p-2' />
 
             <Button primary fluid type='submit'>
-              <>Create my account</>
+              <>{t('button.createMyAccount')}</>
             </Button>
           </Form>
         </div>

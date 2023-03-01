@@ -70,7 +70,7 @@ export default function Input({
           placeholder={placeholder}
           onChange={onChange}
           defaultValue={defaultValue}
-          className='outline-none  px-3  bg-transparent w-full py-4  font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4    '
+          className='outline-none  px-3  bg-transparent w-full py-3 smallTablet:py-4  font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4    '
           {...props}
         />
         {icon && (
