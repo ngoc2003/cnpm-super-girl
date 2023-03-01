@@ -25,7 +25,8 @@
     "signUp": "Sign Up",
     "logOut": "Log Out",
     "orderHistory": "Orders history",
-    "createMyAccount": "Create my account"
+    "createMyAccount": "Create my account",
+    "myProfile": "My Profile"
   },
   "title": {
     "update": "Update {{item}}",
@@ -54,7 +55,6 @@
     "description": "Description",
     "email": "Email *",
     "password": "Password *"
-
   },
   "placeholder": {
     "title": "Title",

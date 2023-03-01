@@ -17,9 +17,22 @@ const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <PersistGate loading={<Spin />} persistor={persistor}>
+    <PersistGate
+      loading={
+        <div className='h-screen flex items-center justify-center'>
+          <Spin />
+        </div>
+      }
+      persistor={persistor}
+    >
       <BrowserRouter>
-        <Suspense fallback={<Spin />}>
+        <Suspense
+          fallback={
+            <div className='h-screen flex items-center justify-center'>
+              <Spin />
+            </div>
+          }
+        >
           <App />
         </Suspense>
         <ToastContainer />

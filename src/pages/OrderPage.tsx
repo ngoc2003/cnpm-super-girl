@@ -92,7 +92,7 @@ function OrderPage() {
       </div>
       <ReactModal
         isOpen={open}
-        overlayClassName='modal-overlay fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center '
+        overlayClassName='modal-overlay fixed inset-0 z-40 bg-black bg-opacity-50 flex items-center justify-center '
         shouldCloseOnOverlayClick
         onRequestClose={() => setOpen(false)}
         className='modal-content w-full max-w-[521px] bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden'

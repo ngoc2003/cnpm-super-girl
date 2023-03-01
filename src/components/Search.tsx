@@ -23,7 +23,7 @@ function Search({
     <div className={`relative flex-1  ${className}`}>
       <div
         className={` flex items-center p-2 bg-white rounded-full border w-full ${
-          max && 'max-w-[458px]'
+          max && 'max-w-[400px]'
         } `}
       >
         <div className='flex-1 pl-4 pr-5'>
@@ -39,7 +39,7 @@ function Search({
         </div>
         <button
           onClick={onClick}
-          className='flex-shrink-0 w-[72px] h-10 flex items-center justify-center rounded-full text-white bg-primary'
+          className='flex-shrink-0 w-[70px] py-1 flex items-center justify-center rounded-full text-white bg-primary'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'

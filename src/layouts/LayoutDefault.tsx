@@ -20,13 +20,11 @@ function LayoutDefault() {
   }, [user]);
 
   return (
-    <div className='flex md:h-screen'>
-      <div className='flex-1'>
-        <Header />
-        <Topbar />
-        <Outlet />
-        <Footer />
-      </div>
+    <div className='overflow-x-hidden'>
+      <Header />
+      <Topbar />
+      <Outlet />
+      <Footer />
     </div>
   );
 }

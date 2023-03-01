@@ -58,7 +58,7 @@ export default function Input({
   ) : (
     <>
       <div
-        className={`items-center flex border rounded-xl overflow-hidden hover:border-blue-400 text-text1  duration-200 ${
+        className={`z-0 items-center flex border rounded-xl overflow-hidden hover:border-blue-400 text-text1  duration-200 ${
           error.length > 0
             ? 'border-error'
             : 'border-stroke dark:border-darkStroke'
