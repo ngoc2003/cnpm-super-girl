@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -44,32 +45,35 @@ function SignInPage() {
   };
 
   return (
-    <div className=' mx-auto bg-white w-full max-w-[600px] p-8 rounded-md'>
-      <h4 className='text-2xl font-semibold pb-8 text-center'>Sign In</h4>
+    <div className=' mx-auto bg-white w-full smallTablet:max-w-[600px] p-8 smallTablet:rounded-md h-screen smallTablet:h-auto'>
+      <h4 className='text-2xl font-semibold pb-8 text-center'>
+        <>{t('button.signIn')}</>
+      </h4>
+      <p className='mb-8 text-center text-xs font-normal text-text3 lg:text-sm lg:mb-6'>
+        <>{t('question.dontHaveAnAccount')}</>
+        <Link to='/sign-up' className='font-medium underline text-primary'>
+          <>{t('button.signUp')}</>
+        </Link>
+      </p>
       <FormGroup>
-        <Label>Email *</Label>
+        <Label>{t('label.email')}</Label>
         <Input
           onChange={(e) => setEmail(e.target.value)}
           placeholder='abc@gmail.com'
         />
       </FormGroup>
       <FormGroup>
-        <Label>Password *</Label>
+        <Label>{t('label.password')}</Label>
         <Input
           onChange={(e) => setPassword(e.target.value)}
           placeholder='Password'
           icon
         />
       </FormGroup>
-      <div className='text-sm text-right'>
-        Dont have an account?{' '}
-        <Link className='text-primary' to='/sign-up'>
-          Sign up here
-        </Link>
-      </div>
+
       <div className='p-2' />
       <Button isLoading={loading} onClick={handleSignIn} fluid primary>
-        Sign In
+        <>{t('button.signIn')}</>
       </Button>
     </div>
   );
