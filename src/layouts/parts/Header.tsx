@@ -5,15 +5,31 @@ import Cart from '../../components/cart/Cart';
 import { useTranslation } from 'react-i18next';
 import { AppState } from '../../stores';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { MenuOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 function Header() {
   const { user } = useSelector((state: AppState) => state.auth);
   const { pathname } = useLocation();
   const { t } = useTranslation();
 
+  const isTablet = useMediaQuery('(max-width: 900px)');
+
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOpenSideBar = () => {
+    setOpen(true);
+  };
+
+  const handleCloseSideBar = () => {
+    setOpen(false);
+  };
+
   return (
-    <div className='py-4 px-10 '>
-      <div className='flex items-center gap-10 justify-between w-full'>
+    <div className='py-4 px-10 bg-white'>
+      <div className='flex items-center gap-10 justify-between w-full '>
         <div className='flex items-center'>
           <Link to='/'>
             <img className='h-[4rem]' src={Images.logo} alt='' />
@@ -23,7 +39,24 @@ function Header() {
             <h4 className='text-sm'>{t('schoolName_english')}</h4>
           </div>
         </div>
-        <div className='flex-1 flex items-center gap-10 justify-end '>
+        {isTablet && (
+          <span>
+            <Button type='text' onClick={handleOpenSideBar}>
+              <MenuOutlined size={20} />
+            </Button>
+          </span>
+        )}
+        {open && isTablet && (
+          <div
+            className='fixed inset-0 z-[45] bg-black bg-opacity-50 lg:hidden'
+            onClick={handleCloseSideBar}
+          ></div>
+        )}
+        <div
+          className={`justify-center duration-300 flex-1 flex lg:flex-row flex-col w-[250px] lg:w-auto items-center gap-10 lg:justify-end fixed lg:static bg-white top-0 bottom-0 z-50 -ml-10 lg:ml-0 py-10 lg:py-0 lg:translate-x-0  ${
+            open ? 'translate-x-0' : '-translate-x-[500px]'
+          }`}
+        >
           {headerData.map((item) => {
             const active = pathname === item.url;
             return (
@@ -38,12 +71,21 @@ function Header() {
               </Link>
             );
           })}
-          {user && user?.role !== 1 ? (
-            <span className='text-xl text-primary'>
-              <Cart />
-            </span>
-          ) : user?.role == 1 ? (
-            ''
+          {user && user?.role === 0 ? (
+            <>
+              <Link
+                to='/me'
+                className={`min-w-[80px] text-center font-semibold hover:text-primary text-primary px-2 py-1 rounded-md cursor-pointer ${
+                  pathname === '/me' ? 'bg-lightGray' : 'hover:bg-lightGray'
+                } `}
+              >
+                My Profile
+              </Link>
+
+              <span className='text-xl text-primary'>
+                <Cart />
+              </span>
+            </>
           ) : (
             <Link
               to='/sign-in'

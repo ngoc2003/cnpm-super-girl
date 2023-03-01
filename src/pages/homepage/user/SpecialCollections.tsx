@@ -9,7 +9,7 @@ function SpecialCollections() {
       <p className='header-links text-[140px] leading-none stroke-text mb-5'>
         Collections
       </p>
-      <div className='flex gap-8'>
+      <div className='flex gap-8 flex-col lg:flex-row '>
         {specialCollectionsData.map((item) => (
           <div
             className='header-links-item flex-1 flex flex-col items-center'

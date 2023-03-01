@@ -20,8 +20,8 @@ function LayoutDefault() {
   }, [user]);
 
   return (
-    <div className='flex md:h-screen'>
-      <div className='flex-1'>
+    <div className='flex md:h-screen relative'>
+      <div className='flex-1 '>
         <Header />
         <Topbar />
         <Outlet />

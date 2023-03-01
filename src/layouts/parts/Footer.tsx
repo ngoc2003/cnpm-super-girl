@@ -13,17 +13,17 @@ const Footer = () => {
   const copyRightContent = `Copyright ${new Date().getFullYear()} © All Rights Reserve`;
   return (
     <>
-      <div className='h-10'></div>
-      <Layout className='grid grid-cols-3 bg-white'>
-        <Layout className='col-span-1'>
+      <div className='pt-10'></div>
+      <Layout className='md:grid grid-cols-3 bg-white'>
+        <Layout className='md:col-span-1'>
           <img src={Images.footer} className='h-full object-cover' alt='' />
         </Layout>
         <div className='col-span-2 bg-primary p-5 flex'>
           <div className='flex-1'>
-            <Title style={{ color: '#fff' }}>
+            <h4 className='text-white text-2xl  xl:text-3xl font-bold mb-2 '>
               <>{t('logoName')}</>
-            </Title>
-            <ul className='list-none text-white flex flex-col gap-3'>
+            </h4>
+            <ul className='list-none text-white flex flex-col gap-3 text-sm xl:text-md'>
               <li className='flex gap-3 items-center'>
                 <>
                   <MailOutlined style={{ fontSize: '20px' }} />
@@ -52,10 +52,10 @@ const Footer = () => {
             </ul>
           </div>
           <div className='flex flex-col flex-1'>
-            <Title style={{ color: '#fff' }}>
+            <h4 className='text-white text-2xl  xl:text-3xl font-bold mb-2 '>
               <>{t('title.membersOfTeam')}</>
-            </Title>
-            <ul className='list-none text-white flex flex-col gap-3'>
+            </h4>
+            <ul className='list-none text-white flex flex-col gap-3 text-sm xl:text-md'>
               <li className='flex gap-3 items-center'>
                 Bui Thuy Ngoc{' '}
                 <span className='opacity-70 text-xs'>
@@ -69,7 +69,7 @@ const Footer = () => {
                 </span>
               </li>
             </ul>
-            <span className='text-white opacity-70 flex-1 flex items-end'>
+            <span className='text-white opacity-70 flex-1 flex items-end text-sm xl:text-md'>
               {copyRightContent}
             </span>
           </div>
