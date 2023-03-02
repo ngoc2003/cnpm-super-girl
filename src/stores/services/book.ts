@@ -1,11 +1,19 @@
 import baseRtkApi from '.';
-import { BookType } from './typing';
+import { BookType, searchBooksParams } from './typing';
 
 export const bookApi = baseRtkApi.injectEndpoints({
   endpoints: (builder) => ({
     getBooks: builder.query<BookType[], void>({
       query: () => ({
         url: '/books/all',
+      }),
+      providesTags: ['book'],
+    }),
+    searchBooks: builder.query<BookType[], searchBooksParams>({
+      query: (params) => ({
+        method: 'POST',
+        url: '/books/search',
+        params: params,
       }),
       providesTags: ['book'],
     }),
@@ -51,4 +59,5 @@ export const {
   useAddBookMutation,
   useUpdateBookMutation,
   useDeleteBookMutation,
+  useLazySearchBooksQuery,
 } = bookApi;

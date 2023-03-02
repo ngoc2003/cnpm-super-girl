@@ -11,7 +11,7 @@ interface MenuDropdownProps {
   width?: string;
   defaultValue?: string | number;
   setItem: Dispatch<SetStateAction<any>>;
-  // Dispatch<SetStateAction<number>>
+  className?: string;
 }
 function MenuDropdown({
   fluid = false,
@@ -21,6 +21,7 @@ function MenuDropdown({
   width = '250px',
   defaultValue,
   setItem,
+  className = '',
 }: MenuDropdownProps) {
   const handleMenuClick = (e) => {
     setItem(e.key);
@@ -36,7 +37,9 @@ function MenuDropdown({
         selectable: true,
         defaultSelectedKeys: [`${defaultValue}`],
       }}
-      className={`rounded-md  ${fluid ? 'w-full' : `w-[${width}]`} `}
+      className={`rounded-md  ${
+        fluid ? 'w-full' : `w-[${width}] ${className}`
+      } `}
       trigger={['click']}
     >
       <Button block>

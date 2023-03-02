@@ -11,6 +11,7 @@ function Book({ data, to = '' }) {
   const components = (
     <Card
       hoverable
+      className=' w-[250px] max-w-[250px]'
       cover={<img alt='Cover' className='h-[300px]' src={data.image} />}
     >
       <Meta className='h-[100px]' title={data.name} description={data.author} />
