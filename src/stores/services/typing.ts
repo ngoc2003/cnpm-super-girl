@@ -53,3 +53,9 @@ export interface LikeBookBody {
   userId: string;
   bookId: string;
 }
+
+export interface searchBooksParams {
+  filter?: string;
+  author?: string;
+  type?: string;
+}

@@ -1,16 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Search from '../../components/Search';
-import IconUser from '../../icons/IconUser';
 import Images from '../../images/Images';
-import { AppState } from '../../stores';
 import { motion, useAnimation } from 'framer-motion';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import Button from '../../components/Button';
-import { t } from 'i18next';
 function Hero() {
-  const { user } = useSelector((state: AppState) => state.auth);
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState<string>('');
   const isExtraLarge = useMediaQuery('(min-width:1000px');
@@ -111,17 +106,6 @@ function Hero() {
             onClick={handleSearch}
             placeholder='Find book, author, . . .'
           />
-          {user && user.role === 0 ? (
-            <Link
-              className='lg:flex gap-3 font-semibold text-white hover:text-secondary hidden'
-              to='/me'
-            >
-              <>{t('button.myProfile')}</>
-              <IconUser />
-            </Link>
-          ) : (
-            ''
-          )}
         </div>
         <div>
           <h4 className='py-5 text-white text-2xl md:text-4xl xxl:text-5xl font-bold max-w-[400px]'>
