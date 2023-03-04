@@ -55,7 +55,7 @@ function Header() {
           ></div>
         )}
         <div
-          className={`justify-center duration-300 flex-1 flex lg:flex-row flex-col w-[250px] lg:w-auto items-center gap-10 lg:justify-end fixed lg:static bg-white top-0  z-50 -ml-10 lg:ml-0 py-10 lg:py-0 lg:translate-x-0  ${
+          className={`justify-center duration-300 flex-1 flex lg:flex-row flex-col w-[250px] lg:w-auto items-center gap-10 lg:justify-end fixed lg:static bg-white top-0  z-50 lg:z-0 -ml-10 lg:ml-0 py-10 lg:py-0 lg:translate-x-0  ${
             open ? 'translate-x-0' : '-translate-x-[500px]'
           } ${isTablet && 'h-screen'}`}
         >

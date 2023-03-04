@@ -1,14 +1,14 @@
 export interface RequestType {
-  _id: string;
+  _id?: string;
   bookId: string;
   bookName: string;
   userName: string;
   userId: string;
-  createdAt: Date;
+  createdAt?: Date;
   updatedAt?: Date;
-  status: string;
+  status?: string;
   endedAt?: Date;
-  extendCount: number;
+  extendCount?: number;
 }
 
 export interface BookType {
@@ -58,4 +58,13 @@ export interface searchBooksParams {
   filter?: string;
   author?: string;
   type?: string;
+}
+
+export interface CartBody {
+  userId: string;
+  bookId: string;
+}
+
+export interface ListCartBody {
+  userId: string;
 }

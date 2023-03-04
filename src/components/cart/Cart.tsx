@@ -1,17 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { v4 } from 'uuid';
 import ReactModal from 'react-modal';
 import Button from '../Button';
-import { Typography, Layout, Space } from 'antd';
+import { Typography, Layout, Space, Spin } from 'antd';
 import Images from '../../images/Images';
 import { t } from 'i18next';
 import { AppState } from '../../stores';
+import { useListCartMutation } from '../../stores/services/user';
+import { BookType } from '../../stores/services/typing';
 
 function Cart() {
+  const { user } = useSelector((state: AppState) => state.auth);
   const [show, setShow] = useState(false);
-  const cart = useSelector((state: AppState) => state.book);
+  const [listBook, setListBook] = useState<BookType[]>([]);
+  const [listCart, { isLoading }] = useListCartMutation();
+  useEffect(() => {
+    if (show) {
+      listCart({ userId: user._id })
+        .unwrap()
+        .then((response) => setListBook(response));
+    }
+  }, [show]);
 
   function handleToggleShow() {
     setShow(!show);
@@ -32,11 +43,15 @@ function Cart() {
         >
           <Layout className='h-2 w-full clear-both' />
 
-          {!cart.length ? (
+          {isLoading ? (
+            <div className='h-full w-full flex items-center justify-center'>
+              <Spin />
+            </div>
+          ) : !listBook.length ? (
             <>
               <img src={Images.empty} alt='' />
               <Typography className='italic p-3 text-center'>
-                <>{t('cart', { count: cart.length })}</>
+                <>{t('cart', { count: listBook.length })}</>
               </Typography>
               <Button to='/Library' primary fluid>
                 <>{t('button.findNewBook')}</>
@@ -48,10 +63,10 @@ function Cart() {
                 type='success'
                 className=' bg-green-100 p-1 rounded-md inline-block mb-5 text-sm'
               >
-                <>{t('cart', { count: cart.length })}</>
+                <>{t('cart', { count: listBook.length })}</>
               </Typography.Text>
               <Layout>
-                {cart.map((item) => (
+                {listBook.map((item) => (
                   <>
                     <Space size='large' key={v4()}>
                       <Layout className='h-[100px] '>

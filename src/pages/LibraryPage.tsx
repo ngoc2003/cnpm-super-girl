@@ -35,7 +35,6 @@ function LibraryPage() {
       .unwrap()
       .then((response) => {
         if (response) {
-          console.log(response);
           setBooks(response);
           setLoading(false);
         }
@@ -75,7 +74,7 @@ function LibraryPage() {
               onKeyUp={handleChange}
               max={false}
             />
-            <div>
+            {isTablet && (
               <Button
                 type='text'
                 className='mx-auto flex items-center justify-center mt-5'
@@ -83,8 +82,7 @@ function LibraryPage() {
               >
                 <UnorderedListOutlined />
               </Button>
-            </div>
-
+            )}
             {!isTablet || isOpenFilterMenu ? (
               <>
                 <div className='border-t border-t-gray-200 my-5'></div>

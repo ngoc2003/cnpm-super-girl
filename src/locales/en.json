@@ -26,7 +26,8 @@
     "logOut": "Log Out",
     "orderHistory": "Orders history",
     "createMyAccount": "Create my account",
-    "myProfile": "My Profile"
+    "myProfile": "My Profile",
+    "myListRequest": "My list request"
   },
   "title": {
     "update": "Update {{item}}",

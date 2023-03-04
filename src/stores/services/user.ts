@@ -1,5 +1,5 @@
 import baseRtkApi from '.';
-import { LikeBookBody } from './typing';
+import { CartBody, LikeBookBody, ListCartBody, BookType } from './typing';
 
 export const userApi = baseRtkApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -39,6 +39,27 @@ export const userApi = baseRtkApi.injectEndpoints({
         body,
       }),
     }),
+    addToCart: builder.mutation<void, CartBody>({
+      query: (body) => ({
+        url: '/users/me/cart/add',
+        method: 'POST',
+        body,
+      }),
+    }),
+    removeFromCart: builder.mutation<void, CartBody>({
+      query: (body) => ({
+        url: '/users/me/cart/remove',
+        method: 'POST',
+        body,
+      }),
+    }),
+    listCart: builder.mutation<BookType[], ListCartBody>({
+      query: (body) => ({
+        url: '/users/me/cart/list',
+        method: 'POST',
+        body: body,
+      }),
+    }),
   }),
 });
 
@@ -50,4 +71,7 @@ export const {
   useUpdateUserMutation,
   useLikeBookMutation,
   useUnLikeBookMutation,
+  useAddToCartMutation,
+  useRemoveFromCartMutation,
+  useListCartMutation,
 } = userApi;

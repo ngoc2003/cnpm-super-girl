@@ -26,16 +26,12 @@ export const requestApi = baseRtkApi.injectEndpoints({
         'request',
       ],
     }),
-    addRequest: builder.mutation<void, RequestType>({
+    addRequest: builder.mutation<void, RequestType[]>({
       query: (data) => ({
         url: '/borrows/create',
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: (_, __, result) => [
-        { type: 'request', _id: result?._id },
-        'request',
-      ],
     }),
   }),
 });
