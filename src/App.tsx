@@ -43,12 +43,6 @@ function App() {
   const { user } = useSelector((state: AppState) => state.auth);
 
   useEffect(() => {
-    if (!user) {
-      navigate('/sign-in');
-    }
-  }, [user]);
-
-  useEffect(() => {
     if (!user && window.location.pathname.includes('staff')) {
       navigate('/');
     }

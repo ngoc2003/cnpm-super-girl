@@ -28,10 +28,10 @@ const AboutPage = () => {
   return (
     <MotionDefault className='flex flex-col gap-5 bg-white'>
       <Row gutter={12}>
-        <Col span={12}>
+        <Col md={12} xs={24}>
           <img src={Images.event1} className='h-full' alt='' />
         </Col>
-        <Col span={12}>
+        <Col md={12} xs={24}>
           <Paragraph className='p-10 flex items-center justify-center h-full relative'>
             Library has been receiving the investment attention of the
             University's Board of Directors, from the projects of Denmark, the
@@ -46,7 +46,7 @@ const AboutPage = () => {
       </Row>
       <Row gutter={12}>
         {MOCK_BLOG.map((item) => (
-          <Col key={v4()} span={6}>
+          <Col key={v4()} xs={24} md={12} xl={6}>
             <Card
               hoverable
               cover={

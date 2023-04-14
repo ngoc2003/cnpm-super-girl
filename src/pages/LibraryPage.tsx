@@ -125,7 +125,7 @@ function LibraryPage() {
               ''
             )}
           </div>
-          <div className='px-10 col-span-2 xxl:col-span-3 '>
+          <div className='px-10 col-span-2 xxl:col-span-3'>
             <div className='text-xl text-center md:text-left sm:text-2xl text-primary font-semibold py-5 '>
               {books.length} books has been founded!
             </div>
